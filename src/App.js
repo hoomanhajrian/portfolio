@@ -1,19 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
-import './normalizer.css';
+import './sass/main.scss';
 import Header from './components/header/Header'
 import Content from './components/content/Content'
 import Footer from './components/footer/Footer'
 
-const useStyles = makeStyles({
-  app: {
 
-  }
-});
 
-function App() {
-  const styles = useStyles();
+
+const App = () => {
+ 
   return (
-    <div className={styles.app}>
+    <div className="app">
       <Header />
       <Content />
       <Footer />
