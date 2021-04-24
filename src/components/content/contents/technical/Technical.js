@@ -13,14 +13,20 @@ function Technical() {
     return (
         <div className={styles.technical}>
             <h2>Technical Skills</h2>
-            <table className="skills_table">
-                <tr><td>JavaScript</td><td>HTML3/5/X</td></tr>
-                <tr><td>Java</td><td>CSS and SASS</td></tr>
-                <tr><td>Docker</td><td>Amazon Web Services</td></tr>
-                <tr><td>GitHub</td><td>Docker Hub</td></tr>
-                <tr><td>Node.js</td><td>React and related libraries</td></tr>
-                <tr><td>Data Bases(MySQL,MongoDb,FireBase)</td><td>GraphQl</td></tr>
-            </table>
+            <ul className="skills_table">
+                <li>JavaScript</li>
+                <li>HTML3/5/X</li>
+                <li>Java</li>
+                <li>CSS and SASS</li>
+                <li>Docker</li>
+                <li>Amazon Web Services</li>
+                <li>GitHub</li>
+                <li>Docker Hub</li>
+                <li>Node.js</li>
+                <li>React and related libraries</li>
+                <li>GraphQl</li>
+                <li>Data Bases(MySQL,MongoDb,FireBase)</li>
+            </ul>
         </div>
     );
 }

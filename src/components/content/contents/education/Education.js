@@ -10,8 +10,8 @@ function Education() {
     return (
         <div className="education">
             <h2 className="education-title">education</h2>
-            <Card className="education-card card1">
-                <CardActionArea>
+            <div className="education-card-continer">
+                <Card className="education-card card1">
                     <CardMedia
                         className="card-media"
                         image="./farmerfresh.jpg"
@@ -19,22 +19,20 @@ function Education() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
-                                </Typography>
+                            Web and Mobile Development and Design
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Project Manager/Full Stack Developer
-                                </Typography>
+                            Post Baccalaureate Diploma
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
+                            Langara College / Vancouver, BC
+                                    </Typography>
+                        <Typography gutterBottom variant="h6" component="h2">
+                            <a href="https://langara.ca/" target="_blank">langara.ca</a>
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
                     </CardContent>
-                </CardActionArea>
-            </Card>
-            <Card className="education-card card1">
-                <CardActionArea>
+                </Card>
+                <Card className="education-card card2">
                     <CardMedia
                         className="card-media"
                         image="./farmerfresh.jpg"
@@ -42,22 +40,20 @@ function Education() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
-                                </Typography>
+                            Computer Software Engineering
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Project Manager/Full Stack Developer
-                                </Typography>
+                            Bachelor’s Degree
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
+                            Azad University / Tehran, Iran
+                                    </Typography>
+                        <Typography gutterBottom variant="h6" component="h2">
+                            <a href="http://iauctb.ac.ir/en" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
                     </CardContent>
-                </CardActionArea>
-            </Card>
-            <Card className="education-card card1">
-                <CardActionArea>
+                </Card>
+                <Card className="education-card card3">
                     <CardMedia
                         className="card-media"
                         image="./farmerfresh.jpg"
@@ -65,20 +61,20 @@ function Education() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
-                                </Typography>
+                            Computer Hardware Engineering
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Project Manager/Full Stack Developer
-                                </Typography>
+                            Associate Bachelor’s Degree
+                                    </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
+                            Azad University / Tehran, Iran
+                                    </Typography>
+                        <Typography gutterBottom variant="h6" component="h2">
+                            <a href="http://iauctb.ac.ir/en" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
-                            Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
                     </CardContent>
-                </CardActionArea>
-            </Card>
+                </Card>
+            </div>
         </div>
     );
 }

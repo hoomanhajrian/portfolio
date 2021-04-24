@@ -1,19 +1,13 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-
-
-const useStyles = makeStyles({
-    footer: {
-
-    }
-});
-
 
 function Footer() {
-    const styles = useStyles();
+
     return (
-        <div className={styles.footer}>
-            <h1>This is the Footer</h1>
+        <div className="footer">
+            <Typography>
+                <p className="footer-copy">&copy; 2021 Hooman Hajarian All Rights Reserved</p>
+            </Typography>
         </div>
     );
 }

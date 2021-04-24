@@ -1,8 +1,22 @@
 .skills_table{
-    width: 60%;
+    max-width: 90%;
+    text-align: left;
     padding: 0;
+    display: grid;
     margin-right: auto;
     margin-left: auto;
+    width: 60%;
+    @include for-phone-only{
+        width: 60%;
+        grid-template-columns: 1fr;
+    }
+    @include for-tablet-landscape-up{
+        width: 45%;
+        grid-template-columns: 1fr 1fr;
+    }
+    li{
+        font-size: .9rem;
+    }
 }
 
 
@@ -45,12 +59,12 @@
 }
 
 .work{
-
+    margin: 0;
+    padding: 0;
     .work-title{
         text-align: center;
     }
     .work-card-container{
-        margin: 1rem;
         margin-right: auto;
         margin-left: auto;
         @include for-tablet-landscape-up{
@@ -60,20 +74,47 @@
             max-width: 80%;
         }
         @include for-phone-only{
-            max-width: 80%;
+            width: 80%;
         }
         .work-card{
-            margin:3rem;
+            width: 100%;
+            margin-top: 1rem;
         }
     }
     button:hover{
         background-color: lightskyblue;
-        transition: 2500ms;
+        transition: 2000ms;
     }
 }
 
 .education{
     .education-title{
         text-align: center;
+    }
+    .education-card-continer{
+        margin-right: auto;
+        margin-left: auto;
+        @include for-tablet-landscape-up{
+            max-width: 60%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 1rem;
+        }
+        @include for-tablet-portrait-up{
+            max-width: 80%;
+
+        }
+        @include for-phone-only{
+            width: 80%;
+        }
+    .education-card{
+        width: 100%;
+        margin-top: 2rem;
+
+    }  
+}
+.education-card:hover{
+        background-color: lightskyblue;
+        transition: 2000ms;
     }
 }

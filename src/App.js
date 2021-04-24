@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Contact from './components/header/Contact';
+import About from './components/content/about/About';
 
 
 const App = () => {
@@ -101,7 +102,7 @@ const App = () => {
           <Contact />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <About />
         </TabPanel>
       </SwipeableViews>
     </div>

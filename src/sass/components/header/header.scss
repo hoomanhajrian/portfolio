@@ -1,11 +1,13 @@
 .header{
-width: 70%;
+width: 90%;
 display: grid;
+text-align: center;
 margin-right: auto;
 margin-left: auto;
-grid-template-columns: 1fr 1fr;
+grid-template-columns: 1fr;
 padding: 10px;
 border-bottom-left-radius: 15px;
 border-bottom-right-radius: 15px;
 background-color: lightcyan;
+
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Contact from './Contact';
 
 
 function Header() {
@@ -10,7 +9,6 @@ function Header() {
                 <h1 className="title">Hooman Hajarian</h1>
                 <h3 className="subTitle">Front End Developer</h3>
             </div>
-            <Contact />
         </div>
     );
 }

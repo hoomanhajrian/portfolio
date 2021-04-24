@@ -1,0 +1,28 @@
+.contact{
+    width: 100%;
+    h1{
+        text-align: center;
+    }
+
+    ul{
+        
+        padding-left: 0;
+        li{
+        list-style-type: none; 
+            }
+    
+    }
+.links{
+    align-items: center;
+    text-align: center;
+    width: 30%;
+    margin-right: auto;
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    i{
+        font-size: 2rem;
+        color: darkblue;
+    }
+}
+}
