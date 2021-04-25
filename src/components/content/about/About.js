@@ -7,7 +7,10 @@ const About = () => {
         <div className="about">
             <h1>ABOUT</h1>
             <Typography>
-                This Domain is being used just as the portfolio of Hooman Hajarian.
+                <p>This Domain is being used just as the portfolio for Hooman Hajarian.</p>
+            </Typography>
+            <Typography>
+                <p>The website is coded using React running on a docker container.</p>
             </Typography>
         </div>
     )

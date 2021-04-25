@@ -28,8 +28,12 @@ function Work() {
                                 <a href="https://www.cellclinic.ca/" target="_blank">cellclinic.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
+                                <ul>
+                                    <li>Repairing Android and IOS phones</li>
+                                    <li>Cashier and customer services</li>
+                                    <li>Working with designated software for diagnose or repair.</li>
+                                </ul>
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
@@ -51,8 +55,13 @@ function Work() {
                                 <a href="https://www.goharshafa.com/" target="_blank">goharshafa.com</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
+                                <ul>
+                                    <li>Conducted online digital customer care and follow-up for clients of the medical equipment company.</li>
+                                    <li>Enhanced customer satisfaction by creating a rapport with clients, through
+                                    communication and diagnosis of problems and errors, and ensuring the issue was resolved.</li>
+                                    <li>Performed on-site technology reports, maintaining the safety and smooth application of products and equipment.</li>
+                                </ul>
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
@@ -74,8 +83,12 @@ function Work() {
                                 <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
-                                </Typography>
+                                <ul>
+                                    <li>Diagnosed the hardware problem of a device for customers, ranging from mobile phones to desktop computers.</li>
+                                    <li>Enhanced device performance through assembly of new parts, reconstruction and chipset manipulation.</li>
+                                    <li>Consulted with customers and clients on their tech issues and needs, and performed bespoke repairs and construction based on their feedback and concerns.</li>
+                                </ul>
+                            </Typography>
                         </CardContent>
                     </CardActionArea>
                 </Card>
