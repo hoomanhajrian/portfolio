@@ -49,7 +49,7 @@ function Work() {
                                 ONLINE CUSTOMER CARE AND IT CONSULTANT / Gohar Shafa Co. / Tehran, Iran
                                 </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
-                                Project Manager/Full Stack Developer
+                                Jan.2019-Oct.2019
                                 </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
                                 <a href="https://www.goharshafa.com/" target="_blank">goharshafa.com</a>
@@ -77,7 +77,7 @@ function Work() {
                                 CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
                                 </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
-                                Project Manager/Full Stack Developer
+                                Jan.2017-Jan.2019
                                 </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
                                 <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
