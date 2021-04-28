@@ -26,6 +26,8 @@ function Technical() {
                 <li>React and related libraries</li>
                 <li>GraphQl</li>
                 <li>Data Bases(MySQL,MongoDb,FireBase)</li>
+                <li>Restful API</li>
+                <li>Express</li>
             </ul>
         </div>
     );
