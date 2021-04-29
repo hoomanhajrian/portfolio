@@ -1,10 +1,10 @@
-FROM node
+FROM node:14.16.1
 
 WORKDIR /app
 
-COPY . /app
+COPY ./package.json /app
 
-RUN npm install 
+RUN yarn install 
 
 EXPOSE 3000
 
