@@ -9,7 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 function Education() {
     return (
         <div className="education">
-            <h2 className="education-title">education</h2>
+            <h2 className="education-title">Education</h2>
             <div className="education-card-continer">
                 <Card className="education-card card1">
                     <CardMedia

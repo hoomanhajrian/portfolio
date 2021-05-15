@@ -4,6 +4,7 @@
     padding: 0;
     display: grid;
     margin-right: auto;
+    list-style-type: none;
     margin-left: auto;
     width: 60%;
     @include for-phone-only{
@@ -48,9 +49,17 @@
             margin-top: 2rem;
         }
     }
+    button{
+text-align: left;   
+a{
+    text-decoration: none;
+} 
+}
+    // card action area hover
     button:hover{
-        background-color: lightskyblue;
-        transition: 2500ms;
+        border-radius: 15px;
+        transition: 500ms;
+        
     }
 }
 
