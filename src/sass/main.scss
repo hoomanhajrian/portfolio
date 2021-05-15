@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import './app';
 @import './typography';
 @import './normalizer';
 @import './functions';
@@ -8,5 +9,7 @@
 @import './components/header/header';
 @import './components/content/content';
 @import './components/footer/footer';
-@import './components/contact';
-@import './components/about';
+@import './components/tabs/contact';
+@import './components/tabs/about';
+@import './components/bars/progress';
+@import './components/menu/menu';

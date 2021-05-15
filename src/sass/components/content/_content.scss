@@ -17,6 +17,11 @@
     }
     li{
         font-size: .9rem;
+        span{
+            @include for-phone-only{
+                display: none;
+            }
+        }
     }
 }
 
@@ -91,7 +96,6 @@ a{
         }
     }
     button:hover{
-        background-color: lightskyblue;
         transition: 2000ms;
     }
 }
@@ -123,7 +127,6 @@ a{
     }  
 }
 .education-card:hover{
-        background-color: lightskyblue;
         transition: 2000ms;
     }
 }

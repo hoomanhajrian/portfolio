@@ -1,16 +1,28 @@
 import React from 'react';
 
 
-function Header() {
+const Header = (props) => {
 
-    return (
-        <div className="header">
-            <div className="titles">
-                <h1 className="title">Hooman Hajarian</h1>
-                <h3 className="subTitle">Front End Developer</h3>
+    if (props.nightMode == false) {
+        return (
+            <div className="header">
+                <div className="titles">
+                    <h1 className="title">Hooman Hajarian</h1>
+                    <h4 className="subTitle">Full Stack Developer</h4>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+    else {
+        return (
+            <div className=" header-night">
+                <div className=" titles-night" >
+                    <h1 className=" title-night">Hooman Hajarian</h1>
+                    <h4 className=" subTitle-night">Full Stack Developer</h4>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default Header;

@@ -36,12 +36,12 @@ function Technical() {
                 <li><ProgressBar now={65} /></li>
                 <li>GraphQl</li>
                 <li><ProgressBar now={50} /></li>
-                <li>Data Bases(MySQL,MongoDb,FireBase)</li>
+                <li>Data Bases<span>(MySQL,MongoDb,FireBase)</span></li>
                 <li><ProgressBar now={60} /></li>
                 <li>Restful API</li>
                 <li><ProgressBar now={65} /></li>
                 <li>Express</li>
-                <li><ProgressBar now={60} /></li>
+                <li><ProgressBar now={80} /></li>
             </ul>
         </div>
     );
