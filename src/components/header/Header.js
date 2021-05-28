@@ -1,28 +1,35 @@
 import React from 'react';
-
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import { Link, Router, Route } from 'react-router-dom';
 
 const Header = (props) => {
+    const [state, setState] = React.useState({
+        checkedB: false,
+    });
+    const handleChangeNightMode = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
 
-    if (props.nightMode == false) {
-        return (
-            <div className="header">
-                <div className="titles">
-                    <h1 className="title">Hooman Hajarian</h1>
-                    <h4 className="subTitle">Full Stack Developer</h4>
-                </div>
+    return (
+        <div className="header">
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={state.checkedB}
+                        onChange={handleChangeNightMode}
+                        name="checkedB"
+                        color="primary"
+                    />
+                }
+                label="Night Mode (Under construction)"
+            />
+            <div className="titles">
+                <h1 className="title">Hooman Hajarian</h1>
             </div>
-        );
-    }
-    else {
-        return (
-            <div className=" header-night">
-                <div className=" titles-night" >
-                    <h1 className=" title-night">Hooman Hajarian</h1>
-                    <h4 className=" subTitle-night">Full Stack Developer</h4>
-                </div>
-            </div>
-        );
-    }
+        </div>
+
+    );
 }
 
 export default Header;

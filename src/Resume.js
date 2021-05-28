@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Contact from './components/header/Contact';
 import About from './components/content/about/About';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 
 
 
@@ -31,7 +29,6 @@ const App = () => {
   }));
 
 
-  const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
@@ -83,17 +80,7 @@ const App = () => {
   return (
 
     <div className="app">
-      <FormControlLabel
-        control={
-          <Switch
-            checked={state.checkedB}
-            onChange={handleChangeNightMode}
-            name="checkedB"
-            color="primary"
-          />
-        }
-        label="Night Mode (Under construction)"
-      />
+
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -114,7 +101,6 @@ const App = () => {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Header nightMode={state.checkedB} />
           <Content />
           <Footer />
         </TabPanel>

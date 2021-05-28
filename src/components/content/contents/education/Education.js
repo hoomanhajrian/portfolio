@@ -3,7 +3,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
 
 
 function Education() {
@@ -28,7 +27,7 @@ function Education() {
                             Langara College / Vancouver, BC
                                     </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="https://langara.ca/" target="_blank">langara.ca</a>
+                            <a href="https://langara.ca/" rel="noreferrer" target="_blank">langara.ca</a>
                         </Typography>
                     </CardContent>
                 </Card>
@@ -49,7 +48,7 @@ function Education() {
                             Azad University / Tehran, Iran
                                     </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://iauctb.ac.ir/en" target="_blank">iauctb.ac.ir(en)</a>
+                            <a href="http://iauctb.ac.ir/en" rel="noreferrer" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>
                     </CardContent>
                 </Card>
@@ -70,7 +69,7 @@ function Education() {
                             Azad University / Tehran, Iran
                                     </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://iauctb.ac.ir/en" target="_blank">iauctb.ac.ir(en)</a>
+                            <a href="http://iauctb.ac.ir/en" rel="noreferrer" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>
                     </CardContent>
                 </Card>
