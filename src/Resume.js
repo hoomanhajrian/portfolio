@@ -1,6 +1,5 @@
 import './sass/main.scss';
 import React from 'react';
-import Header from './components/header/Header'
 import Content from './components/content/Content'
 import Footer from './components/footer/Footer'
 import PropTypes from 'prop-types';
@@ -18,6 +17,7 @@ import About from './components/content/about/About';
 
 
 const App = () => {
+
   const [state, setState] = React.useState({
     checkedB: false,
   });
@@ -79,7 +79,7 @@ const App = () => {
 
   return (
 
-    <div className="app">
+    <div className="resume">
 
       <AppBar position="static" color="default">
         <Tabs
