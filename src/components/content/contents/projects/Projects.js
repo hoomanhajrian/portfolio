@@ -4,12 +4,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Box from '@material-ui/core/Box';
 
-
-const images = ["farmerfresh.jpg", "patchapp.jpg"]
 
 function Projects() {
-
     return (
         <div className="projects">
             <h2 className="projects-header">Project Experience</h2>
@@ -93,7 +93,8 @@ function Projects() {
                 </Card>
             </div>
         </div>
-    );
-}
+    )
+};
+
 
 export default Projects;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
+    Switch as NavSwitch,
     Route,
     Link
 } from "react-router-dom";
@@ -10,7 +10,7 @@ import Contact from './components/header/Contact'
 import Projects from './components/content/contents/projects/Projects'
 import Resume from './Resume';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import Switch from '@material-ui/core/Switch';
 
 const App = () => {
     const [state, setState] = React.useState({
@@ -25,7 +25,7 @@ const App = () => {
             <div className="header">
                 <ul className="header_menu">
                     <li>
-                        <Header />
+                        <Link to="/"><Header /></Link>
                     </li>
                     <li>
                         <div className="header_nav">
@@ -40,7 +40,7 @@ const App = () => {
                             </li>
                         </div>
                     </li>
-                    <li>
+                    <li className="dark-mode-container">
                         <FormControlLabel
                             control={
                                 <Switch
@@ -55,7 +55,7 @@ const App = () => {
                     </li>
                 </ul>
             </div>
-            <Switch>
+            <NavSwitch>
                 <Route exact path="/">
                     <Projects />
                 </Route>
@@ -65,7 +65,7 @@ const App = () => {
                 <Route path="/resume">
                     <Resume />
                 </Route>
-            </Switch>
+            </NavSwitch>
         </Router>
 
     )
