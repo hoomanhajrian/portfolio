@@ -1,8 +1,8 @@
 .header{
-    padding: .1rem;
+    padding: .6rem;
     padding-bottom: 0;
     background-color: $color-primary;
-    
+    color: $color-text;
 .header_menu{
     color: $color-text;
     a{
@@ -24,6 +24,9 @@ grid-template-columns: 1fr 1fr 1fr;
     .header_nav{
         display: flex;
     flex-direction: row;
+    @include for-phone-only{
+    padding: .5rem;
+    }
     justify-content: space-around;
     font-weight: bold;
     font-size: 1rem;
