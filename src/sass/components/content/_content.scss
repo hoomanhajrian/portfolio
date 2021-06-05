@@ -40,8 +40,6 @@
             }
         }
         @include for-tablet-landscape-up{
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
             width: 90%;
             margin-right: auto;
             margin-left: auto;
@@ -137,4 +135,15 @@ a{
     border-radius: 15px;
     display: block;
     padding: 1rem;
+}
+
+
+.resume{
+    .cards-container{
+        display: grid;
+        grid-template-columns: 25% 75%;
+    }
+   .resume-header{
+       text-align: center;
+   }
 }

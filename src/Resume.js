@@ -118,33 +118,30 @@ const App = () => {
   };
 
   return (
-
     <div className="resume">
-      <div className="projects">
-        <h2 className="projects-header">Resume</h2>
-        <div className="cards-container">
-          <Tabs
-            orientation="vertical"
-            variant="scrollable"
-            value={value}
-            onChange={handleChange}
-            aria-label="Vertical tabs example"
-            className={classes.tabs}
-          >
-            <Tab label="Skills" {...a11yProps(0)} />
-            <Tab label="Work Experience" {...a11yProps(1)} />
-            <Tab label="Education" {...a11yProps(2)} />
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            <Technical />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <Work />
-          </TabPanel>
-          <TabPanel value={value} index={2}>
-            <Education />
-          </TabPanel>
-        </div>
+      <h2 className="resume-header">Resume</h2>
+      <div className="cards-container">
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          className={classes.tabs}
+        >
+          <Tab label="Skills" {...a11yProps(0)} />
+          <Tab label="Work Experience" {...a11yProps(1)} />
+          <Tab label="Education" {...a11yProps(2)} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <Technical />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Work />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <Education />
+        </TabPanel>
       </div>
     </div>
 
