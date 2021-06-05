@@ -11,3 +11,9 @@
 .MuiAppBar-colorPrimary{
     background-color: $color-primary !important;  
 }
+.MuiTabs-flexContainerVertical{
+    margin-left: 3%;
+    @include for-phone-only{
+        margin-left: 0;
+    }
+}

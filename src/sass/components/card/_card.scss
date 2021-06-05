@@ -1,6 +1,7 @@
 .card-container .MuiTypography-root{
     display: grid;
     grid-gap: 0;
+    padding-top: 1rem;
     grid-template-rows: 30% 70%;
     grid-template-columns: 1fr;
     @include for-tablet-landscape-up{
@@ -21,10 +22,12 @@
     .card-image{
         @include for-tablet-landscape-up{
             height: 50vh;
+
         }
     }
     .MuiTypography-body2{
         grid-template-columns: 1fr;
+        font-size: 1.3rem;
     }
 }
 
