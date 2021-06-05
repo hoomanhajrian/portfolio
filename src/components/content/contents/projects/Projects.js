@@ -77,8 +77,8 @@ const Projects = () => {
                         <Tab label="Go Hike" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
-                <TabPanel value={value} index={0}>
-                    <img src="./img/farmerfresh.jpg" />
+                <TabPanel value={value} className="card-container" index={0}>
+                    <img className="card-image" src="./img/farmerfresh.jpg" />
                     <Card className="project-card card1">
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
@@ -99,8 +99,8 @@ const Projects = () => {
                         </CardContent>
                     </Card>
                 </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <img src="./img/patchapp.jpg" />
+                <TabPanel value={value} className="card-container" index={1}>
+                    <img className="card-image" src="./img/patchapp.jpg" />
                     <Card className="project-card card2">
 
                         <CardMedia
@@ -128,7 +128,8 @@ const Projects = () => {
 
                     </Card>
                 </TabPanel>
-                <TabPanel value={value} index={2}>
+                <TabPanel value={value} className="card-container" index={2}>
+                    <img className="card-image" src="./img/gohike-card-pic.jpg" />
                     <Card className="project-card card3">
 
                         <CardMedia

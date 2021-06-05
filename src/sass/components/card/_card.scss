@@ -1,4 +1,33 @@
-.MuiTypography-root{
+.card-container .MuiTypography-root{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 0;
+    grid-template-rows: 30% 70%;
+    grid-template-columns: 1fr;
+    @include for-tablet-landscape-up{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+    .MuiCard-root{
+        max-width: 90%;
+        height: 40vh;
+        margin-right: auto;
+        margin-left: auto;
+        
+        @include for-tablet-landscape-up{
+            height: 50vh;
+
+        }
+    }
+    .card-image{
+        @include for-tablet-landscape-up{
+            height: 50vh;
+        }
+    }
+    .MuiTypography-body2{
+        grid-template-columns: 1fr;
+    }
+}
+
+.card-container .MuiTypography-gutterBottom{
+    display: block;
 }

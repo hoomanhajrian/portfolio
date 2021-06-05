@@ -16,16 +16,23 @@
     max-width: 100%;
     width: 100%;
     list-style-type: none;
-   display: grid;
-grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     @include for-phone-only{
         grid-template-columns: 1fr;
+        grid-template-rows: 10% 60% 30%;
     }
     .header_nav{
         display: flex;
-    flex-direction: row;
+        flex-direction: row;
     @include for-phone-only{
-    padding: .5rem;
+        li{
+            margin-top: 1rem;
+        }
+        flex-direction: column;
+        text-align: center;
+        padding: .5rem;
+
     }
     justify-content: space-around;
     font-weight: bold;
@@ -50,3 +57,11 @@ grid-template-columns: 1fr 1fr 1fr;
     }
 }
 };
+
+
+.dark-mode-container{
+    grid-column: 2;
+    @include for-phone-only{
+        grid-column: 1;
+    }
+}

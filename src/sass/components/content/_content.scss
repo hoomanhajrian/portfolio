@@ -6,13 +6,13 @@
     margin-right: auto;
     list-style-type: none;
     margin-left: auto;
-    width: 60%;
+    width: 70%;
     @include for-phone-only{
-        width: 60%;
+        width: 70%;
         grid-template-columns: 1fr;
     }
     @include for-tablet-landscape-up{
-        width: 45%;
+        width: 70%;
         grid-template-columns: 1fr 1fr;
     }
     li{
@@ -35,9 +35,6 @@
     .cards-container{
         @include for-phone-only{
             display: block;
-            .project-card{
-                margin: 2rem;
-            }
         }
         @include for-tablet-landscape-up{
             width: 90%;
@@ -45,12 +42,12 @@
             margin-left: auto;
         
         }
-        .project-card{
-            max-width: 350px;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: 2rem;
-        }
+        // .project-card{
+        //     max-width: 350px;
+        //     margin-right: auto;
+        //     margin-left: auto;
+        //     margin-top: 2rem;
+        // }
     }
     button{
 text-align: left;   
@@ -141,7 +138,13 @@ a{
 .resume{
     .cards-container{
         display: grid;
-        grid-template-columns: 25% 75%;
+        grid-template-columns: 27% 73%;
+        @include for-phone-only{
+            grid-template-columns: 35% 65%;
+        }
+        @include for-tablet-landscape-up{
+            grid-template-columns: 20% 80%;
+        }
     }
    .resume-header{
        text-align: center;
