@@ -6,13 +6,13 @@
     margin-right: auto;
     list-style-type: none;
     margin-left: auto;
-    width: 70%;
+    width: 80%;
     @include for-phone-only{
-        width: 70%;
+        width: 80%;
         grid-template-columns: 1fr;
     }
     @include for-tablet-landscape-up{
-        width: 70%;
+        width: 80%;
         grid-template-columns: 1fr 1fr;
     }
     li{

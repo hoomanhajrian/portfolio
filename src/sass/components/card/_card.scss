@@ -9,18 +9,18 @@
     }
     .MuiCard-root{
         max-width: 90%;
-        height: 40vh;
+        // height: 40vh;
         margin-right: auto;
         margin-left: auto;
         
         @include for-tablet-landscape-up{
-            height: 50vh;
+            // height: 50vh;
 
         }
     }
     .card-image{
         @include for-tablet-landscape-up{
-            height: 50vh;
+            // height: 50vh;
 
         }
     }
@@ -32,10 +32,4 @@
 
 .card-container .MuiTypography-gutterBottom{
     display: block;
-}
-
-.MuiCardContent-root:last-child{
-    padding: 0;
-    padding-left: 10px;
-    padding-top: 20px;
 }
