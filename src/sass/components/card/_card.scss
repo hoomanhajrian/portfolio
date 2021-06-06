@@ -1,7 +1,6 @@
 .card-container .MuiTypography-root{
     display: grid;
     grid-gap: 0;
-    padding-top: 1rem;
     grid-template-rows: 30% 70%;
     grid-template-columns: 1fr;
     @include for-tablet-landscape-up{
@@ -33,4 +32,10 @@
 
 .card-container .MuiTypography-gutterBottom{
     display: block;
+}
+
+.MuiCardContent-root:last-child{
+    padding: 0;
+    padding-left: 10px;
+    padding-top: 20px;
 }

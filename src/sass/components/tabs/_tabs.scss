@@ -12,7 +12,11 @@
     background-color: $color-primary !important;  
 }
 .MuiTabs-flexContainerVertical{
-    margin-left: 3%;
+    padding-left: 0%;
+    display: none;
+    @include for-tablet-landscape-up{
+        padding-left: 2%;
+    }
     @include for-phone-only{
         margin-left: 0;
     }
