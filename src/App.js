@@ -12,7 +12,7 @@ import Resume from './Resume';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Footer from './components/footer/Footer';
-
+import MenuButton from './components/menu/Menu';
 
 const App = () => {
     const [state, setState] = React.useState({
@@ -26,12 +26,16 @@ const App = () => {
         <div className="app">
             <Router>
                 <div className="header">
+
                     <ul className="header_menu">
+
                         <li>
                             <Link to="/"><Header /></Link>
                         </li>
+
                         <li>
-                            <div className="header_nav">
+                            <MenuButton />
+                            <div id="menuitems" className="header_nav">
                                 <li>
                                     <Link to="/">Projects</Link>
                                 </li>

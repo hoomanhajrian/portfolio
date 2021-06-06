@@ -1,3 +1,14 @@
-.MuiTab-wrapper{
-    font-weight: bold;
+// .MuiTab-wrapper{
+//     font-weight: bold;
+// }
+
+.menu{
+    @include for-tablet-portrait-up{
+    display: none;
+    }
+    text-align: center;
+    align-self: center;
+    margin: 1rem;
 }
+
+
