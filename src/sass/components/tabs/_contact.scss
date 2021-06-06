@@ -22,6 +22,7 @@
     margin-right: auto;
     margin-left: auto;
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: 1fr 1fr;
     @include for-phone-only{
         margin-left: 1rem;
