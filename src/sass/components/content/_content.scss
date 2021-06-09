@@ -140,7 +140,7 @@ a{
         display: grid;
         grid-template-columns: 27% 73%;
         @include for-phone-only{
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 45% 55%;
         }
         @include for-tablet-landscape-up{
             grid-template-columns: 20% 80%;

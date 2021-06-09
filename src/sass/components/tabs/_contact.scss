@@ -37,8 +37,8 @@
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr 1fr;
-    
     color: $color-primary;
+    
     :hover{
         color: darkcyan;
     }
