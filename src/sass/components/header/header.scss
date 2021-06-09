@@ -3,6 +3,7 @@
     padding-bottom: 0;
     background-color: $color-primary;
     color: $color-text;
+    
 .header_menu{
     color: $color-text;
     a{
@@ -17,7 +18,7 @@
     width: 100%;
     list-style-type: none;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 20% 80%;
     @include for-phone-only{
         grid-template-columns: 1fr;
         grid-template-rows: 10% 60% 30%;
@@ -30,6 +31,7 @@
             margin-top: 1rem;
         }
         flex-direction: column;
+        justify-content: space-between;
         text-align: center;
         padding: .5rem;
 
@@ -48,6 +50,10 @@
         .titles{
             .title{
                 font-size: 1.5rem;
+                color: $color-text;
+                :hover{
+                    color: cyan;
+                }
                 @include for-phone-only{
                     color: $color-text;
                     text-align: center;

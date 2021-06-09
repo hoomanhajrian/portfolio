@@ -45,21 +45,22 @@ const App = () => {
                                 <li>
                                     <Link to="/resume">Resume</Link>
                                 </li>
+                                <li className="dark-mode-container">
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={state.checkedB}
+                                                onChange={handleChangeNightMode}
+                                                name="checkedB"
+                                                color="primary"
+                                            />
+                                        }
+                                        label="Night Mode"
+                                    />
+                                </li>
                             </div>
                         </li>
-                        <li className="dark-mode-container">
-                            <FormControlLabel
-                                control={
-                                    <Switch
-                                        checked={state.checkedB}
-                                        onChange={handleChangeNightMode}
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                }
-                                label="Night Mode"
-                            />
-                        </li>
+
                     </ul>
                 </div>
                 <NavSwitch>
