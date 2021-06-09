@@ -122,7 +122,7 @@ const Projects = () => {
                                 <a href="https://patch-app.ca/" target="_blank">patch-app.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Online Platform for kids to learn, how to fix injuries in case of emergency. This platfrom was based on React Technology with back end on AWS servers.
+                                Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.
 </Typography>
                         </CardContent>
 
@@ -151,7 +151,7 @@ const Projects = () => {
                                 <a href="http://gohike.ca/" target="_blank">goHike.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                Cordova based mobile application that shows the hiking trails around the user and user is able to see the route to the trail and the trail route it self on the map.
+                                Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.
 </Typography>
                         </CardContent>
                     </Card>
