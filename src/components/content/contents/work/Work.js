@@ -3,7 +3,6 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
 
 function Work() {
     return (
@@ -19,12 +18,12 @@ function Work() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             PART-TIME CELLPHONE TECHNICIAN / Vancouver, BC
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Feb.2020 - Present
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="https://www.cellclinic.ca/" target="_blank">cellclinic.ca</a>
+                            <a href="https://www.cellclinic.ca/" target="_blank" rel="noreferrer">cellclinic.ca</a>
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <ul>
@@ -44,12 +43,12 @@ function Work() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             ONLINE CUSTOMER CARE AND IT CONSULTANT / Gohar Shafa Co. / Tehran, Iran
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Jan.2019 - Oct.2019
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="https://www.goharshafa.com/" target="_blank">goharshafa.com</a>
+                            <a href="https://www.goharshafa.com/" target="_blank" rel="noreferrer">goharshafa.com</a>
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <ul>
@@ -70,12 +69,12 @@ function Work() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Jan.201 - Jan.2019
-                                </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="http://sunservice.com/" target="_blank">sunservice.com</a>
+                            <a href="http://sunservice.com/" target="_blank" rel="noreferrer">sunservice.com</a>
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <ul>

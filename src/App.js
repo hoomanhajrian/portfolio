@@ -1,4 +1,5 @@
 import React from 'react';
+import './sass/main.scss';
 import {
     BrowserRouter as Router,
     Switch as NavSwitch,
@@ -8,19 +9,11 @@ import {
 import Header from './components/header/Header';
 import Contact from './components/header/Contact'
 import Projects from './components/content/contents/projects/Projects'
-import Resume from './Resume';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
 import MenuButton from './components/menu/Menu';
 
 const App = () => {
-    const [state, setState] = React.useState({
-        checkedB: false,
-    });
-    const handleChangeNightMode = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
 
     return (
         <div className="app">
@@ -44,19 +37,6 @@ const App = () => {
                                 </li>
                                 <li>
                                     <Link to="/resume">Resume</Link>
-                                </li>
-                                <li className="dark-mode-container">
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                checked={state.checkedB}
-                                                onChange={handleChangeNightMode}
-                                                name="checkedB"
-                                                color="primary"
-                                            />
-                                        }
-                                        label="Night Mode"
-                                    />
                                 </li>
                             </div>
                         </li>

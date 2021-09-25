@@ -1,20 +1,13 @@
-import './sass/main.scss';
 import React from 'react';
-import Content from './components/content/Content'
-import Footer from './components/footer/Footer'
 import PropTypes from 'prop-types';
-import SwipeableViews from 'react-swipeable-views';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
+import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Contact from './components/header/Contact';
-import About from './components/content/about/About';
-import Technical from './components/content/contents/technical/Technical';
-import Work from './components/content/contents/work/Work';
-import Education from './components/content/contents/education/Education';
+import Technical from '../content/contents/technical/Technical';
+import Work from '../content/contents/work/Work';
+import Education from '../content/contents/education/Education';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,12 +35,6 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
-function a11yProps(index) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,10 +54,6 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
-  const [state, setState] = React.useState({
-    checkedB: false,
-  });
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -105,16 +88,8 @@ const App = () => {
     };
   }
 
-  const handleChangeNightMode = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
   };
 
   return (

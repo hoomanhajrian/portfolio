@@ -30,7 +30,6 @@
     .projects-header{
         text-align: center;
         margin-top: 3rem;
-        padding-bottom: 1rem;
     }
     .cards-container{
         @include for-phone-only{
@@ -148,5 +147,6 @@ a{
     }
    .resume-header{
        text-align: center;
+       margin-top: 2rem;
    }
 }

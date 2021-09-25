@@ -3,12 +3,10 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
 
@@ -45,20 +43,8 @@ function a11yProps(index) {
     };
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        height: 224,
-    },
-    tabs: {
-        borderRight: `1px solid ${theme.palette.divider}`,
-    },
-}));
 
 const Projects = () => {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -78,7 +64,7 @@ const Projects = () => {
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} className="card-container" index={0}>
-                    <img className="card-image" src="./img/farmerfresh.jpg" />
+                    <img className="card-image" alt="farmer fresh" src="./img/farmerfresh.jpg" />
                     <Card className="project-card card1">
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
@@ -91,7 +77,7 @@ const Projects = () => {
                                 2021 - 2022
                             </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
-                                <a href="https://farmerfresh.ca/" target="_blank">farmerfresh.ca</a>
+                                <a href="https://farmerfresh.ca/" target="_blank" rel="noreferrer">farmerfresh.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
@@ -100,7 +86,7 @@ const Projects = () => {
                     </Card>
                 </TabPanel>
                 <TabPanel value={value} className="card-container" index={1}>
-                    <img className="card-image" src="./img/patchapp.jpg" />
+                    <img className="card-image" alt="patchapp" src="./img/patchapp.jpg" />
                     <Card className="project-card card2">
 
                         <CardMedia
@@ -111,25 +97,25 @@ const Projects = () => {
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
                                 Patch App
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
                                 Full Stack Developer
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
                                 2020 - 2021
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
-                                <a href="https://patch-app.ca/" target="_blank">patch-app.ca</a>
+                                <a href="https://patch-app.ca/" target="_blank" rel="noreferrer">patch-app.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.
-</Typography>
+                            </Typography>
                         </CardContent>
 
                     </Card>
                 </TabPanel>
                 <TabPanel value={value} className="card-container" index={2}>
-                    <img className="card-image" src="./img/gohike-card-pic.jpg" />
+                    <img className="card-image" alt="gohike-app" src="./img/gohike-card-pic.jpg" />
                     <Card className="project-card card3">
 
                         <CardMedia
@@ -140,19 +126,19 @@ const Projects = () => {
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
                                 Go Hike
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
                                 Full Stack Developer
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h6" component="h2">
                                 2020 - 2021
-</Typography>
+                            </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
-                                <a href="http://gohike.ca/" target="_blank">goHike.ca</a>
+                                <a href="http://gohike.ca/" target="_blank" rel="noreferrer">goHike.ca</a>
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.
-</Typography>
+                            </Typography>
                         </CardContent>
                     </Card>
                 </TabPanel>
