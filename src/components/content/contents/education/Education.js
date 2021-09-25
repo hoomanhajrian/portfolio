@@ -19,13 +19,13 @@ function Education() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             Web and Mobile Development and Design
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Post Baccalaureate Diploma
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Langara College / Vancouver, BC
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             <a href="https://langara.ca/" rel="noreferrer" target="_blank">langara.ca</a>
                         </Typography>
@@ -40,13 +40,13 @@ function Education() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             Computer Software Engineering
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Bachelor’s Degree
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Azad University / Tehran, Iran
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             <a href="http://iauctb.ac.ir/en" rel="noreferrer" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>
@@ -61,13 +61,13 @@ function Education() {
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             Computer Hardware Engineering
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Associate Bachelor’s Degree
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Azad University / Tehran, Iran
-                                    </Typography>
+                        </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             <a href="http://iauctb.ac.ir/en" rel="noreferrer" target="_blank">iauctb.ac.ir(en)</a>
                         </Typography>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './sass/main.scss';
+import Showoff from './components/showoff/showoff';
 import {
     BrowserRouter as Router,
     Switch as NavSwitch,
@@ -7,7 +8,7 @@ import {
     Link
 } from "react-router-dom";
 import Header from './components/header/Header';
-import Contact from './components/header/Contact'
+import Contact from './components/contact/Contact'
 import Projects from './components/content/contents/projects/Projects'
 import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
@@ -38,6 +39,9 @@ const App = () => {
                                 <li>
                                     <Link to="/resume">Resume</Link>
                                 </li>
+                                <li>
+                                    <Link to="/showoff">Showoff</Link>
+                                </li>
                             </div>
                         </li>
 
@@ -52,6 +56,9 @@ const App = () => {
                     </Route>
                     <Route path="/resume">
                         <Resume />
+                    </Route>
+                    <Route path="/showoff">
+                        <Showoff />
                     </Route>
                 </NavSwitch>
             </Router>
