@@ -1,6 +1,6 @@
 import React from 'react';
 import './sass/main.scss';
-import Showoff from './components/showoff/showoff';
+import Showoff from './components/showoff/Showoff';
 import {
     BrowserRouter as Router,
     Switch as NavSwitch,
