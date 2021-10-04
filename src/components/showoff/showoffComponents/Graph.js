@@ -45,13 +45,13 @@ const data = [
 const Graph = () => {
     return (
         <Card className="graph-card">
-            <Typography><h3>Languages</h3></Typography>
+            <Typography><h3>Pie charts</h3></Typography>
             <ResponsivePie
                 data={data}
                 margin={{ top: 40, right: 110, bottom: 80, left: 60 }}
                 startAngle={-180}
                 sortByValue={true}
-                innerRadius={0.55}
+                innerRadius={0.3}
                 padAngle={4}
                 cornerRadius={15}
                 activeOuterRadiusOffset={8}
