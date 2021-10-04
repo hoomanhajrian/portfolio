@@ -1,35 +1,12 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Graph from './showoffComponents/Graph'
 
 function Showoff() {
     return (
-        <ul>
-            <Typography><h3>Under Construction</h3></Typography>
-            <li>
-                <Card className="app1-card card1">
-                    <Graph />
-                </Card>
-            </li>
-            <li>
-                <Card className="app1-card card1">
-                    <CardContent>
-
-                    </CardContent>
-                </Card>
-            </li>
-            <li>
-                <Card className="app1-card card1">
-                    <CardContent>
-
-                    </CardContent>
-                </Card>
-            </li>
+        <ul className="showoff-list">
+            <li><Graph /></li>
         </ul>
-
-
     )
 }
 

@@ -5,6 +5,12 @@
 a{
     text-decoration: none !important;
 }
+ul{
+    list-style-type: none;
+    li{
+        margin-left: 0;
+    }
+}
 .contact{
     margin-bottom: 3.8rem;
 
