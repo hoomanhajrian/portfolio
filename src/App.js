@@ -1,6 +1,5 @@
 import React from 'react';
 import './sass/main.scss';
-import Showoff from './components/showoff/Showoff';
 import {
     BrowserRouter as Router,
     Switch as NavSwitch,
@@ -13,6 +12,8 @@ import Projects from './components/content/contents/projects/Projects'
 import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
 import MenuButton from './components/menu/Menu';
+import Showoff from './components/showoff/Showoff';
+
 
 const App = () => {
 
