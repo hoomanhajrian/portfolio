@@ -1,0 +1,21 @@
+.showoff-container{
+    h2{
+        text-align: center;
+    }
+    .showoff-list{
+    display: flex;
+    flex-direction: column;
+    @include for-tablet-landscape-up{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+    .graph-card{
+        margin: 2rem;
+    height: 40vw;
+    }
+    .bump-card{
+        margin: 2rem;
+    height: 40vw;
+    }
+}
+}

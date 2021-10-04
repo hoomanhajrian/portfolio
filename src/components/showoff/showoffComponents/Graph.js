@@ -48,7 +48,7 @@ const Graph = () => {
             <Typography><h3>Languages</h3></Typography>
             <ResponsivePie
                 data={data}
-                margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+                margin={{ top: 40, right: 110, bottom: 80, left: 60 }}
                 startAngle={-180}
                 sortByValue={true}
                 innerRadius={0.55}
@@ -58,7 +58,7 @@ const Graph = () => {
                 colors={{ scheme: 'category10' }}
                 borderWidth={6}
                 borderColor={{ from: 'color', modifiers: [['darker', '0.4']] }}
-                arcLinkLabelsTextColor="#333333"
+                arcLinkLabelsTextColor="#000"
                 arcLinkLabelsOffset={-10}
                 arcLinkLabelsThickness={2}
                 arcLinkLabelsColor={{ from: 'color' }}
@@ -89,25 +89,25 @@ const Graph = () => {
                         match: {
                             id: 'React'
                         },
-                        id: 'dots'
+                        id: 'lines'
                     },
                     {
                         match: {
                             id: 'Java'
                         },
-                        id: 'dots'
+                        id: 'lines'
                     },
                     {
                         match: {
                             id: 'JavaScript'
                         },
-                        id: 'dots'
+                        id: 'lines'
                     },
                     {
                         match: {
-                            id: 'python'
+                            id: 'Python'
                         },
-                        id: 'dots'
+                        id: 'lines'
                     },
                     {
                         match: {

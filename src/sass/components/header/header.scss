@@ -66,11 +66,3 @@
     }
 }
 };
-
-
-.dark-mode-container{
-    grid-column: 2;
-    @include for-phone-only{
-        grid-column: 1;
-    }
-}
