@@ -42,7 +42,7 @@ const data = [
     }
 ];
 
-const Graph = () => {
+const Prices = () => {
     return (
         <Card className="graph-card">
             <Typography><h3>Pie charts</h3></Typography>
@@ -152,4 +152,4 @@ const Graph = () => {
     )
 }
 
-export default Graph;
+export default Prices;
