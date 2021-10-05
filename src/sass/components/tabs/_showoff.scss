@@ -11,6 +11,10 @@
     max-width: 90%;
     margin-right: auto;
     margin-left: auto;
+    // for limiting the width of the components inside the list
+    li{
+        max-width: 95%;
+    }
     .graph-card{
         margin: 2rem;
     height: 40vh;
