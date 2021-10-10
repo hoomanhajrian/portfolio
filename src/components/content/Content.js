@@ -5,7 +5,7 @@ import Education from './contents/education/Education'
 
 
 
-function Content() {
+const Content = () => {
     return (
         <div className="content">
             <Technical />

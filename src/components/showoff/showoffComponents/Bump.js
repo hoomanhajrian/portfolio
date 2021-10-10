@@ -311,7 +311,7 @@ const Bump = () => {
             <Typography><h3>Trends</h3></Typography>
             <ResponsiveBump
                 data={data}
-                margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
+                margin={{ top: 40, right: 100, bottom: 80, left: 60 }}
                 xPadding={0.15}
                 xOuterPadding={0}
                 yOuterPadding={0.9}

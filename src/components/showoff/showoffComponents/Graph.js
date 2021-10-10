@@ -48,7 +48,7 @@ const Prices = () => {
             <Typography><h3>Pie charts</h3></Typography>
             <ResponsivePie
                 data={data}
-                margin={{ top: 40, right: 110, bottom: 80, left: 60 }}
+                margin={{ top: 30, right: 110, bottom: 80, left: 60 }}
                 startAngle={-180}
                 sortByValue={true}
                 innerRadius={0.3}
@@ -120,31 +120,6 @@ const Prices = () => {
                             id: 'C/C++'
                         },
                         id: 'lines'
-                    }
-                ]}
-                legends={[
-                    {
-                        anchor: 'bottom',
-                        direction: 'row',
-                        justify: false,
-                        translateX: 0,
-                        translateY: 56,
-                        itemsSpacing: 0,
-                        itemWidth: 100,
-                        itemHeight: 18,
-                        itemTextColor: '#999',
-                        itemDirection: 'left-to-right',
-                        itemOpacity: 1,
-                        symbolSize: 18,
-                        symbolShape: 'circle',
-                        effects: [
-                            {
-                                on: 'hover',
-                                style: {
-                                    itemTextColor: '#000'
-                                }
-                            }
-                        ]
                     }
                 ]}
             />
