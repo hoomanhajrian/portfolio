@@ -30,9 +30,10 @@
     background: rgb(34,193,195);
     background: linear-gradient(45deg, $color-primary 10%, rgba(13,170,251,1) 20%, rgba(46,113,194,1) 40%, rgba(50,88,194,1) 63%, $color-primary 80%);
     color: $color-text;
-    .MuiTab-wrapper{
-        font-weight: bold;
-    }
     border-top-right-radius:15px ;
     border-bottom-right-radius:15px ;
+}
+
+.MuiTab-wrapper{
+    font-weight: bold;
 }

@@ -22,10 +22,13 @@
     @include for-phone-only{
         margin-left: auto;
     }
+    .ant-input{
+        border-radius: 5px 5px 5px 5px;
+    }
+    .ant-btn{
+        border-radius: 5px;
+    }
 }
-
-
-
 
 .links{
     align-items: center;
@@ -40,7 +43,7 @@
     color: $color-primary;
     
     :hover{
-        color: darkcyan;
+        color: $secondary;
     }
     i{
         font-size: 2rem;
