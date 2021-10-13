@@ -63,61 +63,63 @@ const RadarController = () => {
             <CardHeader
                 title="Radar"
             />
-            <Slider
-                aria-label="Small steps"
-                className="slider-fruity"
-                defaultValue={50}
-                onChange={getFruityValue}
-                step={10}
-                marks
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-            />
-            <Slider
-                aria-label="Small steps"
-                className="slider-bitter"
-                defaultValue={50}
-                onChange={getBitterValue}
-                step={10}
-                marks
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-            />
-            <Slider
-                aria-label="Small steps"
-                className="slider-heavy"
-                defaultValue={50}
-                onChange={getHeavyValue}
-                step={10}
-                marks
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-            />
-            <Slider
-                aria-label="Small steps"
-                className="slider-strong"
-                defaultValue={50}
-                onChange={getStrongValue}
-                step={10}
-                marks
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-            />
-            <Slider
-                aria-label="Small steps"
-                className="slider-sunny"
-                defaultValue={50}
-                onChange={getSunnyValue}
-                step={10}
-                marks
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-            />
+            <div className="sliders">
+                <Slider
+                    aria-label="Small steps"
+                    className="slider-fruity"
+                    defaultValue={50}
+                    onChange={getFruityValue}
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                    valueLabelDisplay="auto"
+                />
+                <Slider
+                    aria-label="Small steps"
+                    className="slider-bitter"
+                    defaultValue={50}
+                    onChange={getBitterValue}
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                    valueLabelDisplay="auto"
+                />
+                <Slider
+                    aria-label="Small steps"
+                    className="slider-heavy"
+                    defaultValue={50}
+                    onChange={getHeavyValue}
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                    valueLabelDisplay="auto"
+                />
+                <Slider
+                    aria-label="Small steps"
+                    className="slider-strong"
+                    defaultValue={50}
+                    onChange={getStrongValue}
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                    valueLabelDisplay="auto"
+                />
+                <Slider
+                    aria-label="Small steps"
+                    className="slider-sunny"
+                    defaultValue={50}
+                    onChange={getSunnyValue}
+                    step={10}
+                    marks
+                    min={0}
+                    max={100}
+                    valueLabelDisplay="auto"
+                />
+            </div>
             <Radar data={data} />
         </Card>
     )
