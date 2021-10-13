@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { ResponsivePie } from '@nivo/pie'
+import { CardHeader } from '@mui/material';
 
 const data = [
     {
@@ -45,7 +46,9 @@ const data = [
 const Prices = () => {
     return (
         <Card className="graph-card">
-            <Typography><h3>Pie charts</h3></Typography>
+            <CardHeader
+                title="Pie Chart"
+            />
             <ResponsivePie
                 data={data}
                 margin={{ top: 30, right: 110, bottom: 80, left: 60 }}

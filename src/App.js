@@ -30,7 +30,7 @@ const App = () => {
 
                         <li>
                             <MenuButton />
-                            <div id="menuitems" className="header_nav">
+                            <ul id="menuitems" className="header_nav">
                                 <li>
                                     <Link to="/">Projects</Link>
                                 </li>
@@ -43,7 +43,7 @@ const App = () => {
                                 <li>
                                     <Link to="/showoff">Showoff</Link>
                                 </li>
-                            </div>
+                            </ul>
                         </li>
 
                     </ul>

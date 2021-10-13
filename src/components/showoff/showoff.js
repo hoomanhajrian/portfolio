@@ -1,7 +1,7 @@
 import React from 'react';
 import Graph from './showoffComponents/Graph';
 import Bump from './showoffComponents/Bump';
-import Radar from './showoffComponents/Radar';
+import RadarController from './showoffComponents/RadarController';
 
 function Showoff() {
     return (
@@ -10,7 +10,7 @@ function Showoff() {
             <ul className="showoff-list">
                 <li><Graph /></li>
                 <li><Bump /></li>
-                <li><Radar /></li>
+                <li><RadarController /></li>
             </ul>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
+import { CardHeader } from '@mui/material';
 import { ResponsiveBump } from '@nivo/bump'
 const data = [
     {
@@ -183,7 +183,9 @@ const data = [
 const Bump = () => {
     return (
         <Card className="bump-card">
-            <Typography><h3>Trends</h3></Typography>
+            <CardHeader
+                title="Trends"
+            />
             <ResponsiveBump
                 data={data}
                 margin={{ top: 40, right: 100, bottom: 80, left: 60 }}
