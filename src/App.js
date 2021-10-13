@@ -12,7 +12,7 @@ import Projects from './components/content/contents/projects/Projects'
 import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
 import MenuButton from './components/menu/Menu';
-import Showoff from './components/showoff/Showoff';
+import Showoff from './components/showoff/showoff';
 
 
 const App = () => {
