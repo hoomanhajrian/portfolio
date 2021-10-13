@@ -49,9 +49,6 @@ const App = () => {
                     </ul>
                 </div>
                 <NavSwitch>
-                    <Route exact path="/">
-                        <Projects />
-                    </Route>
                     <Route path="/contact">
                         <Contact />
                     </Route>
@@ -60,6 +57,9 @@ const App = () => {
                     </Route>
                     <Route path="/showoff">
                         <Showoff />
+                    </Route>
+                    <Route exact path="/">
+                        <Projects />
                     </Route>
                 </NavSwitch>
             </Router>

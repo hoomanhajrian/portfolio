@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { ResponsiveRadar } from '@nivo/radar'
-
-
+import Slider from '@mui/material/Slider';
 
 const Radar = () => {
-    const [data, setData] = useState([
+    let [data, setData] = useState([
         {
             "taste": "fruity",
             "chardonay": 10
@@ -30,9 +29,25 @@ const Radar = () => {
     ]);
 
 
+    function valuetext(value) {
+        // return `${value}°C`;
+        // setData(data[0].chardonay = value);
+    }
+
+
     return (
         <Card className="radar-card">
             <Typography><h3>Radar</h3></Typography>
+            <Slider
+                aria-label="Small steps"
+                defaultValue={10}
+                getAriaValueText={valuetext}
+                step={10}
+                marks
+                min={0}
+                max={100}
+                valueLabelDisplay="auto"
+            />
             <ResponsiveRadar
                 data={data}
                 keys={['chardonay']}
