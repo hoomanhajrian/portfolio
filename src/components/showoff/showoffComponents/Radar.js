@@ -8,40 +8,102 @@ const Radar = () => {
     let [data, setData] = useState([
         {
             "taste": "fruity",
-            "chardonay": 10
+            "chardonay": 50
         },
         {
             "taste": "bitter",
-            "chardonay": 75
+            "chardonay": 50
         },
         {
             "taste": "heavy",
-            "chardonay": 96
+            "chardonay": 50
         },
         {
             "taste": "strong",
-            "chardonay": 26
+            "chardonay": 50
         },
         {
             "taste": "sunny",
-            "chardonay": 61
+            "chardonay": 50
         }
     ]);
 
-
-    function valuetext(value) {
-        // return `${value}°C`;
-        // setData(data[0].chardonay = value);
+    const getFruityValue = (e) => {
+        let newData = data;
+        newData[0].chardonay = e.target.value;
+        setData(newData);
     }
 
+    const getBitterValue = (e) => {
+        let newData = data;
+        newData[1].chardonay = e.target.value;
+        setData(newData);
+    }
 
+    const getHeavyValue = (e) => {
+        let newData = data;
+        newData[2].chardonay = e.target.value;
+        setData(newData);
+    }
+
+    const getStrongValue = (e) => {
+        let newData = data;
+        newData[3].chardonay = e.target.value;
+        setData(newData);
+    }
+
+    const getSunnyValue = (e) => {
+        let newData = data;
+        newData[4].chardonay = e.target.value;
+        setData(newData);
+    }
     return (
         <Card className="radar-card">
             <Typography><h3>Radar</h3></Typography>
             <Slider
                 aria-label="Small steps"
-                defaultValue={10}
-                getAriaValueText={valuetext}
+                defaultValue={50}
+                onChange={getFruityValue}
+                step={10}
+                marks
+                min={0}
+                max={100}
+                valueLabelDisplay="auto"
+            />
+            <Slider
+                aria-label="Small steps"
+                defaultValue={50}
+                onChange={getBitterValue}
+                step={10}
+                marks
+                min={0}
+                max={100}
+                valueLabelDisplay="auto"
+            />
+            <Slider
+                aria-label="Small steps"
+                defaultValue={50}
+                onChange={getHeavyValue}
+                step={10}
+                marks
+                min={0}
+                max={100}
+                valueLabelDisplay="auto"
+            />
+            <Slider
+                aria-label="Small steps"
+                defaultValue={50}
+                onChange={getStrongValue}
+                step={10}
+                marks
+                min={0}
+                max={100}
+                valueLabelDisplay="auto"
+            />
+            <Slider
+                aria-label="Small steps"
+                defaultValue={50}
+                onChange={getSunnyValue}
                 step={10}
                 marks
                 min={0}
@@ -53,7 +115,7 @@ const Radar = () => {
                 keys={['chardonay']}
                 indexBy="taste"
                 valueFormat=">-.2f"
-                margin={{ top: 50, right: 80, bottom: 80, left: 80 }}
+                margin={{ top: 50, right: 80, bottom: 250, left: 80 }}
                 borderColor={{ from: 'color' }}
                 gridLabelOffset={36}
                 dotSize={10}
@@ -86,6 +148,8 @@ const Radar = () => {
             />
         </Card>
     )
+
+
 }
 
 export default Radar;
