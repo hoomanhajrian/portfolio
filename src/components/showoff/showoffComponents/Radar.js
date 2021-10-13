@@ -132,7 +132,7 @@ const Radar = () => {
                         translateY: -40,
                         itemWidth: 80,
                         itemHeight: 20,
-                        itemTextColor: '#999',
+                        itemTextColor: '#777',
                         symbolSize: 12,
                         symbolShape: 'circle',
                         effects: [
