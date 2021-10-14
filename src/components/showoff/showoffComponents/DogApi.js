@@ -24,7 +24,7 @@ const DogApi = () => {
     return (
         <Card className="dog-card">
             <CardHeader
-                title="Calling Api"
+                title="Calling Api(under construction)"
                 subheader="src: https://dog.ceo/dog-api/"
             />
             <Form className="contact-form">
@@ -37,7 +37,7 @@ const DogApi = () => {
                         },
                     ]}
                 >
-                    <Input onChange={() => { changeBool(false) }} />
+                    <Input onChange={(bool) => { bool ? changeBool(false) : changeBool(true) }} />
                 </Form.Item>
 
             </Form>
