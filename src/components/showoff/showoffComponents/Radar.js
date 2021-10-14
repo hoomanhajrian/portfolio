@@ -2,7 +2,6 @@ import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar'
 
 const Radar = (props) => {
-    console.log("data", props.data);
     const data = props.data;
     return (
         <ResponsiveRadar

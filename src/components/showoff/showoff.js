@@ -2,6 +2,7 @@ import React from 'react';
 import Graph from './showoffComponents/Graph';
 import Bump from './showoffComponents/Bump';
 import RadarController from './showoffComponents/RadarController';
+import DogApi from './showoffComponents/DogApi';
 
 function Showoff() {
     return (
@@ -11,6 +12,7 @@ function Showoff() {
                 <li><Graph /></li>
                 <li><Bump /></li>
                 <li><RadarController /></li>
+                <li><DogApi /></li>
             </ul>
         </div>
     )
