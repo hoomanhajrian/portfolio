@@ -1,32 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form, Input, Button } from 'antd';
+import { Form, Select, Button } from 'antd';
 import 'antd/dist/antd.css';
 import Card from '@material-ui/core/Card';
 import { CardHeader } from '@mui/material';
 import CardMedia from '@material-ui/core/CardMedia';
+// const { Option } = Select;
+
 
 const DogApi = () => {
-
     const [data, setData] = useState();
+    const tempArray = [];
+    const [dogListArray, updateDogListArray] = useState([]);
+    const [selectedBreed, changeSelectedBreed] = useState("");
     const [bool, changeBool] = useState(true);
 
 
-    const getDogs = async () => {
+    const onChange = (value) => {
+        changeSelectedBreed(value);
+    };
+
+    const getRandomDogPicture = async () => {
         try {
-            const breed = document.getElementById('Breed').value;
-            const result = await axios.get(`https://dog.ceo/api/breed/${breed}/images/random`);
+            const result = await axios.get(`https://dog.ceo/api/breed/${selectedBreed}/images/random`);
             setData(result.data);
         } catch (err) {
-            setData(err);
             console.error(err);
         }
     };
 
+    const getAllDogs = async () => {
+        try {
+            const result = await axios.get(`https://dog.ceo/api/breeds/list/all`);
+            for (const [breed] of Object.entries(result.data.message)) {
+                tempArray.push({
+                    value: breed
+                });
+            }
+            updateDogListArray(tempArray);
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
+    useEffect(() => {
+        getAllDogs();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
         <Card className="dog-card">
             <CardHeader
-                title="Calling Api(under construction)"
+                title="Calling Api(Random dog pictures by breed)"
                 subheader="source: https://dog.ceo/dog-api/"
             />
             <Form className="contact-form">
@@ -44,19 +69,35 @@ const DogApi = () => {
 
                     ]}
                 >
-                    <Input placeholder="Exp: husky, bulldog, ..." allowClear={true} />
+                    <Select
+                        showSearch
+                        style={{ width: 150 }}
+                        placeholder="Select or search a dog"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        filterOption={(input, option) =>
+                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                        }
+                    >
+                        {dogListArray.map(dog => (
+                            <Select.Option value={dog.value}>
+                                {dog.value}
+                            </Select.Option>
+                        ))}
+                    </Select>
                 </Form.Item>
-                <Button disabled={bool} type="primary" htmlType="submit" onClick={getDogs} className="getdogs-button">
+                <Button disabled={bool} type="primary" htmlType="submit" onClick={getRandomDogPicture} className="getdogs-button">
                     Show Picture
                 </Button>
             </Form>
-
-            {data ? <CardMedia
-                component="img"
-                height="194"
-                image={data.message}
-                alt={data.message}
-            /> : <p>Please type in the breed name to load the picture</p>}
+            {
+                data ? <CardMedia
+                    component="img"
+                    height="100"
+                    image={data.message}
+                    alt={data.message}
+                /> : <p>Please select the breed name to load the picture</p>
+            }
         </Card >
     )
 };
