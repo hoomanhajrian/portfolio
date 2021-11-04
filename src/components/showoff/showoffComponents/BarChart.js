@@ -14,37 +14,37 @@ const BarChart = () => {
 
     const [data, setData] = useState([
         {
-            "country": "AD",
+            "country": "1",
             "donut": 126,
             "donutColor": "hsl(128, 70%, 50%)"
         },
         {
-            "country": "AE",
+            "country": "2",
             "donut": 52,
             "donutColor": "hsl(32, 70%, 50%)"
         },
         {
-            "country": "AF",
+            "country": "3",
             "donut": 124,
             "donutColor": "hsl(246, 70%, 50%)"
         },
         {
-            "country": "AG",
+            "country": "4",
             "donut": 69,
             "donutColor": "hsl(53, 70%, 50%)"
         },
         {
-            "country": "AI",
+            "country": "5",
             "donut": 119,
             "donutColor": "hsl(91, 70%, 50%)"
         },
         {
-            "country": "AL",
+            "country": "6",
             "donut": 37,
             "donutColor": "hsl(31, 70%, 50%)"
         },
         {
-            "country": "AM",
+            "country": "7",
             "donut": 174,
             "donutColor": "hsl(84, 70%, 50%)"
         }
@@ -58,37 +58,37 @@ const BarChart = () => {
         randomNumbers();
         setData([
             {
-                "country": "AD",
+                "country": "1",
                 "donut": newData[0],
                 "donutColor": "hsl(128, 70%, 50%)"
             },
             {
-                "country": "AE",
+                "country": "2",
                 "donut": newData[1],
                 "donutColor": "hsl(32, 70%, 50%)"
             },
             {
-                "country": "AF",
+                "country": "3",
                 "donut": newData[2],
                 "donutColor": "hsl(246, 70%, 50%)"
             },
             {
-                "country": "AG",
+                "country": "4",
                 "donut": newData[3],
                 "donutColor": "hsl(53, 70%, 50%)"
             },
             {
-                "country": "AI",
+                "country": "5",
                 "donut": newData[4],
                 "donutColor": "hsl(91, 70%, 50%)"
             },
             {
-                "country": "AL",
+                "country": "6",
                 "donut": newData[5],
                 "donutColor": "hsl(31, 70%, 50%)"
             },
             {
-                "country": "AM",
+                "country": "7",
                 "donut": newData[6],
                 "donutColor": "hsl(84, 70%, 50%)"
             }
@@ -105,7 +105,7 @@ const BarChart = () => {
                     newData[j + 1] = tmp;
                 }
             }
-        }
+        };
 
         setData(newData);
 
@@ -120,7 +120,7 @@ const BarChart = () => {
                 data={data}
                 keys={['donut']}
                 indexBy="country"
-                margin={{ top: 70, right: 130, bottom: 50, left: 60 }}
+                margin={{ top: 70, right: 60, bottom: 50, left: 60 }}
                 padding={0.3}
                 valueScale={{ type: 'linear' }}
                 indexScale={{ type: 'band', round: true }}
@@ -152,7 +152,7 @@ const BarChart = () => {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'country',
+                    legend: 'bars',
                     legendPosition: 'middle',
                     legendOffset: 32
                 }}
@@ -160,37 +160,13 @@ const BarChart = () => {
                     tickSize: 5,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: 'food (0-200)',
+                    legend: '(0-200)',
                     legendPosition: 'middle',
                     legendOffset: -40
                 }}
                 labelSkipWidth={12}
                 labelSkipHeight={12}
                 labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-                legends={[
-                    {
-                        dataFrom: 'keys',
-                        anchor: 'bottom-right',
-                        direction: 'column',
-                        justify: false,
-                        translateX: 120,
-                        translateY: 0,
-                        itemsSpacing: 2,
-                        itemWidth: 100,
-                        itemHeight: 20,
-                        itemDirection: 'left-to-right',
-                        itemOpacity: 0.85,
-                        symbolSize: 20,
-                        effects: [
-                            {
-                                on: 'hover',
-                                style: {
-                                    itemOpacity: 1
-                                }
-                            }
-                        ]
-                    }
-                ]}
                 role="application"
                 ariaLabel="Nivo bar chart"
                 barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}

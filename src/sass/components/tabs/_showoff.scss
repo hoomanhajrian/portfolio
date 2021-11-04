@@ -42,7 +42,7 @@
    }
    .barchart-card{
     margin: 2rem;
-    padding-bottom: 7rem;
+    padding-bottom: 9rem;
     height: 90vh;
     .barchart-buttons{
         width: 70%;
@@ -51,6 +51,9 @@
         justify-content: space-around;
         margin-right: auto;
         margin-left: auto;
+        button{
+            margin: .2rem;
+        }
     }
    }
 }
