@@ -76,8 +76,8 @@ const Projects = () => {
                             <Typography gutterBottom variant="h6" component="h2">
                                 2021 - 2022
                             </Typography>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                <a href="https://farmerfresh.ca/" target="_blank" rel="noreferrer">farmerfresh.ca</a>
+                            <Typography gutterBottom variant="h5" component="a" href="https://farmerfresh.ca/" rel="noreferrer" target="_blank">
+                                farmerfresh.ca
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.
@@ -104,8 +104,8 @@ const Projects = () => {
                             <Typography gutterBottom variant="h6" component="h2">
                                 2020 - 2021
                             </Typography>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                <a href="https://patch-app.ca/" target="_blank" rel="noreferrer">patch-app.ca</a>
+                            <Typography gutterBottom variant="h5" component="a" href="https://patch-app.ca/" target="_blank" rel="noreferrer">
+                                patch-app.ca
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.
@@ -133,8 +133,8 @@ const Projects = () => {
                             <Typography gutterBottom variant="h6" component="h2">
                                 2020 - 2021
                             </Typography>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                <a href="http://gohike.ca/" target="_blank" rel="noreferrer">goHike.ca</a>
+                            <Typography gutterBottom variant="h5" component="a" href="http://gohike.ca/" target="_blank" rel="noreferrer">
+                                goHike.ca
                             </Typography>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.
