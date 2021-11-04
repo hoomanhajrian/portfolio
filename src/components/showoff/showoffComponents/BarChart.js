@@ -50,7 +50,7 @@ const BarChart = () => {
         }
     ]);
 
-    const randomdata = () => {
+    const randomData = () => {
         const newData = [];
         const randomNumbers = () => {
             data.forEach(e => { newData.push(Math.floor(Math.random() * 200)) });
@@ -95,8 +95,19 @@ const BarChart = () => {
         ])
     };
 
-    const sortdata = () => {
-        console.log("clicked");
+    const sortData = () => {
+        const newData = [...data];
+        for (let i = 0; i < newData.length - 1; i++) {
+            for (let j = 0; j < newData.length - 1; j++) {
+                if (newData[j].donut > newData[j + 1].donut) {
+                    let tmp = newData[j];
+                    newData[j] = newData[j + 1];
+                    newData[j + 1] = tmp;
+                }
+            }
+        }
+
+        setData(newData);
 
     };
 
@@ -185,8 +196,8 @@ const BarChart = () => {
                 barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}
             />
             <div className="barchart-buttons">
-                <Button type="primary" onClick={randomdata}>Random Data</Button>
-                <Button type="primary" onClick={sortdata}>Sort it out</Button>
+                <Button type="primary" onClick={randomData}>Random Data</Button>
+                <Button type="primary" onClick={sortData}>Bubble Sort</Button>
             </div>
 
         </Card>

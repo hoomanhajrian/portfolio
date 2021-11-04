@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
@@ -88,12 +87,6 @@ const Projects = () => {
                 <TabPanel value={value} className="card-container" index={1}>
                     <img className="card-image" alt="patchapp" src="./img/patchapp.jpg" />
                     <Card className="project-card card2">
-
-                        <CardMedia
-                            className="card-media"
-                            image="/static/images/cards/contemplative-reptile.jpg"
-                            title="Contemplative Reptile"
-                        />
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
                                 Patch App
@@ -117,12 +110,6 @@ const Projects = () => {
                 <TabPanel value={value} className="card-container" index={2}>
                     <img className="card-image" alt="gohike-app" src="./img/gohike-card-pic.jpg" />
                     <Card className="project-card card3">
-
-                        <CardMedia
-                            className="card-media"
-                            image="/static/images/cards/contemplative-reptile.jpg"
-                            title="Contemplative Reptile"
-                        />
                         <CardContent>
                             <Typography gutterBottom variant="h4" component="h2">
                                 Go Hike
