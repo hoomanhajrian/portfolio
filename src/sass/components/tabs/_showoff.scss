@@ -42,8 +42,16 @@
    }
    .barchart-card{
     margin: 2rem;
-    padding-bottom: 4rem;
-    height: 80vh;
+    padding-bottom: 7rem;
+    height: 90vh;
+    .barchart-buttons{
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-right: auto;
+        margin-left: auto;
+    }
    }
 }
 }

@@ -80,7 +80,7 @@ const DogApi = () => {
                         }
                     >
                         {dogListArray.map(dog => (
-                            <Select.Option value={dog.value}>
+                            <Select.Option key={dog.value} value={dog.value}>
                                 {dog.value}
                             </Select.Option>
                         ))}
