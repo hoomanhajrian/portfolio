@@ -1,7 +1,7 @@
 import React from 'react';
 import './sass/main.scss';
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Switch as NavSwitch,
     Route,
     Link
