@@ -13,7 +13,7 @@ import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
 import MenuButton from './components/menu/Menu';
 import Showoff from './components/showoff/showoff';
-
+import NotFound from './components/notfound/NotFound';
 
 const App = () => {
 
@@ -49,7 +49,7 @@ const App = () => {
                     </ul>
                 </div>
                 <NavSwitch>
-                    <Route path="/contact">
+                    <Route path="/contact" >
                         <Contact />
                     </Route>
                     <Route path="/resume">
@@ -60,6 +60,9 @@ const App = () => {
                     </Route>
                     <Route exact path="/">
                         <Projects />
+                    </Route>
+                    <Route>
+                        <NotFound />
                     </Route>
                 </NavSwitch>
             </Router>
