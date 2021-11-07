@@ -4,7 +4,8 @@ import {
     HashRouter as Router,
     Switch as NavSwitch,
     Route,
-    Link
+    Link,
+    NavLink
 } from "react-router-dom";
 import Header from './components/header/Header';
 import Contact from './components/contact/Contact'
@@ -25,23 +26,23 @@ const App = () => {
                     <ul className="header_menu">
 
                         <li>
-                            <Link to="/"><Header /></Link>
+                            <NavLink to="/"><Header /></NavLink>
                         </li>
 
                         <li>
                             <MenuButton />
                             <ul id="menuitems" className="header_nav">
                                 <li>
-                                    <Link to="/">Projects</Link>
+                                    <NavLink to="/">Projects</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/contact">Contact</Link>
+                                    <NavLink to="/contact">Contact</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/resume">Resume</Link>
+                                    <NavLink to="/resume">Resume</NavLink>
                                 </li>
                                 <li>
-                                    <Link to="/showoff">Showoff</Link>
+                                    <NavLink to="/showoff">Showoff</NavLink>
                                 </li>
                             </ul>
                         </li>
