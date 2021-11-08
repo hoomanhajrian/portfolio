@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN npm install --force
+RUN yarn
 
 EXPOSE 3000
 
 CMD ["yarn","start"]
+
+# docker run -d -p 80:3000 hoomandock/portfolio 
