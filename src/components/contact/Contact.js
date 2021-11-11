@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
-
+import Map from './Map'
 const layout = {
     labelCol: {
         span: 8,
@@ -35,6 +35,7 @@ const Contact = () => {
     return (
         <div className="contact">
             <h2>Contact me</h2>
+            <Map className="googlemap" />
             <Form className="contact-form" {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                 <Form.Item
                     name={['user', 'name']}
@@ -67,6 +68,7 @@ const Contact = () => {
                     </Button>
                 </Form.Item>
             </Form>
+
             <ul className="links">
 
                 <li><a href="https://www.linkedin.com/in/hooman-hajarian/" target="_blank" rel="noreferrer"><i class="fab fa-linkedin"></i><span className="visually-hidden">https://www.linkedin.com/in/hooman-hajarian/</span></a></li>
