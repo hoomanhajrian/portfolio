@@ -1,38 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import { CardHeader } from '@mui/material';
 import Ball from './Ball'
 
 
+const useMove = () => {
+    const [position, setPosition] = useState({ x: '200', y: '250' });
 
-export default class MouseMagic extends React.Component {
-    constructor(props) {
-        super(props);
-        this.name = "Mouse Game";
-        this.state = {
-            position: {
-                x: "100px",
-                y: "100px"
-            }
-        }
+    const handleMouseMove = e => {
+        e.persist()
+        setPosition(position => ({ ...position, x: e.clientX, y: e.clientY }))
     }
-    componentWillMount = () => {
-        document.addEventListener("mousemove", (event) => {
-            let mousex = event.clientX; // Gets Mouse X
-            let mousey = event.clientY; // Gets Mouse Y
-            this.setState({ position: { x: mousex, y: mousey } })
-            // console.log([mousex, mousey]); // Prints data
-        });
+    return {
+        x: position.x,
+        y: position.y,
+        handleMouseMove,
     }
-    render() {
+}
 
-        return (
-            <Card className="mouse-game-card">
-                <CardHeader
-                    title={this.name}
-                />
-                <Ball position={this.state.position} />
-            </Card>
-        );
-    }
+
+
+const MouseMagic = () => {
+    const title = "Mouse Game";
+
+    const { x, y, handleMouseMove } = useMove();
+
+    return (
+        <Card className="mouse-game-card" onMouseMove={handleMouseMove}>
+            <CardHeader
+                title={title}
+
+            />
+            <Ball x={x} y={y} />
+        </Card>
+    );
 };
+
+export default MouseMagic;
