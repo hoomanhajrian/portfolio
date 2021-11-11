@@ -4,6 +4,7 @@ import Bump from './showoffComponents/Bump';
 import RadarController from './showoffComponents/RadarController';
 import DogApi from './showoffComponents/DogApi';
 import BarChart from './showoffComponents/BarChart';
+import MouseMagic from './showoffComponents/mouseMagic';
 
 function Showoff() {
     return (
@@ -12,6 +13,7 @@ function Showoff() {
             <ul className="showoff-list">
                 <li><Graph /></li>
                 <li><BarChart /></li>
+                <li><MouseMagic /></li>
                 <li><Bump /></li>
                 <li><RadarController /></li>
                 <li><DogApi /></li>

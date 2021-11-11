@@ -4,7 +4,6 @@ import {
     HashRouter as Router,
     Switch as NavSwitch,
     Route,
-    Link,
     NavLink
 } from "react-router-dom";
 import Header from './components/header/Header';
