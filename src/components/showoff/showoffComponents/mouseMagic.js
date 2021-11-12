@@ -22,6 +22,7 @@ const useMove = () => {
 
 const MouseMagic = () => {
     const title = "Mouse Game";
+    const subHeader = "Try to click on the red ball(not for mobile devices)";
 
     const { x, y, handleMouseMove } = useMove();
 
@@ -29,7 +30,7 @@ const MouseMagic = () => {
         <Card className="mouse-game-card" onMouseMove={handleMouseMove}>
             <CardHeader
                 title={title}
-
+                subheader={subHeader}
             />
             <Ball x={x} y={y} />
         </Card>

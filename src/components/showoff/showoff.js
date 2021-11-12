@@ -11,12 +11,12 @@ function Showoff() {
         <div className="showoff-container">
             <h2 className="showoff-header">Showoff</h2>
             <ul className="showoff-list">
-                <li><Graph /></li>
                 <li><BarChart /></li>
-                <li><MouseMagic /></li>
-                <li><Bump /></li>
                 <li><RadarController /></li>
+                <li><Graph /></li>
                 <li><DogApi /></li>
+                <li><Bump /></li>
+                <li><MouseMagic /></li>
             </ul>
         </div>
     )
