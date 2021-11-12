@@ -19,6 +19,7 @@
     width: 60%;
     margin-right: auto;
     margin-left: 15%;
+    margin-top: 2rem;
     @include for-phone-only{
         margin-left: auto;
     }
@@ -41,6 +42,7 @@
     grid-gap: 1rem;
     grid-template-columns: 1fr 1fr;
     color: $color-primary;
+    
     
     :hover{
         color: $secondary;
