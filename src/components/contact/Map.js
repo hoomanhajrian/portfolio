@@ -70,10 +70,8 @@ const Map = () => {
             <GoogleMapReact
                 bootstrapURLKeys={{ key: "AIzaSyDCZ-HHhKHwJQqngMu9ax7KAR7_JGpVL90" }}
                 center={center}
-                onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
                 defaultZoom={zoom}
             >
-                <Marker lat={crd.latitude} lng={crd.longitude} />
             </GoogleMapReact>
         </div>
     );
