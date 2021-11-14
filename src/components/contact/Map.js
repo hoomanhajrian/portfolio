@@ -66,12 +66,14 @@ const Map = () => {
 
     return (
         // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '50%', margin: '0 auto' }}>
+        <div style={{ height: '50vh', width: '60%', margin: '0 auto' }}>
             <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyBSKYJdqFM5ySXBNMWI36BI-XmW6eyEgxI" }}
+                bootstrapURLKeys={{ key: "AIzaSyDCZ-HHhKHwJQqngMu9ax7KAR7_JGpVL90" }}
                 center={center}
+                onGoogleApiLoaded={({ map, maps }) => renderMarkers(map, maps)}
                 defaultZoom={zoom}
             >
+                <Marker lat={crd.latitude} lng={crd.longitude} />
             </GoogleMapReact>
         </div>
     );
