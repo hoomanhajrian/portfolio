@@ -25,14 +25,14 @@ const App = () => {
                     <ul className="header_menu">
 
                         <li>
-                            <NavLink to="/"><Header /></NavLink>
+                            <NavLink to="/projects"><Header /></NavLink>
                         </li>
 
                         <li>
                             <MenuButton />
                             <ul id="menuitems" className="header_nav">
                                 <li>
-                                    <NavLink to="/">Projects</NavLink>
+                                    <NavLink to="/projects">Projects</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/contact">Contact</NavLink>
@@ -49,6 +49,9 @@ const App = () => {
                     </ul>
                 </div>
                 <NavSwitch>
+                    <Route exact path="/projects">
+                        <Projects />
+                    </Route>
                     <Route path="/contact" >
                         <Contact />
                     </Route>
@@ -57,9 +60,6 @@ const App = () => {
                     </Route>
                     <Route path="/showoff">
                         <Showoff />
-                    </Route>
-                    <Route exact path="/">
-                        <Projects />
                     </Route>
                     <Route>
                         <NotFound />
