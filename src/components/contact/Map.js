@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-
-
+import Marker from './Marker';
 
 const options = {
     enableHighAccuracy: true,
@@ -11,15 +9,23 @@ const options = {
 };
 
 
+
 const Map = () => {
 
     const [center, setCenter] = useState({
         lat: 59.95,
         lng: 30.33
     });
-    const zoom = 11;
+    const zoom = 13;
 
-
+    const getMapOptions = (maps) => {
+        return {
+            disableDefaultUI: true,
+            mapTypeControl: true,
+            streetViewControl: true,
+            styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'on' }] }],
+        };
+    };
 
     function success(pos) {
         const crd = pos.coords;
@@ -27,11 +33,6 @@ const Map = () => {
             lat: crd.latitude,
             lng: crd.longitude
         })
-
-        // console.log("Your current position is:");
-        // console.log(`Latitude : ${crd.latitude}`);
-        // console.log(`Longitude: ${crd.longitude}`);
-        // console.log(`More or less ${crd.accuracy} meters.`);
     };
 
     function errors(err) {
@@ -71,7 +72,14 @@ const Map = () => {
                 bootstrapURLKeys={{ key: "AIzaSyDCZ-HHhKHwJQqngMu9ax7KAR7_JGpVL90" }}
                 center={center}
                 defaultZoom={zoom}
+                options={getMapOptions}
             >
+                <Marker
+                    lat={center.lat}
+                    lng={center.lng}
+                    name="Your Estimated Location"
+                    color="red"
+                />
             </GoogleMapReact>
         </div>
     );
