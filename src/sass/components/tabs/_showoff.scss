@@ -69,5 +69,26 @@
         margin: 1rem auto;
     }
 }
+.calculator-card{
+    margin: 2rem;
+    margin-bottom: 5rem;
+    height: 50vh;
+    .calculator-input{
+        width: 50%;
+        margin: 1rem auto;
+        display: block;
+    };
+    .calculator-buttons{
+        display: grid;
+        grid-gap: .5rem;
+        grid-template-columns:1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        width: 50%;
+        margin: 1rem auto;
+    };
+    .calculator-button{
+        
+    }
+}
 }
 }

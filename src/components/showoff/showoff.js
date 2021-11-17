@@ -5,6 +5,7 @@ import RadarController from './showoffComponents/RadarController';
 import DogApi from './showoffComponents/DogApi';
 import BarChart from './showoffComponents/BarChart';
 import MouseMagic from './showoffComponents/mouseMagic';
+import Calculator from './showoffComponents/Calculator';
 
 function Showoff() {
     return (
@@ -12,6 +13,7 @@ function Showoff() {
             <h2 className="showoff-header">Showoff</h2>
             <ul className="showoff-list">
                 <li><BarChart /></li>
+                <li><Calculator /></li>
                 <li><RadarController /></li>
                 <li><Graph /></li>
                 <li><DogApi /></li>
