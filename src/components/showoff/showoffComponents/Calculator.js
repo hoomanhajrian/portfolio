@@ -5,10 +5,31 @@ import { Input } from "@material-ui/core";
 import { Button } from "antd";
 
 const Calculator = () => {
-    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '=', '-', '/', '*']
+    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '-', '=', '/', '*'];
+    const input = document.getElementById("calcInput");
 
-    const useButton = (value) => {
-        console.log(value);
+    const useButton = (event) => {
+        const theInput = event.target.value;
+        switch (theInput) {
+            case '+':
+                console.log(theInput);
+                break;
+            case '-':
+                console.log(theInput);
+                break;
+            case '/':
+                console.log(theInput);
+                break;
+            case '*':
+                console.log(theInput);
+                break;
+            case '=':
+                console.log(theInput);
+                break;
+            default:
+                input.value += theInput;
+                break;
+        };
     };
 
     return (
@@ -16,7 +37,10 @@ const Calculator = () => {
             <CardHeader
                 title="Calculator"
             />
-            <Input className="calculator-input" />
+            <div className="calc-input-container">
+                <Input id="calcInput" className="calculator-input" />
+                <Button onClick={() => { input.value = '' }} style={{ backgroundColor: "orange" }}>C</Button>
+            </div>
             <div className="calculator-buttons">
                 {calcButtons.map(button => (
                     <Button className="calculator-button" onClick={useButton} type="primary" key={button} value={button}>
