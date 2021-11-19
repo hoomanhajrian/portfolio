@@ -3,33 +3,30 @@ import Card from '@material-ui/core/Card';
 import { CardHeader } from '@mui/material';
 import { Input } from "@material-ui/core";
 import { Button } from "antd";
+import { evaluate } from "mathjs";
+
+
+
 
 const Calculator = () => {
-    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '-', '=', '/', '*'];
-    const input = document.getElementById("calcInput");
+    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '-', '=', '/', '*', '(', ')'];
+
+    const clear = () => {
+        const input = document.getElementById("calcInput");
+        input.value = '';
+    };
 
     const useButton = (event) => {
-        const theInput = event.target.value;
-        switch (theInput) {
-            case '+':
-                console.log(theInput);
-                break;
-            case '-':
-                console.log(theInput);
-                break;
-            case '/':
-                console.log(theInput);
-                break;
-            case '*':
-                console.log(theInput);
-                break;
-            case '=':
-                console.log(theInput);
-                break;
-            default:
-                input.value += theInput;
-                break;
+        const input = document.getElementById("calcInput");
+        const userInput = event.target.value;
+
+        if (userInput === "=") {
+            input.value = "Result: " + evaluate(`${input.value}`);
+        }
+        else {
+            input.value += userInput;
         };
+
     };
 
     return (
@@ -39,7 +36,7 @@ const Calculator = () => {
             />
             <div className="calc-input-container">
                 <Input id="calcInput" className="calculator-input" />
-                <Button onClick={() => { input.value = '' }} style={{ backgroundColor: "orange" }}>C</Button>
+                <Button onClick={clear} style={{ backgroundColor: "orange" }}>C</Button>
             </div>
             <div className="calculator-buttons">
                 {calcButtons.map(button => (

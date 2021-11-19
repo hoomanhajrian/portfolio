@@ -72,7 +72,7 @@
 .calculator-card{
     margin: 2rem;
     margin-bottom: 5rem;
-    height: 50vh;
+    height: 65vh;
     .calc-input-container{
         display: grid !important;
         grid-template-columns: 80% 20%;
@@ -80,20 +80,22 @@
         width: 55%;
         margin: 1rem auto;
         display: block;
+        .calculator-input{
+            font-weight: bold;
+        }
 }
     .calculator-buttons{
         display: grid;
         grid-gap: .4rem;
         grid-template-columns:1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;
-        width: 60%;
+        width: 70%;
         margin: 1rem auto;
         background-color: lighten(black,20%);
         border-radius: 15px;
         padding: .5rem;
     };
     .calculator-button{
-        
         font-weight: bold;
     }
 }
