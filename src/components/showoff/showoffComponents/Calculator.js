@@ -9,7 +9,8 @@ import { evaluate } from "mathjs";
 
 
 const Calculator = () => {
-    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '+', '-', '=', '/', '*', '(', ')'];
+    const calcButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    const calcActions = ['+', '-', ')', '/', '*', '(', '='];
 
     const clear = () => {
         const input = document.getElementById("calcInput");
@@ -20,13 +21,17 @@ const Calculator = () => {
         const input = document.getElementById("calcInput");
         const userInput = event.target.value;
 
-        if (userInput === "=") {
-            input.value = "Result: " + evaluate(`${input.value}`);
+        if (userInput === undefined) {
+
         }
         else {
-            input.value += userInput;
+            if (userInput === "=") {
+                input.value = "Result: " + evaluate(`${input.value}`);
+            }
+            else {
+                input.value += userInput;
+            };
         };
-
     };
 
     return (
@@ -36,11 +41,18 @@ const Calculator = () => {
             />
             <div className="calc-input-container">
                 <Input id="calcInput" className="calculator-input" />
-                <Button onClick={clear} style={{ backgroundColor: "orange" }}>C</Button>
+                <Button onClick={clear} style={{ backgroundColor: "red", color: "white", fontWeight: "bold" }}>C</Button>
             </div>
-            <div className="calculator-buttons">
+            <div className="calculator-numbers">
                 {calcButtons.map(button => (
-                    <Button className="calculator-button" onClick={useButton} type="primary" key={button} value={button}>
+                    <Button className="calculator-button" onClick={useButton} type="primary" key={button} id={`button${button}`} value={button}>
+                        {button}
+                    </Button>
+                ))}
+            </div>
+            <div className="calc-actions">
+                {calcActions.map(button => (
+                    <Button className="calculator-action-button" onClick={useButton} type="primary" key={button} value={button}>
                         {button}
                     </Button>
                 ))}
