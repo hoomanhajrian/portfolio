@@ -2,6 +2,9 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
 import Map from './Map'
+const axios = require("axios");
+
+
 const layout = {
     labelCol: {
         span: 8,
@@ -26,8 +29,31 @@ const validateMessages = {
 
 const Contact = () => {
 
+    const sendMessage = async (data) => {
+
+        // axios.post('http://localhost:8080/message', data)
+        //     .then((response) => {
+        //         console.log(response);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+        try {
+            await axios.post('http://localhost:8080/message', data)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        catch (err) {
+            console.error(err);
+        }
+    };
+
     const onFinish = (values) => {
-        console.log(values);
+        sendMessage(values);
     };
 
 
@@ -63,7 +89,7 @@ const Contact = () => {
                     <Input.TextArea />
                 </Form.Item>
                 <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button onFinish={onFinish} type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>
