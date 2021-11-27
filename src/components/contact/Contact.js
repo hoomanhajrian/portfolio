@@ -1,99 +1,40 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from 'react';
 import Map from './Map'
+import ContactForm from './ContactForm';
 const axios = require("axios");
-
-
-const layout = {
-    labelCol: {
-        span: 8,
-    },
-    wrapperCol: {
-        span: 16,
-    },
-};
-/* eslint-disable no-template-curly-in-string */
-
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-    },
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
-};
 
 
 const Contact = () => {
 
-    const sendMessage = async (data) => {
+    const [isDone, changeIsDone] = useState(false);
+    const [message, changeMessage] = useState("");
 
-        // axios.post('http://localhost:8080/message', data)
-        //     .then((response) => {
-        //         console.log(response);
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     });
+    const sendMessage = async (data) => {
         try {
             await axios.post('http://localhost:8080/message', data)
                 .then((response) => {
-                    console.log(response);
+                    changeMessage("Thank you I will get back to you as soon as possible!");
+                    changeIsDone(true);
+                    setTimeout(() => { changeIsDone(false) }, 6000);
                 })
                 .catch((error) => {
+                    changeIsDone(true);
+                    changeMessage(`${error}`);
+                    setTimeout(() => { changeIsDone(false) }, 3000)
                     console.log(error);
                 });
         }
         catch (err) {
-            console.error(err);
+            // console.error(err);
         }
     };
-
-    const onFinish = (values) => {
-        sendMessage(values);
-    };
-
 
 
     return (
         <div className="contact">
             <h2>Contact me</h2>
             <Map className="googlemap" />
-            <Form className="contact-form" {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-                <Form.Item
-                    name={['user', 'name']}
-                    label="Name"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name={['user', 'email']}
-                    label="Email"
-                    rules={[
-                        {
-                            type: 'email',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item name={['user', 'Your Message']} label="Your Message">
-                    <Input.TextArea />
-                </Form.Item>
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button onFinish={onFinish} type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
-            </Form>
+            {isDone ? <p className="message">{message}</p> : <ContactForm sendMessage={sendMessage} />}
 
             <ul className="links">
 
