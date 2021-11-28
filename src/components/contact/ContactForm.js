@@ -55,7 +55,7 @@ const ContactForm = (props) => {
             >
                 <Input />
             </Form.Item>
-            <Form.Item name={['user', 'Your Message']} label="Your Message">
+            <Form.Item name={['user', 'message']} label="Your Message">
                 <Input.TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

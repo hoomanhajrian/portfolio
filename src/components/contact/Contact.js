@@ -11,7 +11,7 @@ const Contact = () => {
 
     const sendMessage = async (data) => {
         try {
-            await axios.post('http://hh-portfolio.com:8080/message', data)
+            await axios.post('http://localhost:8080/message', data)
                 .then((response) => {
                     changeMessage("Thank you I will get back to you as soon as possible!");
                     changeIsDone(true);
