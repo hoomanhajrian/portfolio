@@ -17,7 +17,7 @@ const Calculator = () => {
         input.value = '';
     };
 
-    const useButton = (event) => {
+    const calculate = (event) => {
         const input = document.getElementById("calcInput");
         const userInput = event.target.value;
 
@@ -45,14 +45,14 @@ const Calculator = () => {
             </div>
             <div className="calculator-numbers">
                 {calcButtons.map(button => (
-                    <Button className="calculator-button" onClick={useButton} type="primary" key={button} id={`button${button}`} value={button}>
+                    <Button className="calculator-button" onClick={calculate} type="primary" key={button} id={`button${button}`} value={button}>
                         {button}
                     </Button>
                 ))}
             </div>
             <div className="calc-actions">
                 {calcActions.map(button => (
-                    <Button className="calculator-action-button" onClick={useButton} type="primary" key={button} value={button}>
+                    <Button className="calculator-action-button" onClick={calculate} type="primary" key={button} value={button}>
                         {button}
                     </Button>
                 ))}

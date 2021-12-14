@@ -6,6 +6,7 @@ import DogApi from './showoffComponents/DogApi';
 import BarChart from './showoffComponents/BarChart';
 import MouseMagic from './showoffComponents/mouseMagic';
 import Calculator from './showoffComponents/Calculator';
+import MusicPlayer from './showoffComponents/MusicPlayer';
 
 function Showoff() {
     return (
@@ -13,6 +14,7 @@ function Showoff() {
             <h2 className="showoff-header">Showoff</h2>
             <ul className="showoff-list">
                 <li><BarChart /></li>
+                <li><MusicPlayer /></li>
                 <li><Calculator /></li>
                 <li><RadarController /></li>
                 <li><Graph /></li>

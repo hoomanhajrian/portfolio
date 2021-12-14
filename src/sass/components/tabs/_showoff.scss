@@ -131,4 +131,17 @@
     };
 };
 };
+.music-card{
+    width: 75%;
+    height: 67vh;
+    margin-right: auto;
+    margin-left: auto;
+    color:white;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: lighten(black,20%);
+    .music-controller-button{
+        border-radius: 50%;
+    }
+    };
 }
