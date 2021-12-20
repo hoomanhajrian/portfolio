@@ -140,8 +140,32 @@
     border-radius: 15px;
     padding: 1rem;
     background-color: lighten(black,20%);
+    .css-nrdprl-MuiTypography-root{
+        color:white;
+    }
     .music-controller-button{
         border-radius: 50%;
+        font-size: 1.5rem;
+    }
+    .music-time-wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 1.5em;
+    }
+    .music-controller-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        .music-controller-button{
+            font-size: 2rem;
+            color: white;
+            background-color: lighten(black,20%);
+            border: none;
+:hover{
+    color: red;
+}
+        }
     }
     };
 }
