@@ -71,8 +71,8 @@ const MusicPlayer = () => {
                 changeBarLoc(barLoc => barLoc + 1);
                 console.log(barLoc);
             }, 1000
-        )
-        setPlayingId(id)
+        );
+        setPlayingId(id);
     };
 
     const pause = () => {
