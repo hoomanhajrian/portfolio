@@ -69,7 +69,6 @@ const MusicPlayer = () => {
         const id = setInterval(
             () => {
                 changeBarLoc(barLoc => barLoc + 1);
-                console.log(barLoc);
             }, 1000
         );
         setPlayingId(id);
@@ -77,11 +76,11 @@ const MusicPlayer = () => {
 
     const pause = () => {
         clearInterval(playingId);
-        console.log("Pause" + barLoc);
     };
 
     const stop = () => {
         changeBarLoc(0);
+        clearInterval(playingId);
     };
 
     const previous = () => {
