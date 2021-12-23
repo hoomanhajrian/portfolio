@@ -57,6 +57,8 @@ const MusicPlayer = () => {
     const [barLoc, changeBarLoc] = useState(0);
     const [selectedMusic, changeSelectedMusic] = useState(5);
     const [loadedList, changeList] = useState(sampleMusics);
+    const [playingId, setPlayingId] = useState();
+
     const random = false;
 
     const changeBar = (e) => {
@@ -64,16 +66,17 @@ const MusicPlayer = () => {
     };
 
     const play = () => {
-        setInterval(
+        const id = setInterval(
             () => {
                 changeBarLoc(barLoc => barLoc + 1);
                 console.log(barLoc);
             }, 1000
-        );
+        )
+        setPlayingId(id)
     };
 
     const pause = () => {
-
+        clearInterval(playingId);
         console.log("Pause" + barLoc);
     };
 
@@ -154,7 +157,7 @@ const MusicPlayer = () => {
                 <Button onClick={repeat} className="music-controller-button repeat-button"><i class="fas fa-redo-alt"></i></Button>
             </div>
 
-        </Card >
+        </Card>
     )
 
 
