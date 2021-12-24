@@ -4,9 +4,10 @@ import Slider from '@mui/material/Slider';
 import { CardHeader } from '@mui/material';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Button } from 'antd';
+// const axios = require("axios");
 
 
-const sampleMusics = [
+let sampleMusics = [
     {
         id: 1,
         name: "Track One",
@@ -49,17 +50,28 @@ const sampleMusics = [
     },
 ];
 
-const musicIds = [];
-sampleMusics.forEach(x => musicIds.push(x.id));
-
 
 const MusicPlayer = () => {
     const [barLoc, changeBarLoc] = useState(0);
     const [selectedMusic, changeSelectedMusic] = useState(5);
     const [loadedList, changeList] = useState(sampleMusics);
-    const [playingId, setPlayingId] = useState();
-
+    const [playingInterval, setPlayingInterval] = useState();
+    const [playButton, changePlayButton] = useState(true);
     const random = false;
+
+    // const getSampleMusic = async () => {
+    //     try {
+    //         const result = await axios.get(`https://shazam.p.rapidapi.com/charts/track`, {
+    //             params: { locale: 'en-US', pageSize: '20', startFrom: '0' }, headers: {
+    //                 'x-rapidapi-host': 'shazam.p.rapidapi.com',
+    //                 'x-rapidapi-key': '2368c1128cmsh5ce9ce868b89400p17eb24jsnadb112ab5492'
+    //             }
+    //         });
+    //         changeList(result.data);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 
     const changeBar = (e) => {
         changeBarLoc(e.target.value);
@@ -68,20 +80,33 @@ const MusicPlayer = () => {
     const play = () => {
         const id = setInterval(
             () => {
-                changeBarLoc(barLoc => barLoc + 1);
+                console.log(barLoc);
+                console.log(barLoc, "<=", loadedList[selectedMusic - 1].length);
+                if (barLoc <= loadedList[selectedMusic - 1].length) {
+                    changeBarLoc(barLoc => barLoc + 1);
+                }
+                else {
+                    // next();
+                }
             }, 1000
         );
-        setPlayingId(id);
+        setPlayingInterval(id);
+        changePlayButton(false);
     };
 
     const pause = () => {
-        clearInterval(playingId);
+        clearInterval(playingInterval);
+        changePlayButton(true);
     };
 
     const stop = () => {
         changeBarLoc(0);
-        clearInterval(playingId);
+        clearInterval(playingInterval);
+        changePlayButton(true);
     };
+
+    const musicIds = [];
+    sampleMusics.forEach(x => musicIds.push(x.id));
 
     const previous = () => {
 
@@ -114,6 +139,9 @@ const MusicPlayer = () => {
 
     };
 
+    // useEffect(() => {
+    //     getSampleMusic();
+    // }, [])
 
     return (
         <Card className="music-card">
@@ -147,16 +175,16 @@ const MusicPlayer = () => {
                 <p className="total-time">{`${Math.floor(loadedList[selectedMusic - 1].length / 60)}:${(loadedList[selectedMusic - 1].length % 60)}`}</p>
             </div>
             <div className="music-controller-container">
-                <Button onClick={!random} className="music-controller-button random-button"><i class="fas fa-random"></i></Button>
-                <Button onClick={previous} className="music-controller-button previous-button"><i class="fas fa-backward"></i></Button>
-                <Button onClick={play} className="music-controller-button play-button"><i class="fas fa-play"></i></Button>
-                <Button onClick={pause} className="music-controller-button pause-button"><i class="fas fa-pause"></i></Button>
-                <Button onClick={stop} className="music-controller-button stop-button"><i class="fas fa-stop"></i></Button>
-                <Button onClick={next} className="music-controller-button next-button"><i class="fas fa-forward"></i></Button>
-                <Button onClick={repeat} className="music-controller-button repeat-button"><i class="fas fa-redo-alt"></i></Button>
+                <Button onClick={!random} className="music-controller-button random-button"><i className="fas fa-random"></i></Button>
+                <Button onClick={previous} className="music-controller-button previous-button"><i className="fas fa-backward"></i></Button>
+                {playButton ? <Button onClick={play} className="music-controller-button play-button"><i className="fas fa-play"></i></Button> : <Button onClick={pause} className="music-controller-button pause-button"><i className="fas fa-pause"></i></Button>}
+
+                <Button onClick={stop} className="music-controller-button stop-button"><i className="fas fa-stop"></i></Button>
+                <Button onClick={next} className="music-controller-button next-button"><i className="fas fa-forward"></i></Button>
+                <Button onClick={repeat} className="music-controller-button repeat-button"><i className="fas fa-redo-alt"></i></Button>
             </div>
 
-        </Card>
+        </Card >
     )
 
 
