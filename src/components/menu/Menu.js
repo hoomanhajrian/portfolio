@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import anime from 'animejs/lib/anime.es.js';
 
 const useStyles = makeStyles({
     root: {
@@ -16,13 +15,6 @@ const useStyles = makeStyles({
     },
 });
 
-// anime({
-//     targets: 'div',
-//     translateX: 250,
-//     rotate: '1turn',
-//     backgroundColor: '#FFF',
-//     duration: 800
-// });
 
 const Menu = (props) => {
     const classes = useStyles();
@@ -31,12 +23,20 @@ const Menu = (props) => {
     const handleMenuStatusChange = () => {
         changeStatus(!status);
         if (status === true) {
-            const menuItems = document.getElementById("menuitems");
-            menuItems.style.display = "none";
+            const menu = document.getElementById("menuitems");
+            const menuItems = document.getElementsByClassName("menu-item");
+            for (let i = 0; i < menuItems.length; i++) {
+                menuItems[i].classList.remove("animated-menu");
+            }
+            menu.style.display = "none";
         }
         else {
-            const menuItems = document.getElementById("menuitems");
-            menuItems.style.display = "flex";
+            const menu = document.getElementById("menuitems");
+            const menuItems = document.getElementsByClassName("menu-item");
+            menu.style.display = "flex";
+            for (let i = 0; i < menuItems.length; i++) {
+                menuItems[i].classList.add("animated-menu");
+            }
         }
     }
 

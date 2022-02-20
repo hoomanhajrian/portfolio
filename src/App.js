@@ -15,6 +15,10 @@ import MenuButton from './components/menu/Menu';
 import Showoff from './components/showoff/showoff';
 import NotFound from './components/notfound/NotFound';
 
+
+
+
+
 const App = () => {
 
     return (
@@ -32,16 +36,16 @@ const App = () => {
                             <MenuButton />
                             <ul id="menuitems" className="header_nav">
                                 <li>
-                                    <NavLink to="/">Projects</NavLink>
+                                    <NavLink className="menu-item" to="/">Projects</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/contact">Contact</NavLink>
+                                    <NavLink className="menu-item" to="/contact">Contact</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/resume">Resume</NavLink>
+                                    <NavLink className="menu-item" to="/resume">Resume</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/showoff">Showoff</NavLink>
+                                    <NavLink className="menu-item" to="/showoff">Showoff</NavLink>
                                 </li>
                             </ul>
                         </li>

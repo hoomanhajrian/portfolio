@@ -9,12 +9,12 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     musicImg: {
-        width: '100%',
+        width: '60%',
         height: '40%',
         marginTop: '1rem',
         marginLeft: 'auto',
         marginRight: 'auto',
-        objectFit: 'contain'
+        objectFit: 'fill',
     }
 });
 
