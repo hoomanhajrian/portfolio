@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import anime from 'animejs/lib/anime.es.js';
 
 const useStyles = makeStyles({
     root: {
@@ -15,6 +16,13 @@ const useStyles = makeStyles({
     },
 });
 
+// anime({
+//     targets: 'div',
+//     translateX: 250,
+//     rotate: '1turn',
+//     backgroundColor: '#FFF',
+//     duration: 800
+// });
 
 const Menu = (props) => {
     const classes = useStyles();

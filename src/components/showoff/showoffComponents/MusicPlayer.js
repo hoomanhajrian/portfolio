@@ -4,7 +4,19 @@ import Slider from '@mui/material/Slider';
 import { CardHeader } from '@mui/material';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Button } from 'antd';
+import { makeStyles } from '@mui/styles';
 // const axios = require("axios");
+
+const useStyles = makeStyles({
+    musicImg: {
+        width: '100%',
+        height: '40%',
+        marginTop: '1rem',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        objectFit: 'contain'
+    }
+});
 
 
 let sampleMusics = [
@@ -13,7 +25,7 @@ let sampleMusics = [
         name: "Track One",
         artist: "Good Boy",
         color: "red",
-        image: "image",
+        pic: 'https://picsum.photos/seed/picsum/200/300',
         length: 233
     },
     {
@@ -21,7 +33,7 @@ let sampleMusics = [
         name: "Track Two",
         artist: "Bad Boy",
         color: "green",
-        image: "image",
+        pic: "https://picsum.photos/200/300?grayscale",
         length: 120
     },
     {
@@ -29,7 +41,7 @@ let sampleMusics = [
         name: "Track Three",
         artist: "Medium Boy",
         color: "blue",
-        image: "image",
+        pic: "https://picsum.photos/id/870/200/300?grayscale&blur=2",
         length: 146
     },
     {
@@ -37,7 +49,7 @@ let sampleMusics = [
         name: "Track Four",
         artist: "Lonely One",
         color: "purple",
-        image: "image",
+        pic: "https://picsum.photos/id/237/200/300",
         length: 130
     },
     {
@@ -45,13 +57,14 @@ let sampleMusics = [
         name: "Track Five",
         artist: "Firefly",
         color: "yellow",
-        image: "image",
+        pic: "https://picsum.photos/id/1/200/300",
         length: 100
     },
 ];
 
 
 const MusicPlayer = () => {
+    const classes = useStyles();
     const [barLoc, changeBarLoc] = useState(0);
     const [selectedMusic, changeSelectedMusic] = useState(5);
     const [loadedList, changeList] = useState(sampleMusics);
@@ -80,13 +93,14 @@ const MusicPlayer = () => {
     const play = () => {
         const id = setInterval(
             () => {
-                console.log(barLoc);
+                const newBarLoc = barLoc => barLoc;
+                console.log(newBarLoc);
                 console.log(barLoc, "<=", loadedList[selectedMusic - 1].length);
                 if (barLoc <= loadedList[selectedMusic - 1].length) {
                     changeBarLoc(barLoc => barLoc + 1);
                 }
                 else {
-                    // next();
+                    next();
                 }
             }, 1000
         );
@@ -147,19 +161,10 @@ const MusicPlayer = () => {
         <Card className="music-card">
             <CardHeader
                 title="Music Player"
-                subheader={loadedList[selectedMusic - 1].name}
+                subheader={loadedList[selectedMusic - 1].artist}
                 className="music-card-header"
                 style={{ color: "white" }}
             />
-
-            {
-                selectedMusic ? <CardMedia
-                    component="img"
-                    height="100"
-                    image={loadedList[selectedMusic - 1].pic}
-                    alt={loadedList[selectedMusic - 1].pic}
-                /> : <p>Empty Player</p>
-            }
             <Slider
                 aria-label="Small steps"
                 className="slider-bitter"
@@ -183,7 +188,12 @@ const MusicPlayer = () => {
                 <Button onClick={next} className="music-controller-button next-button"><i className="fas fa-forward"></i></Button>
                 <Button onClick={repeat} className="music-controller-button repeat-button"><i className="fas fa-redo-alt"></i></Button>
             </div>
-
+            <CardMedia
+                component="img"
+                className={classes.musicImg}
+                src={loadedList[selectedMusic - 1].pic}
+                alt={loadedList[selectedMusic - 1].pic}
+            />
         </Card >
     )
 
