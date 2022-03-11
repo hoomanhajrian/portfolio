@@ -6,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-
+import FormHelperText from '@mui/material/FormHelperText';
 
 const testData = [
     {
@@ -29,25 +29,36 @@ const testData = [
 const Test = () => {
     const [questions, changeQuestions] = useState(testData);
     const [questionNumber, changeQuestionNumber] = useState(0);
-    const [question, changeQuestion] = useState(questions[questionNumber]);
+    const [question, changeQuestion] = useState(questions[0]);
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
-
+    const [helperText, setHelperText] = useState('');
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
         setError(false);
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(event);
-    };
 
-    const handleNext = () => {
-        changeQuestionNumber(questionNumber + 1);
-        changeQuestion(questions[questionNumber]);
-        console.log(questionNumber);
+
+    const nextSubmit = (event) => {
+        const buttonName = event.target.innerText.toLowerCase();
+
+        if (buttonName === "next") {
+            if (value === '') {
+                setHelperText("Please choose a value!");
+            }
+            else {
+                changeQuestionNumber(questionNumber + 1);
+                console.log(questionNumber);
+                changeQuestion(questions[questionNumber]);
+                console.log(value);
+                setValue('');
+            }
+        }
+        else {
+            console.log("Submit");
+        }
     };
 
     const handlePrevious = () => {
@@ -67,7 +78,7 @@ const Test = () => {
 
             </RadioGroup>
             <CardContent>
-                <form onSubmit={handleSubmit}>
+                <form>
                     <FormControl sx={{ m: 3 }} error={error} variant="standard">
                         <FormLabel id="demo-error-radios">{question.question}</FormLabel>
                         <RadioGroup
@@ -80,6 +91,7 @@ const Test = () => {
                                 return <FormControlLabel key={answer} value={answer} control={<Radio />} label={answer} />
                             })}
                         </RadioGroup>
+                        <FormHelperText>{helperText}</FormHelperText>
                         <Button
                             disabled={question.id === 0}
                             onClick={handlePrevious}
@@ -87,16 +99,9 @@ const Test = () => {
                             variant="outlined">
                             Previous
                         </Button>
-
-                        {question.id === questions.length - 1
-                            ?
-                            <Button onClick={handleSubmit} type="submit" sx={{ mt: 1, mr: 1 }} variant="outlined">
-                                Submit
-                            </Button>
-                            :
-                            <Button onClick={handleNext} sx={{ mt: 1, mr: 1 }} variant="outlined">
-                                Next
-                            </Button>}
+                        <Button onClick={nextSubmit} sx={{ mt: 1, mr: 1 }} variant="outlined">
+                            {question.id === questions.length - 1 ? "Submit" : "Next"}
+                        </Button>
 
                     </FormControl>
                 </form>
