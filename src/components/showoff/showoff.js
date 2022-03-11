@@ -7,6 +7,7 @@ import BarChart from './showoffComponents/BarChart';
 import MouseMagic from './showoffComponents/mouseMagic';
 import Calculator from './showoffComponents/Calculator';
 import MusicPlayer from './showoffComponents/MusicPlayer';
+import Test from './showoffComponents/Test';
 
 function Showoff() {
     return (
@@ -14,11 +15,12 @@ function Showoff() {
             <h2 className="showoff-header">Showoff</h2>
             <ul className="showoff-list">
                 <li><BarChart /></li>
-                <li><MusicPlayer /></li>
+                <li><Test /></li>
                 <li><Calculator /></li>
                 <li><RadarController /></li>
                 <li><Graph /></li>
                 <li><DogApi /></li>
+                <li><MusicPlayer /></li>
                 <li><Bump /></li>
                 <li><MouseMagic /></li>
             </ul>
