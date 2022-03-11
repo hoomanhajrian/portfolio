@@ -7,26 +7,21 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 
+
 const testData = [
     {
         id: 0,
         name: 'Continent',
-        question: 'Which continent is Canada Located in?',
-        answer1: 'Asia',
-        answer2: 'America',
-        answer3: 'Africa',
-        answer4: 'I do not know',
-        answer: "Answer2"
+        question: 'Which continent is Canada located in?',
+        answers: ['Asia', 'America', 'Africa', 'I do not know'],
+        answer: "America"
     },
     {
         id: 1,
         name: 'Province',
         question: 'Where is British columbia located?',
-        answer1: 'West',
-        answer2: 'East',
-        answer3: 'North',
-        answer4: 'South',
-        answer: "Answer2"
+        answers: ['West', 'East', 'North', 'South'],
+        answer: "West"
     }
 ]
 
@@ -49,10 +44,24 @@ const Test = () => {
         console.log(event);
     };
 
+    const handleNext = () => {
+        changeQuestionNumber(questionNumber + 1);
+        changeQuestion(questions[questionNumber]);
+        console.log(questionNumber);
+    };
+
+    const handlePrevious = () => {
+        changeQuestionNumber(questionNumber - 1);
+        changeQuestion(questions[questionNumber]);
+        console.log(questionNumber);
+    };
+
+
     return (
         <Card className="test-card">
             <CardHeader
                 title="Sample Test"
+                subheader={question.name}
             />
             <RadioGroup name={question.name}>
 
@@ -67,20 +76,28 @@ const Test = () => {
                             value={value}
                             onChange={handleRadioChange}
                         >
-                            <FormControlLabel value={question.answer1} control={<Radio />} label={question.answer1} />
-                            <FormControlLabel value={question.answer2} control={<Radio />} label={question.answer2} />
-                            <FormControlLabel value={question.answer3} control={<Radio />} label={question.answer3} />
-                            <FormControlLabel value={question.answer4} control={<Radio />} label={question.answer4} />
+                            {question.answers.map((answer) => {
+                                return <FormControlLabel key={answer} value={answer} control={<Radio />} label={answer} />
+                            })}
                         </RadioGroup>
                         <Button
                             disabled={question.id === 0}
+                            onClick={handlePrevious}
                             sx={{ mt: 1, mr: 1 }}
                             variant="outlined">
                             Previous
                         </Button>
-                        <Button sx={{ mt: 1, mr: 1 }} variant="outlined">
-                            {question.id === questions.length - 1 ? "Submit" : "Next"}
-                        </Button>
+
+                        {question.id === questions.length - 1
+                            ?
+                            <Button onClick={handleSubmit} type="submit" sx={{ mt: 1, mr: 1 }} variant="outlined">
+                                Submit
+                            </Button>
+                            :
+                            <Button onClick={handleNext} sx={{ mt: 1, mr: 1 }} variant="outlined">
+                                Next
+                            </Button>}
+
                     </FormControl>
                 </form>
             </CardContent>
