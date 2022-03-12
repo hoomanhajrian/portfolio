@@ -22,6 +22,13 @@ const testData = [
         question: 'Where is British columbia located?',
         answers: ['West', 'East', 'North', 'South'],
         answer: "West"
+    },
+    {
+        id: 2,
+        name: 'Coding',
+        question: 'Which Language is not OOP?',
+        answers: ['C++', 'C#', 'JavaScript', 'HTML'],
+        answer: "HTML"
     }
 ]
 
@@ -57,12 +64,17 @@ const Test = () => {
             }
         }
         else {
-            console.log("Submit");
+            if (value === '') {
+                setHelperText("Please choose a value!");
+            }
+            else {
+                setHelperText("Submited!")
+            }
         }
     };
 
     const handlePrevious = () => {
-        changeQuestionNumber(questionNumber - 1);
+        changeQuestionNumber(preState => preState - 1);
         changeQuestion(questions[questionNumber]);
         console.log(questionNumber);
     };
@@ -102,7 +114,6 @@ const Test = () => {
                         <Button onClick={nextSubmit} sx={{ mt: 1, mr: 1 }} variant="outlined">
                             {question.id === questions.length - 1 ? "Submit" : "Next"}
                         </Button>
-
                     </FormControl>
                 </form>
             </CardContent>
