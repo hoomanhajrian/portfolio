@@ -41,7 +41,7 @@ const Test = () => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
-    const [rightAnswer, setRightAnswer] = useState(0);
+    let answers = [];
     const [submited, changeSubmited] = useState(false);
 
 
@@ -64,11 +64,13 @@ const Test = () => {
                 changeQuestionNumber(questionNumber + 1);
                 console.log(questionNumber);
                 changeQuestion(questions[questionNumber]);
-                if (value === question.answer) {
-                    setRightAnswer(preState => preState++)
+                if (value.toLocaleLowerCase() === question.answer.toLocaleLowerCase()) {
+                    // const johnIndex = persons.data.findIndex(p => p.name === "John")
+
+                    answers[question.id] = true;
                 }
                 else {
-                    { rightAnswer > 0 ? setRightAnswer(preState => preState--) : setRightAnswer(0) };
+                    answers[question.id] = false;
 
                 }
                 setValue('');
@@ -132,7 +134,7 @@ const Test = () => {
 
             </Card>)
     } else {
-        return (<TestResultCard data={rightAnswer} />)
+        return (<TestResultCard data={answers} totalQuestions={questions.length} />)
     }
 
 };

@@ -3,11 +3,13 @@ import { Card } from '@material-ui/core';
 import { Typography } from 'antd';
 
 const TestResultCard = (props) => {
-    const [data, setData] = useState(props.data);
+    const answers = props.data;
+    const totalQuestions = props.totalQuestions;
+    console.log(answers);
 
     return (
         <Card>
-            <Typography>{data}</Typography>
+            <Typography variant="h3">{answers}</Typography>
         </Card>
     )
 
