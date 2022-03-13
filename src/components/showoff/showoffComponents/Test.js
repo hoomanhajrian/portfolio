@@ -7,6 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
+import TestResultCard from './TestResultCard';
 
 const testData = [
     {
@@ -40,6 +41,10 @@ const Test = () => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
+    const [rightAnswer, setRightAnswer] = useState(0);
+    const [submited, changeSubmited] = useState(false);
+
+
 
     const handleRadioChange = (event) => {
         setValue(event.target.value);
@@ -59,7 +64,13 @@ const Test = () => {
                 changeQuestionNumber(questionNumber + 1);
                 console.log(questionNumber);
                 changeQuestion(questions[questionNumber]);
-                console.log(value);
+                if (value === question.answer) {
+                    setRightAnswer(preState => preState++)
+                }
+                else {
+                    { rightAnswer > 0 ? setRightAnswer(preState => preState--) : setRightAnswer(0) };
+
+                }
                 setValue('');
             }
         }
@@ -68,58 +79,61 @@ const Test = () => {
                 setHelperText("Please choose a value!");
             }
             else {
-                setHelperText("Submited!")
+                setHelperText("Submited!");
+                changeSubmited(true);
             }
         }
     };
 
     const handlePrevious = () => {
-        changeQuestionNumber(preState => preState - 1);
+        changeQuestionNumber(questionNumber - 1);
         changeQuestion(questions[questionNumber]);
         console.log(questionNumber);
     };
 
+    if (!submited) {
+        return (
+            <Card className="test-card">
+                <CardHeader
+                    title="Sample Test"
+                    subheader={question.name}
+                />
+                <RadioGroup name={question.name}>
 
-    return (
-        <Card className="test-card">
-            <CardHeader
-                title="Sample Test"
-                subheader={question.name}
-            />
-            <RadioGroup name={question.name}>
+                </RadioGroup>
+                <CardContent>
+                    <form>
+                        <FormControl sx={{ m: 3 }} error={error} variant="standard">
+                            <FormLabel id="demo-error-radios">{question.question}</FormLabel>
+                            <RadioGroup
+                                aria-labelledby="demo-error-radios"
+                                name="test"
+                                value={value}
+                                onChange={handleRadioChange}
+                            >
+                                {question.answers.map((answer) => {
+                                    return <FormControlLabel key={answer} value={answer} control={<Radio />} label={answer} />
+                                })}
+                            </RadioGroup>
+                            <FormHelperText>{helperText}</FormHelperText>
+                            <Button
+                                disabled={question.id === 0}
+                                onClick={handlePrevious}
+                                sx={{ mt: 1, mr: 1 }}
+                                variant="outlined">
+                                Previous
+                            </Button>
+                            <Button onClick={nextSubmit} sx={{ mt: 1, mr: 1 }} variant="outlined">
+                                {question.id === questions.length - 1 ? "Submit" : "Next"}
+                            </Button>
+                        </FormControl>
+                    </form>
+                </CardContent>
 
-            </RadioGroup>
-            <CardContent>
-                <form>
-                    <FormControl sx={{ m: 3 }} error={error} variant="standard">
-                        <FormLabel id="demo-error-radios">{question.question}</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="demo-error-radios"
-                            name="test"
-                            value={value}
-                            onChange={handleRadioChange}
-                        >
-                            {question.answers.map((answer) => {
-                                return <FormControlLabel key={answer} value={answer} control={<Radio />} label={answer} />
-                            })}
-                        </RadioGroup>
-                        <FormHelperText>{helperText}</FormHelperText>
-                        <Button
-                            disabled={question.id === 0}
-                            onClick={handlePrevious}
-                            sx={{ mt: 1, mr: 1 }}
-                            variant="outlined">
-                            Previous
-                        </Button>
-                        <Button onClick={nextSubmit} sx={{ mt: 1, mr: 1 }} variant="outlined">
-                            {question.id === questions.length - 1 ? "Submit" : "Next"}
-                        </Button>
-                    </FormControl>
-                </form>
-            </CardContent>
-
-        </Card>
-    )
+            </Card>)
+    } else {
+        return (<TestResultCard data={rightAnswer} />)
+    }
 
 };
 
