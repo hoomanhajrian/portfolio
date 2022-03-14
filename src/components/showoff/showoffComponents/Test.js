@@ -9,6 +9,8 @@ import Button from '@mui/material/Button';
 import FormHelperText from '@mui/material/FormHelperText';
 import TestResultCard from './TestResultCard';
 
+
+// sample data
 const testData = [
     {
         id: 0,
@@ -44,13 +46,25 @@ const Test = () => {
     let answers = [];
     const [submited, changeSubmited] = useState(false);
 
-
-
+    // on change on radio buttons
     const handleRadioChange = (event) => {
         setValue(event.target.value);
         setError(false);
     };
 
+    // check if its a right answer and add it to answers
+    const checkAnswer = () => {
+        if (value.toLocaleLowerCase() === question.answer.toLocaleLowerCase()) {
+            // const johnIndex = persons.data.findIndex(p => p.name === "John")
+            console.log("true");
+            answers[question.id] = true;
+        }
+        else {
+            console.log("false");
+            answers[question.id] = false;
+
+        }
+    };
 
 
     const nextSubmit = (event) => {
@@ -64,15 +78,7 @@ const Test = () => {
                 changeQuestionNumber(questionNumber + 1);
                 console.log(questionNumber);
                 changeQuestion(questions[questionNumber]);
-                if (value.toLocaleLowerCase() === question.answer.toLocaleLowerCase()) {
-                    // const johnIndex = persons.data.findIndex(p => p.name === "John")
-
-                    answers[question.id] = true;
-                }
-                else {
-                    answers[question.id] = false;
-
-                }
+                checkAnswer();
                 setValue('');
             }
         }
@@ -81,7 +87,7 @@ const Test = () => {
                 setHelperText("Please choose a value!");
             }
             else {
-                setHelperText("Submited!");
+                checkAnswer();
                 changeSubmited(true);
             }
         }
