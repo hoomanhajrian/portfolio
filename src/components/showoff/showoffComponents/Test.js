@@ -99,12 +99,15 @@ const Test = () => {
         console.log(questionNumber);
     };
 
+    const qNum = () => `Question number: ${question.id + 1}/${questions.length}`;
+
+
     if (!submited) {
         return (
             <Card className="test-card">
                 <CardHeader
-                    title="Sample Test"
-                    subheader={question.name}
+                    title={question.name}
+                    subheader={qNum()}
                 />
                 <RadioGroup name={question.name}>
 
