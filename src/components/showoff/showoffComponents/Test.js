@@ -36,15 +36,24 @@ const testData = [
 ]
 
 
+
 const Test = () => {
-    const [questions, changeQuestions] = useState(testData);
+    const questions = testData;
     const [questionNumber, changeQuestionNumber] = useState(0);
     const [question, changeQuestion] = useState(questions[0]);
     const [value, setValue] = useState('');
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
-    let answers = [];
     const [submited, changeSubmited] = useState(false);
+    const userAnswers = [];
+
+    // filling up answers with empty data
+    questions.forEach(q => {
+        let answer = {};
+        answer.id = q.id;
+        answer.answer = undefined;
+        userAnswers.push(answer);
+    });
 
     // on change on radio buttons
     const handleRadioChange = (event) => {
@@ -52,17 +61,22 @@ const Test = () => {
         setError(false);
     };
 
+
+    function updateArray(array, index, newValue) {
+        array[index].answer = newValue;
+    };
+
     // check if its a right answer and add it to answers
     const checkAnswer = () => {
+
         if (value.toLocaleLowerCase() === question.answer.toLocaleLowerCase()) {
             // const johnIndex = persons.data.findIndex(p => p.name === "John")
-            console.log("true");
-            answers[question.id] = true;
+            updateArray(userAnswers, question.id, true);
+            console.log(userAnswers);
         }
         else {
-            console.log("false");
-            answers[question.id] = false;
-
+            updateArray(userAnswers, question.id, false);
+            console.log(userAnswers);
         }
     };
 
@@ -76,7 +90,6 @@ const Test = () => {
             }
             else {
                 changeQuestionNumber(questionNumber + 1);
-                console.log(questionNumber);
                 changeQuestion(questions[questionNumber]);
                 checkAnswer();
                 setValue('');
@@ -109,9 +122,6 @@ const Test = () => {
                     title={question.name}
                     subheader={qNum()}
                 />
-                <RadioGroup name={question.name}>
-
-                </RadioGroup>
                 <CardContent>
                     <form>
                         <FormControl sx={{ m: 3 }} error={error} variant="standard">
@@ -140,10 +150,10 @@ const Test = () => {
                         </FormControl>
                     </form>
                 </CardContent>
-
-            </Card>)
+            </Card>
+        )
     } else {
-        return (<TestResultCard data={answers} totalQuestions={questions.length} />)
+        return (<TestResultCard data={userAnswers} totalQuestions={questions.length} />)
     }
 
 };
