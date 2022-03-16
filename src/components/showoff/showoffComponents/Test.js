@@ -35,7 +35,7 @@ const testData = [
     }
 ]
 
-
+const userAnswers = [];
 
 const Test = () => {
     const questions = testData;
@@ -45,15 +45,8 @@ const Test = () => {
     const [error, setError] = useState(false);
     const [helperText, setHelperText] = useState('');
     const [submited, changeSubmited] = useState(false);
-    const userAnswers = [];
 
-    // filling up answers with empty data
-    questions.forEach(q => {
-        let answer = {};
-        answer.id = q.id;
-        answer.answer = undefined;
-        userAnswers.push(answer);
-    });
+
 
     // on change on radio buttons
     const handleRadioChange = (event) => {
@@ -62,21 +55,17 @@ const Test = () => {
     };
 
 
-    function updateArray(array, index, newValue) {
-        array[index].answer = newValue;
-    };
+
 
     // check if its a right answer and add it to answers
     const checkAnswer = () => {
 
         if (value.toLocaleLowerCase() === question.answer.toLocaleLowerCase()) {
             // const johnIndex = persons.data.findIndex(p => p.name === "John")
-            updateArray(userAnswers, question.id, true);
-            console.log(userAnswers);
+            userAnswers.push(true);
         }
         else {
-            updateArray(userAnswers, question.id, false);
-            console.log(userAnswers);
+            userAnswers.push(false);
         }
     };
 
