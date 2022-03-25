@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from '@material-ui/core';
-import { ResponsivePie } from '@nivo/pie'
-import { Typography } from 'antd';
+import { ResponsivePie } from '@nivo/pie';
 
 // function rotateLeft(arr) {
 //     let first = arr.shift();
@@ -117,6 +116,3 @@ const TestResultCard = (props) => {
 };
 
 export default TestResultCard;
-
-
-{/* <Typography className='test-result-percentage' variant="h3">{((rightAnswer / totalQuestions) * 100).toFixed(2)}</Typography> */ }
