@@ -5,9 +5,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-import { Card, CardHeader } from '@mui/material';
+import { Card, CardHeader, CardContent } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import { makeStyles } from '@mui/styles';
+import GuessGame from './GuessGame';
 
 const useStyles = makeStyles({
     helperText: {
@@ -21,6 +22,7 @@ const GameContainer = () => {
     const [difficulty, changeDifficulty] = useState('');
     const [helperText, setHelperText] = useState('');
     const [started, changeGameStatus] = useState(false);
+    const [max, changeMax] = useState(0);
     const classes = useStyles();
 
     const startGame = () => {
@@ -31,17 +33,21 @@ const GameContainer = () => {
         else {
             switch (difficulty) {
                 case "easy":
-                    changeRandomNumber(Math.floor(Math.random() * 10))
+                    changeRandomNumber(Math.floor(Math.random() * 10));
+                    changeMax(10);
                     break;
                 case "medium":
-                    changeRandomNumber(Math.floor(Math.random() * 100))
+                    changeRandomNumber(Math.floor(Math.random() * 100));
+                    changeMax(100);
                     break;
                 case "hard":
                     changeRandomNumber(Math.floor(Math.random() * 1000))
+                    changeMax(1000);
                     break;
                 default:
                     break;
             }
+            changeGameStatus(true);
         }
 
     };
@@ -57,29 +63,29 @@ const GameContainer = () => {
             <CardHeader
                 title="Guess the number"
             />
-            {!started ? <form>
-                <FormControl sx={{ m: 3 }} variant="standard">
-                    <FormLabel id="demo-error-radios">choose difficulty:</FormLabel>
-                    <RadioGroup
-                        aria-labelledby="demo-error-radios"
-                        name="numberGame"
-                        onChange={handleRadioChange}
-                    >
-                        <FormControlLabel value="easy" control={<Radio />} label={"Easy(0-10)"} />
-
-                        <FormControlLabel value="medium" control={<Radio />} label={"Medium(0-100)"} />
-
-                        <FormControlLabel value="hard" control={<Radio />} label={"Hard(0-1000)"} />
-                    </RadioGroup>
-                    <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>
-                    <Button
-                        onClick={startGame}
-                        sx={{ mt: 1, mr: 1 }}
-                        variant="outlined">
-                        Let's do it
-                    </Button>
-                </FormControl>
-            </form> : <div>game</div>}
+            {!started ? <CardContent>
+                <form>
+                    <FormControl sx={{ m: 3 }} variant="standard">
+                        <FormLabel id="demo-error-radios">choose difficulty:</FormLabel>
+                        <RadioGroup
+                            aria-labelledby="demo-error-radios"
+                            name="numberGame"
+                            onChange={handleRadioChange}
+                        >
+                            <FormControlLabel value="easy" control={<Radio />} label={"Easy(0-10)"} />
+                            <FormControlLabel value="medium" control={<Radio />} label={"Medium(0-100)"} />
+                            <FormControlLabel value="hard" control={<Radio />} label={"Hard(0-1000)"} />
+                        </RadioGroup>
+                        <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>
+                        <Button
+                            onClick={startGame}
+                            sx={{ mt: 1, mr: 1 }}
+                            variant="outlined">
+                            Let's do it
+                        </Button>
+                    </FormControl>
+                </form>
+            </CardContent> : <GuessGame data={randomNumber} max={max} />}
         </Card>
     )
 
