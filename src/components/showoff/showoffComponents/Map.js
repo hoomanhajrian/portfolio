@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-import Marker from './Marker';
+import Marker from '../../contact/Marker';
+import { Card, CardHeader } from '@mui/material';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles({
+
+    mapCard: {
+        padding: '.5rem'
+    }
+
+});
 
 const options = {
     enableHighAccuracy: true,
@@ -11,7 +21,7 @@ const options = {
 
 
 const Map = () => {
-
+    const classes = useStyles();
     const [center, setCenter] = useState({
         lat: 59.95,
         lng: 30.33
@@ -65,22 +75,26 @@ const Map = () => {
 
 
     return (
-        // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '60%', margin: '0 auto' }}>
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "AIzaSyDCZ-HHhKHwJQqngMu9ax7KAR7_JGpVL90" }}
-                center={center}
-                defaultZoom={zoom}
-                options={getMapOptions}
-            >
-                <Marker
-                    lat={center.lat}
-                    lng={center.lng}
-                    name="Your Estimated Location"
-                    color="red"
-                />
-            </GoogleMapReact>
-        </div>
+        <Card className={classes.mapCard}>
+            <CardHeader
+                title="Your approximate location"
+            />
+            <div style={{ height: '50vh', width: '60%', margin: '0 auto' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: "AIzaSyDCZ-HHhKHwJQqngMu9ax7KAR7_JGpVL90" }}
+                    center={center}
+                    defaultZoom={zoom}
+                    options={getMapOptions}
+                >
+                    <Marker
+                        lat={center.lat}
+                        lng={center.lng}
+                        name="Your Estimated Location"
+                        color="red"
+                    />
+                </GoogleMapReact>
+            </div>
+        </Card>
     );
 };
 

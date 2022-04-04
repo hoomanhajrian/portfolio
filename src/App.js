@@ -39,13 +39,13 @@ const App = () => {
                                     <NavLink className="menu-item" to="/">Projects</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="menu-item" to="/contact">Contact</NavLink>
-                                </li>
-                                <li>
                                     <NavLink className="menu-item" to="/resume">Resume</NavLink>
                                 </li>
                                 <li>
                                     <NavLink className="menu-item" to="/showoff">Showoff</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="menu-item" to="/contact">About</NavLink>
                                 </li>
                             </ul>
                         </li>
