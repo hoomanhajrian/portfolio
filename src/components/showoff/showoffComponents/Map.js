@@ -2,15 +2,6 @@ import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from '../../contact/Marker';
 import { Card, CardHeader } from '@mui/material';
-import { makeStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles({
-
-    mapCard: {
-        padding: '.5rem'
-    }
-
-});
 
 const options = {
     enableHighAccuracy: true,
@@ -21,7 +12,6 @@ const options = {
 
 
 const Map = () => {
-    const classes = useStyles();
     const [center, setCenter] = useState({
         lat: 59.95,
         lng: 30.33
@@ -75,7 +65,7 @@ const Map = () => {
 
 
     return (
-        <Card className={classes.mapCard}>
+        <Card className='map-card'>
             <CardHeader
                 title="Your approximate location"
             />
