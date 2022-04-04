@@ -5,14 +5,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-import { Card, CardHeader, CardContent } from '@mui/material';
-import FormHelperText from '@mui/material/FormHelperText';
+import { Card, CardHeader, CardContent, FormHelperText } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import GuessGame from './GuessGame';
 
 const useStyles = makeStyles({
     helperText: {
         color: 'red',
+        background: 'none',
+        boxShadow: 'none',
     }
 });
 
