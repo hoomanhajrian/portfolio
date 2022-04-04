@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 
 const GameContainer = () => {
-    const [randomNumber, changeRandomNumber] = useState(1)
+    const [randomNumber, changeRandomNumber] = useState('');
     const [difficulty, changeDifficulty] = useState('');
     const [helperText, setHelperText] = useState('');
     const [started, changeGameStatus] = useState(false);
@@ -25,11 +25,27 @@ const GameContainer = () => {
 
     const startGame = () => {
 
-        if (difficulty == '') {
+        if (difficulty === '') {
             setHelperText("Please choose a difficulty!")
+        }
+        else {
+            switch (difficulty) {
+                case "easy":
+                    changeRandomNumber(Math.floor(Math.random() * 10))
+                    break;
+                case "medium":
+                    changeRandomNumber(Math.floor(Math.random() * 100))
+                    break;
+                case "hard":
+                    changeRandomNumber(Math.floor(Math.random() * 1000))
+                    break;
+                default:
+                    break;
+            }
         }
 
     };
+
 
 
     const handleRadioChange = (event) => {
@@ -49,11 +65,11 @@ const GameContainer = () => {
                         name="numberGame"
                         onChange={handleRadioChange}
                     >
-                        <FormControlLabel value="easy" control={<Radio />} label={"easy"} />
+                        <FormControlLabel value="easy" control={<Radio />} label={"Easy(0-10)"} />
 
-                        <FormControlLabel value="medium" control={<Radio />} label={"medium"} />
+                        <FormControlLabel value="medium" control={<Radio />} label={"Medium(0-100)"} />
 
-                        <FormControlLabel value="hard" control={<Radio />} label={"hard"} />
+                        <FormControlLabel value="hard" control={<Radio />} label={"Hard(0-1000)"} />
                     </RadioGroup>
                     <FormHelperText className={classes.helperText}>{helperText}</FormHelperText>
                     <Button
