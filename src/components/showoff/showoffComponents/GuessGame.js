@@ -51,8 +51,9 @@ const GuessGame = (props) => {
 
 
     return (
-        <CardContent className='guess-number-card'>
+        <CardContent>
             <Slider
+                disabled={answered}
                 aria-label="Small steps"
                 className="guessgame-slider"
                 onChange={getSliderValue}
@@ -66,6 +67,7 @@ const GuessGame = (props) => {
             <InputLabel
                 focused
             /><Input
+                disabled={answered}
                 type='number'
                 onChange={setInputValue}
                 value={value}
