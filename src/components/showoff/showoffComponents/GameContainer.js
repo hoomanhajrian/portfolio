@@ -59,7 +59,7 @@ const GameContainer = () => {
     };
 
     return (
-        <Card className='guess-number-card'>
+        <Card className='guess-number-card' id='gameContainer'>
             <CardHeader
                 title="Guess the number"
             />

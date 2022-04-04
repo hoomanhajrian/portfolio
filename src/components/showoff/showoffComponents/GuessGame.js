@@ -2,16 +2,32 @@ import React, { useState } from 'react';
 import { CardContent } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { Button } from 'antd';
-import { FormHelperText, Input } from '@mui/material';
+import { FormHelperText, Input, InputLabel } from '@mui/material';
+import Confetti from 'react-confetti';
 
 const GuessGame = (props) => {
-    const [value, setValue] = useState('');
+    const height = document.getElementById('gameContainer').clientHeight;
+    const width = document.getElementById('gameContainer').clientWidth;
+    const [value, setValue] = useState(0);
     const { data: answer, max } = props;
     const [helperText, setHelperText] = useState('');
     const [answered, setAnswered] = useState(false);
 
+    const marks = [
+        {
+            value: 0,
+            label: '0',
+        },
+        {
+            value: max,
+            label: `${max}`,
+        },
+    ];
+
+
     const getSliderValue = (event) => {
         setValue(event.target.value);
+
     };
 
     const checkAnswer = () => {
@@ -22,31 +38,37 @@ const GuessGame = (props) => {
             setHelperText("Go Higher!");
         }
         else {
-            setHelperText("Good Job you got it!")
+            setHelperText("Good Job you got it!");
+            setAnswered(true);
         }
 
     };
 
-    const setInputValue = () => {
-
-
-
+    const setInputValue = (event) => {
+        setValue(event.target.value);
     };
+
+
 
     return (
         <CardContent className='guess-number-card'>
             <Slider
                 aria-label="Small steps"
                 className="guessgame-slider"
-                defaultValue={max / 2}
                 onChange={getSliderValue}
                 step={1}
+                value={value}
                 min={0}
                 max={max}
                 valueLabelDisplay="auto"
+                marks={marks}
             />
-            <Input
+            <InputLabel
+                focused
+            /><Input
+                type='number'
                 onChange={setInputValue}
+                value={value}
             />
             <FormHelperText>{helperText}</FormHelperText>
             {!answered ? <Button
@@ -55,11 +77,13 @@ const GuessGame = (props) => {
                 variant="outlined">
                 Submit Answer
             </Button> :
-                <Button
-                    sx={{ mt: 1, mr: 1 }}
-                    variant="outlined">
-                    Try Again!
-                </Button>}
+                <Confetti
+                    className='confetti'
+                    gravity={0.4}
+                    run={true}
+                    width={width}
+                    height={height}
+                />}
         </CardContent>
     )
 

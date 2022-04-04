@@ -176,7 +176,15 @@
     color:white;
     border-radius: 15px;
     }
-    
+    .guess-number-card{
+        position: relative;
+        width: 90%;
+        margin-right: auto;
+        margin-left: auto;
+        .confetti{
+            position: absolute;
+        }
+    }
     };
 
     
