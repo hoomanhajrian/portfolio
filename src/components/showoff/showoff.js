@@ -8,7 +8,7 @@ import MouseMagic from './showoffComponents/mouseMagic';
 import Calculator from './showoffComponents/Calculator';
 import MusicPlayer from './showoffComponents/MusicPlayer';
 import Test from './showoffComponents/Test';
-import GuessNumber from './showoffComponents/GuessNumber';
+import GameContainer from './showoffComponents/GameContainer';
 
 function Showoff() {
     return (
@@ -23,7 +23,7 @@ function Showoff() {
                 <li><DogApi /></li>
                 <li><MusicPlayer /></li>
                 <li><Bump /></li>
-                <li><GuessNumber /></li>
+                <li><GameContainer /></li>
                 <li><MouseMagic /></li>
             </ul>
         </div>
