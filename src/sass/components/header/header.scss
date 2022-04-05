@@ -7,7 +7,6 @@
 .header_menu{
     color: $color-text;
     a{
-        color: $color-text;
         :hover{
             color: cyan;
         }
@@ -45,9 +44,6 @@
         :hover{
             color: cyan;
         }
-        // .active{
-        //     color: cyan;
-        // }
 }
     .header_title{
         .titles{

@@ -14,13 +14,23 @@ import Footer from './components/footer/Footer';
 import MenuButton from './components/menu/Menu';
 import Showoff from './components/showoff/showoff';
 import NotFound from './components/notfound/NotFound';
+import { makeStyles } from '@mui/styles';
 
 
 
+const useStyles = makeStyles({
+    menuItem: {
+        color: 'white'
+    }
+    ,
+    activeLink: {
+        color: 'cyan',
+    },
+});
 
 
 const App = () => {
-
+    const classes = useStyles();
     return (
         <div className="app">
             <Router>
@@ -36,16 +46,16 @@ const App = () => {
                             <MenuButton />
                             <ul id="menuitems" className="header_nav">
                                 <li>
-                                    <NavLink className="menu-item" to="/">Projects</NavLink>
+                                    <NavLink className={classes.menuItem} activeClassName={classes.activeLink} exact to="/">Projects</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="menu-item" to="/resume">Resume</NavLink>
+                                    <NavLink className={classes.menuItem} activeClassName={classes.activeLink} to="/resume">Resume</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="menu-item" to="/showoff">Showoff</NavLink>
+                                    <NavLink className={classes.menuItem} activeClassName={classes.activeLink} to="/showoff">Showoff</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="menu-item" to="/contact">About</NavLink>
+                                    <NavLink className={classes.menuItem} activeClassName={classes.activeLink} to="/about">About</NavLink>
                                 </li>
                             </ul>
                         </li>
@@ -54,7 +64,7 @@ const App = () => {
                 </div>
                 <NavSwitch>
                     <Route exact path="/" component={Projects} />
-                    <Route path="/contact" component={Contact} />
+                    <Route path="/about" component={Contact} />
                     <Route path="/resume" component={Resume} />
                     <Route path="/showoff" component={Showoff} />
                     <Route component={NotFound} />
