@@ -17,7 +17,7 @@ function Work() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            PART-TIME CELLPHONE TECHNICIAN / Vancouver, BC
+                            CELLPHONE TECHNICIAN / Vancouver, BC
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Feb.2020 - Present
