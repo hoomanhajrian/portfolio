@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
-    root: {
+    menuButton: {
         background: 'linear-gradient(45deg, #FE6B8B 10%, #FF8E53 90%)',
         border: 0,
         borderRadius: 15,
@@ -43,7 +43,7 @@ const Menu = (props) => {
 
     return (
         <div className="menu">
-            <Button className={classes.root} onClick={handleMenuStatusChange}>Menu</Button>
+            <Button className={classes.menuButton} onClick={handleMenuStatusChange}>Menu</Button>
         </div>
     )
 };
