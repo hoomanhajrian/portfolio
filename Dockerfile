@@ -6,8 +6,8 @@ COPY . /app
 
 RUN yarn
 
-EXPOSE 3000
+EXPOSE 3005
 
 CMD ["yarn","start"]
 
-# docker run -d -p 80:3000 hoomandock/portfolio 
+# docker run -d -p 80:3000 hoomandock/portfolio

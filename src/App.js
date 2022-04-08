@@ -20,9 +20,10 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     menuItem: {
-        color: 'white'
-    }
-    ,
+        color: 'white',
+        background: 'transparent',
+        boxShadow: 'none',
+    },
     activeLink: {
         color: 'cyan',
     },
