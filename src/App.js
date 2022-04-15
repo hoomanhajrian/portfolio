@@ -19,7 +19,6 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-
 const useStyles = makeStyles({
     menuLink: {
         color: 'black',
@@ -44,7 +43,8 @@ const useStyles = makeStyles({
         justifyContent: '',
         flexDirection: 'row',
         alignItems: 'center',
-        padding: '0'
+        padding: '0 1.5rem !important',
+        background: '#188BB0'
     },
     menuButton: {
         border: '1px solid black',
@@ -74,35 +74,33 @@ const App = () => {
     return (
         <div className="app">
             <Router>
-                <div className="header">
-                    <List className={classes.header}>
-                        <ListItem>
-                            <NavLink to="/"><Header className={classes.titles} /></NavLink>
-                        </ListItem>
-                        <Button
-                            aria-owns={anchorEl ? 'portfolio-menu' : undefined}
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                            className={classes.menuButton}
-                        >
-                            Menu
-                        </Button>
-                        <Menu
-                            id="portfolio-menu"
-                            anchorEl={anchorEl}
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} exact to="/">Projects</NavLink></MenuItem>
+                <List className={classes.header}>
+                    <ListItem>
+                        <NavLink to="/"><Header className={classes.titles} /></NavLink>
+                    </ListItem>
+                    <Button
+                        aria-owns={anchorEl ? 'portfolio-menu' : undefined}
+                        aria-haspopup="true"
+                        onClick={handleClick}
+                        className={classes.menuButton}
+                    >
+                        Menu
+                    </Button>
+                    <Menu
+                        id="portfolio-menu"
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} exact to="/">Projects</NavLink></MenuItem>
 
-                            <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/resume">Resume</NavLink></MenuItem>
+                        <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/resume">Resume</NavLink></MenuItem>
 
-                            <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/showoff">Showoff</NavLink></MenuItem>
+                        <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/showoff">Showoff</NavLink></MenuItem>
 
-                            <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/about">About</NavLink></MenuItem>
-                        </Menu>
-                    </List>
-                </div>
+                        <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/about">About</NavLink></MenuItem>
+                    </Menu>
+                </List>
                 <NavSwitch>
                     <Route exact path="/" component={Projects} />
                     <Route path="/about" component={Contact} />
