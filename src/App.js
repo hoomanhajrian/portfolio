@@ -76,7 +76,7 @@ const App = () => {
             <Router>
                 <List className={classes.header}>
                     <ListItem>
-                        <NavLink to="/"><Header className={classes.titles} /></NavLink>
+                        <NavLink to="/"><Header /></NavLink>
                     </ListItem>
                     <Button
                         aria-owns={anchorEl ? 'portfolio-menu' : undefined}
