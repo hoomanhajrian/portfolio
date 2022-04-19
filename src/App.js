@@ -14,51 +14,10 @@ import Footer from './components/footer/Footer';
 import Showoff from './components/showoff/showoff';
 import NotFound from './components/notfound/NotFound';
 import { makeStyles } from '@mui/styles';
-import { List, ListItem } from '@mui/material';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
-const useStyles = makeStyles({
-    menuLink: {
-        color: 'black',
-        background: 'transparent',
-        boxShadow: 'none',
-        margin: '0',
-        fontWeight: "bold",
-        width: '100%',
-        height: '100%',
-    },
-    menuItem: {
-        padding: '0 !important',
-        margin: '1rem !important',
-        width: '100% !important',
-        height: '100% !important',
-    },
-    activeLink: {
-        color: 'cyan',
-    },
-    header: {
-        display: 'flex',
-        justifyContent: '',
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: '0 1.5rem !important',
-        background: '#188BB0'
-    },
-    menuButton: {
-        border: '1px solid black',
-        "& span": {
-            fontWeight: "bold",
-            color: 'white',
-            fontSize: '1.2rem',
-        },
-    }
-});
 
 
 const App = () => {
-    const classes = useStyles();
     const [anchorEl, changeAnchorEl] = useState(null)
 
 
@@ -74,7 +33,7 @@ const App = () => {
     return (
         <div className="app">
             <Router>
-                <List className={classes.header}>
+                {/* <List className={classes.header}>
                     <ListItem>
                         <NavLink to="/"><Header /></NavLink>
                     </ListItem>
@@ -101,6 +60,31 @@ const App = () => {
                         <MenuItem onClick={handleClose} className={classes.menuItem}><NavLink className={classes.menuLink} activeClassName={classes.activeLink} to="/about">About</NavLink></MenuItem>
                     </Menu>
                 </List>
+                 */}
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/">Hooman Hajarian</a>
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse" id="navbarColor01">
+                            <ul class="navbar-nav me-auto">
+                                <li className="nav-item">
+                                    <NavLink exact className="nav-link" to="/">Projects</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/resume">Resume</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/showoff">Showoff</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/about">About</NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
                 <NavSwitch>
                     <Route exact path="/" component={Projects} />
                     <Route path="/about" component={Contact} />
