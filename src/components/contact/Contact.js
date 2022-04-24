@@ -10,19 +10,17 @@ const Contact = () => {
 
     const sendMessage = async (data) => {
         try {
-            // await axios.post('http://hh-portfolio.com:8080/message', data) //change this to change the posting point
+            // await axios.post('http://hh-portfolio.com:8080/message', data) //change this to change the posting port
             await axios.post('http://hh-portfolio.com:5000/message', data)
                 .then((response) => {
                     changeMessage("Thank you I will get back to you as soon as possible!");
                     changeIsDone(true);
-                    console.log(response);
                     setTimeout(() => { changeIsDone(false) }, 6000);
                 })
                 .catch((error) => {
                     changeIsDone(true);
                     changeMessage(`${error}`);
-                    setTimeout(() => { changeIsDone(false) }, 3000)
-                    console.log(error);
+                    setTimeout(() => { changeIsDone(false) }, 3000);
                 });
         }
         catch (err) {
