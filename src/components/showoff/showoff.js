@@ -10,6 +10,7 @@ import MusicPlayer from './showoffComponents/MusicPlayer';
 import Test from './showoffComponents/Test';
 import GameContainer from './showoffComponents/GameContainer';
 import Map from './showoffComponents/Map';
+import Todo from './showoffComponents/Todo';
 
 function Showoff() {
     return (
@@ -20,6 +21,7 @@ function Showoff() {
                 <li><GameContainer /></li>
                 <li><Calculator /></li>
                 <li><RadarController /></li>
+                <li><Todo /></li>
                 <li><Graph /></li>
                 <li><DogApi /></li>
                 <li><MusicPlayer /></li>
