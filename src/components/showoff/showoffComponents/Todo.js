@@ -1,35 +1,60 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, List, ListItem, Input, InputLabel, FormControl, Checkbox } from '@mui/material';
+import { Card, CardHeader, List, ListItem, TextField, FormGroup, Checkbox, MenuItem, DropDownMenu } from '@mui/material';
 import { Button } from 'antd';
 
+
 const Todo = () => {
+    const [done, changeDone] = useState(false);
+
+
     const [todoList, changetodoList] = useState([
-        { name: "Shoping", priority: "Low", done: true },
-        { name: "Gym", priority: "High", done: false }
+        { name: "Shoping", priority: "Low", done: done },
+        { name: "Gym", priority: "High", done: done }
     ]);
 
-    const handleChange = (value) => { console.log(value); }
+    const handleChange = (value) => {
+        console.log(value);
+    }
+
+    const changeData = (value) => {
+        console.log(value);
+    }
 
     return (
         <Card className='todo-card'>
             <CardHeader
                 title="Todo List"
             />
-            <FormControl>
-                <InputLabel htmlFor="name-input">Name</InputLabel>
-                <InputLabel htmlFor="description-input">Description</InputLabel>
-                {/* <Input id="name-input" /> */}
-                <Input id="description-input" />
+            <FormGroup row>
+                <TextField
+                    id="outlined-error"
+                    placeholder="Name"
+                />
+                <TextField
+                    id="outlined-error-helper-text"
+                    placeholder="Description"
+                />
+                <DropDownMenu
+                    value={selection}
+                    onChange={handleChange}
+                >
+                    <MenuItem value={1} primaryText="English" />
+                    <MenuItem value={2} primaryText="Spanish" />
+                    <MenuItem value={3} primaryText="French" />
 
-                <Button >Submit</Button>
-            </FormControl>
+                </DropDownMenu>
+
+                <Button type='submit' onSubmit={changeData}>Add</Button>
+            </FormGroup>
 
             <List>
                 {todoList.map((item) => {
-                    return <ListItem>
-                        {item.name}
-                        <Checkbox checked={item.done} onChange={handleChange} />
-                    </ListItem>
+                    return (
+                        <ListItem>
+                            {item.name}
+                            <Checkbox checked={item.done} onChange={handleChange} />
+                        </ListItem>
+                    )
                 })}
             </List>
 
