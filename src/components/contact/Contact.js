@@ -33,8 +33,8 @@ const Contact = () => {
         <div className="contact">
             <h2>About me</h2>
             <p className='aboutme'>This website is just an asset for me to show off part of my skills and my resume to help me find my place in tech industry as a full stack developer. I studied Hardware and Software engineering to be able to understand the concepts of computer language and how to build one and become a developer. Also finished my studies in coding for web, mobile, and software and still coding to add to my knowledge day by day.</p>
-            <p className='aboutme'>All this project is coded by me usign <a href="https://ant.design/" target="_blank">Ant Design</a> and <a href="https://mui.com/">Material UI</a> and many more liberaries and dependencies and can be provided upon request.</p>
-            <p className='aboutme'>Please do not hesitate to contact me through my <a href="https://www.linkedin.com/in/hooman-hajarian/" target='_blank'>linkedin</a> mentioned below.</p>
+            <p className='aboutme'>All this project is coded by me usign <a href="https://ant.design/" target="_blank" rel="noreferrer">Ant Design</a> and <a href="https://mui.com/">Material UI</a> and many more liberaries and dependencies and can be provided upon request.</p>
+            <p className='aboutme'>Please do not hesitate to contact me through my <a href="https://www.linkedin.com/in/hooman-hajarian/" target='_blank' rel="noreferrer">linkedin</a> mentioned below.</p>
             {isDone ? <p className="message">{message}</p> : <ContactForm sendMessage={sendMessage} />}
 
             <ul className="links">

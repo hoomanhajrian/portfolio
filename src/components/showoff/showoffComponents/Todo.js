@@ -36,24 +36,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function createData(name, description, priority, completed) {
     return { name, description, priority, completed };
-}
-
-const rows = [
-    createData('Shoping', "Go shoping on May", "Low"),
-    createData('Gym', "Start a new habit", "High"),
-    createData('Oil Change', "Change car oil", "medium"),
-    createData('Hell', "Go to hell", "High"),
-];
+};
 
 const Todo = () => {
-    const [priority, setPriority] = React.useState('');
+    const [rows, updateRows] = useState([]);
+    const [priority, setPriority] = useState('');
+    const [name, changeName] = useState('');
+    const [description, changeDescription] = useState('');
 
-    const handleChange = (event) => {
+
+    const priorityHandleChange = (event) => {
         setPriority(event.target.value);
     };
 
+    const filterSelectHandleChange = () => { };
+
     const addData = (value) => {
-        console.log('hi');
+        updateRows([...rows, createData(name, description, priority)])
     };
 
     return (
@@ -63,33 +62,37 @@ const Todo = () => {
             />
             <FormGroup row>
                 <TextField
-                    id="outlined-error"
+                    id="todoName"
                     placeholder="Name"
+                    onChange={(value) => { changeName(value.target.value) }}
                 />
                 <TextField
-                    id="outlined-error-helper-text"
+                    id="todoDes"
                     placeholder="Description"
+                    onChange={(value) => { changeDescription(value.target.value) }}
+
                 />
 
                 <Box className="box" sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
+                    <FormControl>
                         <InputLabel id="priority-select-label">Priority</InputLabel>
                         <Select
                             labelId="priority-select-label"
                             id="priority-select"
                             value={priority}
                             label="Priority"
-                            onChange={handleChange}
+                            onChange={priorityHandleChange}
                         >
                             <MenuItem value="Low">Low</MenuItem>
                             <MenuItem value="Medium">Medium</MenuItem>
                             <MenuItem value="High">High</MenuItem>
                         </Select>
+                        <Button type='submit' onClick={addData}>Add</Button>
                     </FormControl>
                 </Box>
 
 
-                <Button type='submit' onSubmit={addData}>Add</Button>
+
 
                 <Box className="box" sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
@@ -99,7 +102,7 @@ const Todo = () => {
                             id="priority-select"
                             value={priority}
                             label="Priority"
-                            onChange={handleChange}
+                            onChange={filterSelectHandleChange}
                         >
                             <MenuItem value="Low">All</MenuItem>
                             <MenuItem value="Medium">Completed</MenuItem>
