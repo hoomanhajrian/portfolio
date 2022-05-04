@@ -49,10 +49,24 @@ const Todo = () => {
         setPriority(event.target.value);
     };
 
-    const filterSelectHandleChange = () => { };
+    const filterSelectHandleChange = () => {
+        updateRows(rows.filter(row => row.completed === true));
+    };
 
-    const addData = (value) => {
-        updateRows([...rows, createData(name, description, priority)])
+    const addData = () => {
+        if (name === "" || description === "" || priority === "") {
+
+        }
+        else {
+            updateRows([...rows, createData(name, description, priority)])
+        }
+    };
+
+    const removeData = (event) => {
+        // const tableRowNumber = document.getElementById("tableRow");
+        // console.log(tableRowNumber);
+
+        console.log(event);
     };
 
     return (
@@ -104,9 +118,9 @@ const Todo = () => {
                             label="Priority"
                             onChange={filterSelectHandleChange}
                         >
-                            <MenuItem value="Low">All</MenuItem>
-                            <MenuItem value="Medium">Completed</MenuItem>
-                            <MenuItem value="High">Not Completed</MenuItem>
+                            <MenuItem value="all">All</MenuItem>
+                            <MenuItem value="completed">Completed</MenuItem>
+                            <MenuItem value="notCompleted">Not Completed</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
@@ -116,21 +130,27 @@ const Todo = () => {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Name</StyledTableCell>
+                            <StyledTableCell>Index</StyledTableCell>
+                            <StyledTableCell align="right">Name</StyledTableCell>
                             <StyledTableCell align="right">Description</StyledTableCell>
                             <StyledTableCell align="right">Priority</StyledTableCell>
                             <StyledTableCell align="right">Completed</StyledTableCell>
+                            <StyledTableCell align="right">Remove?</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <StyledTableRow key={row.name}>
+                        {rows.map((row, index) => (
+                            <StyledTableRow id="tableRow" key={index}>
+                                <StyledTableCell id='tableRowNumber'>
+                                    {index}
+                                </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
                                     {row.name}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">{row.priority}</StyledTableCell>
                                 <StyledTableCell align="right"><Checkbox /></StyledTableCell>
+                                <StyledTableCell onClick={removeData} align="right"><Button >Remove</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
