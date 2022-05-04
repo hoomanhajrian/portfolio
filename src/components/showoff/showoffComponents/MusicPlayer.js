@@ -67,7 +67,7 @@ const MusicPlayer = () => {
     const classes = useStyles();
     const [barLoc, changeBarLoc] = useState(0);
     const [selectedMusic, changeSelectedMusic] = useState(5);
-    const [loadedList, changeList] = useState(sampleMusics);
+    const loadedList = sampleMusics
     const [playingInterval, setPlayingInterval] = useState();
     const [playButton, changePlayButton] = useState(true);
     const random = false;
