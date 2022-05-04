@@ -63,10 +63,11 @@ const Todo = () => {
     };
 
     const removeData = (event) => {
+        const removedItemIndex = event.target.attributes.index.value;
         // const tableRowNumber = document.getElementById("tableRow");
         // console.log(tableRowNumber);
-
-        console.log(event.target.attributes.index);
+        console.log(removedItemIndex);
+        updateRows(rows.filter((val, index, arr) => { return index != removedItemIndex }));
     };
 
     return (
