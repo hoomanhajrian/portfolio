@@ -66,7 +66,7 @@ const Todo = () => {
         // const tableRowNumber = document.getElementById("tableRow");
         // console.log(tableRowNumber);
 
-        console.log(event);
+        console.log(event.target.attributes.index);
     };
 
     return (
@@ -144,13 +144,13 @@ const Todo = () => {
                                 <StyledTableCell id='tableRowNumber'>
                                     {index}
                                 </StyledTableCell>
-                                <StyledTableCell component="th" scope="row">
+                                <StyledTableCell align="right" component="th" scope="row">
                                     {row.name}
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">{row.priority}</StyledTableCell>
                                 <StyledTableCell align="right"><Checkbox /></StyledTableCell>
-                                <StyledTableCell onClick={removeData} align="right"><Button >Remove</Button></StyledTableCell>
+                                <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
