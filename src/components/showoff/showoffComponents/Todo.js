@@ -66,8 +66,15 @@ const Todo = () => {
         const removedItemIndex = event.target.attributes.index.value;
         // const tableRowNumber = document.getElementById("tableRow");
         // console.log(tableRowNumber);
-        console.log(removedItemIndex);
-        updateRows(rows.filter((val, index, arr) => { return index != removedItemIndex }));
+        console.log(typeof (removedItemIndex));
+        updateRows(rows.filter((val, index, arr) => { return index.toString() !== removedItemIndex }));
+    };
+
+    const checkboxChangeHandel = (event) => {
+
+        console.log(event.target.checked);
+        console.log(event.target.attributes);
+
     };
 
     return (
@@ -150,7 +157,7 @@ const Todo = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">{row.priority}</StyledTableCell>
-                                <StyledTableCell align="right"><Checkbox /></StyledTableCell>
+                                <StyledTableCell align="right"><Checkbox index={index} onChange={checkboxChangeHandel} /></StyledTableCell>
                                 <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
