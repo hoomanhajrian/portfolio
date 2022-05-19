@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
@@ -10,11 +9,6 @@ function Work() {
             <h2 className="work-title">Work Experience</h2>
             <div className="work-card-container">
                 <Card className="work-card card1">
-                    <CardMedia
-                        className="card-media"
-                        image="./farmerfresh.jpg"
-                        title="farmer fresh project"
-                    />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             CELLPHONE TECHNICIAN / Vancouver, BC
@@ -35,11 +29,6 @@ function Work() {
                     </CardContent>
                 </Card>
                 <Card className="work-card card1">
-                    <CardMedia
-                        className="card-media"
-                        image="./farmerfresh.jpg"
-                        title="farmer fresh project"
-                    />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             ONLINE CUSTOMER CARE AND IT CONSULTANT / Gohar Shafa Co. / Tehran, Iran
@@ -61,17 +50,12 @@ function Work() {
                     </CardContent>
                 </Card>
                 <Card className="work-card card1">
-                    <CardMedia
-                        className="card-media"
-                        image="./farmerfresh.jpg"
-                        title="farmer fresh project"
-                    />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
                             CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            Jan.201 - Jan.2019
+                            Jan.2017 - Jan.2019
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             <a href="http://sunservice.com/" target="_blank" rel="noreferrer">sunservice.com</a>
