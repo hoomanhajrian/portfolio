@@ -31,7 +31,7 @@ function Work() {
                 <Card className="work-card card1">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            ONLINE CUSTOMER CARE AND IT CONSULTANT / Gohar Shafa Co. / Tehran, Iran
+                            Software Developer / Gohar Shafa Co. / Tehran, Iran
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Jan.2019 - Oct.2019
@@ -41,10 +41,11 @@ function Work() {
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <ul>
-                                <li>Conducted online digital customer care and follow-up for clients of the medical equipment company.</li>
-                                <li>Enhanced customer satisfaction by creating a rapport with clients, through
-                                    communication and diagnosis of problems and errors, and ensuring the issue was resolved.</li>
-                                <li>Performed on-site technology reports, maintaining the safety and smooth application of products and equipment.</li>
+                                <li>Testing, maintaining, and developing new features.</li>
+                                <li>Keeping the servers and services alive.</li>
+                                <li>Helping in coding internal system for inventory management based on C#</li>
+                                <li>Finding issues and solving them with other team members.</li>
+                                <li>Support website for the best user experience.</li>
                             </ul>
                         </Typography>
                     </CardContent>
