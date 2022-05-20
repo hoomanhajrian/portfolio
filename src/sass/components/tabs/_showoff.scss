@@ -193,6 +193,30 @@
         margin-right: auto;
         margin-left: auto;
     }
+    .todo-card-container{
+        width: 80%;
+        min-height: 10vh;
+        margin-right: auto;
+        margin-left: auto;
+        display: none;
+    }
+    .todo-card{
+        .todo-form{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-gap: .5rem;
+        margin-bottom: .5rem;
+        }
+        .todo-name{}
+        .todo-des{}
+        .todo-priority{}
+        .todo-priority-form{
+            display: flex;
+            flex-direction: row;
+            align-items: center
+        }
+        .todo-table{padding: .8rem;overflow: none}
+    }
     };
 
     
