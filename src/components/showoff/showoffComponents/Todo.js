@@ -82,25 +82,30 @@ const Todo = () => {
             <CardHeader
                 title="Todo List"
             />
-            <FormGroup row>
+            <FormGroup className='todo-form' row>
                 <TextField
                     id="todoName"
-                    placeholder="Name"
+                    className='todo-name'
+                    label="Name"
+                    variant="outlined"
                     onChange={(value) => { changeName(value.target.value) }}
                 />
                 <TextField
                     id="todoDes"
-                    placeholder="Description"
+                    className='todo-des'
+                    label="Description"
+                    variant="outlined"
                     onChange={(value) => { changeDescription(value.target.value) }}
 
                 />
 
-                <Box className="box" sx={{ minWidth: 120 }}>
-                    <FormControl>
+                <Box sx={{ minWidth: 120 }}>
+                    <FormControl className="todo-priority-form">
                         <InputLabel id="priority-select-label">Priority</InputLabel>
                         <Select
                             labelId="priority-select-label"
                             id="priority-select"
+                            className='todo-priority'
                             value={priority}
                             label="Priority"
                             onChange={priorityHandleChange}
@@ -138,7 +143,7 @@ const Todo = () => {
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>Index</StyledTableCell>
+                            <StyledTableCell>#</StyledTableCell>
                             <StyledTableCell align="right">Name</StyledTableCell>
                             <StyledTableCell align="right">Description</StyledTableCell>
                             <StyledTableCell align="right">Priority</StyledTableCell>
@@ -146,7 +151,7 @@ const Todo = () => {
                             <StyledTableCell align="right">Remove?</StyledTableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody>
+                    <TableBody className='todo-table'>
                         {rows.map((row, index) => (
                             <StyledTableRow id="tableRow" key={index}>
                                 <StyledTableCell id='tableRowNumber'>

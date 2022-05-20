@@ -21,7 +21,7 @@ function Showoff() {
                 <li><GameContainer /></li>
                 <li><Calculator /></li>
                 <li><RadarController /></li>
-                <li><Todo /></li>
+                <li className='todo-card-container'><Todo /></li>
                 <li><Graph /></li>
                 <li><DogApi /></li>
                 <li><MusicPlayer /></li>
