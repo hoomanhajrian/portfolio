@@ -71,9 +71,9 @@ const Todo = () => {
     };
 
     const checkboxChangeHandel = (event) => {
-
+        // updateRows([...rows, createData(name, description, priority)])
         console.log(event.target.checked);
-        console.log(event.target.attributes);
+        console.log(event);
 
     };
 
@@ -153,7 +153,7 @@ const Todo = () => {
                     </TableHead>
                     <TableBody className='todo-table'>
                         {rows.map((row, index) => (
-                            <StyledTableRow id="tableRow" key={index}>
+                            <StyledTableRow id={`row${index}`} key={index} >
                                 <StyledTableCell id='tableRowNumber'>
                                     {index}
                                 </StyledTableCell>
