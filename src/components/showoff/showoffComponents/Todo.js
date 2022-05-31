@@ -44,14 +44,28 @@ const Todo = () => {
     const [name, changeName] = useState('');
     const [description, changeDescription] = useState('');
     const [completed, changeCompleted] = useState();
+    const [compeletedFilterValue, updateCompeletedFilterValue] = useState('all');
+    const [originalRows, changeOrgRows] = useState([]);
 
     const priorityHandleChange = (event) => {
         setPriority(event.target.value);
     };
 
     const filterSelectHandleChange = (e) => {
-        changeCompleted(e.target.value);
-
+        updateCompeletedFilterValue(e.target.value);
+        switch (e.target.value) {
+            case 'all':
+                updateRows(originalRows);
+                break;
+            case 'completed':
+                updateRows(originalRows.filter((val, index, arr) => { return val.completed === true }));
+                break;
+            case 'notCompleted':
+                updateRows(originalRows.filter((val, index, arr) => { return val.completed === false || val.completed === undefined }));
+                break;
+            default:
+                break;
+        }
     };
 
     const addData = () => {
@@ -59,7 +73,8 @@ const Todo = () => {
 
         }
         else {
-            updateRows([...rows, createData(name, description, priority, completed)])
+            updateRows([...rows, createData(name, description, priority, completed)]);
+            changeOrgRows(rows);
         }
     };
 
@@ -72,7 +87,7 @@ const Todo = () => {
         const updatedCheckedItemIndex = event.target.attributes.id.value;
         rows[updatedCheckedItemIndex].completed = event.target.checked;
         updateRows(oldRows => rows);
-        console.log(rows);
+        changeOrgRows(rows);
     };
 
     return (
@@ -125,7 +140,7 @@ const Todo = () => {
                         <Select
                             labelId="filter-select-label"
                             id="filter-select"
-                            value="all"
+                            value={compeletedFilterValue}
                             label="Priority"
                             onChange={filterSelectHandleChange}
                         >
@@ -160,7 +175,7 @@ const Todo = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">{row.priority}</StyledTableCell>
-                                <StyledTableCell align="right"><Checkbox id={`${index}`} onChange={checkboxChangeHandel} /></StyledTableCell>
+                                <StyledTableCell align="right"><Checkbox checked={row.completed} id={`${index}`} onChange={checkboxChangeHandel} /></StyledTableCell>
                                 <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
