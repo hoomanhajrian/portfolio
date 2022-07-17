@@ -11,13 +11,13 @@ function Work() {
                 <Card className="work-card card1">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            CELLPHONE TECHNICIAN / Vancouver, BC
+                            Cellphone technician / Mobileklinik / Vancouver, BC
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Feb.2020 - Present
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
-                            <a href="https://www.cellclinic.ca/" target="_blank" rel="noreferrer">cellclinic.ca</a>
+                            <a href="https://www.mobileklinik.ca/" target="_blank" rel="noreferrer">mobileklinik.ca</a>
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <ul>
@@ -31,7 +31,7 @@ function Work() {
                 <Card className="work-card card1">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Software Developer / Gohar Shafa Co. / Tehran, Iran
+                            Software developer / Gohar Shafa Co. / Tehran, Iran
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Jan.2019 - Oct.2019
@@ -53,7 +53,7 @@ function Work() {
                 <Card className="work-card card1">
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            CUSTOMER SERVICE AND TECH HARDWARE REPAIR / Sun Services / Tehran, Iran
+                            Cellphone and laptop technician / Sun Services / Tehran, Iran
                         </Typography>
                         <Typography gutterBottom variant="h6" component="h2">
                             Jan.2017 - Jan.2019
