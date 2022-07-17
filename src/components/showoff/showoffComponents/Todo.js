@@ -43,29 +43,13 @@ const Todo = () => {
     const [priority, setPriority] = useState('');
     const [name, changeName] = useState('');
     const [description, changeDescription] = useState('');
-    const [completed, changeCompleted] = useState();
-    const [compeletedFilterValue, updateCompeletedFilterValue] = useState('all');
-    const [originalRows, changeOrgRows] = useState([]);
 
     const priorityHandleChange = (event) => {
         setPriority(event.target.value);
     };
 
-    const filterSelectHandleChange = (e) => {
-        updateCompeletedFilterValue(e.target.value);
-        switch (e.target.value) {
-            case 'all':
-                updateRows(originalRows);
-                break;
-            case 'completed':
-                updateRows(originalRows.filter((val, index, arr) => { return val.completed === true }));
-                break;
-            case 'notCompleted':
-                updateRows(originalRows.filter((val, index, arr) => { return val.completed === false || val.completed === undefined }));
-                break;
-            default:
-                break;
-        }
+    const filterSelectHandleChange = () => {
+        updateRows(rows.filter(row => row.completed === true));
     };
 
     const addData = () => {
@@ -73,21 +57,23 @@ const Todo = () => {
 
         }
         else {
-            updateRows([...rows, createData(name, description, priority, completed)]);
-            changeOrgRows(rows);
+            updateRows([...rows, createData(name, description, priority)])
         }
     };
 
     const removeData = (event) => {
         const removedItemIndex = event.target.attributes.index.value;
+        // const tableRowNumber = document.getElementById("tableRow");
+        // console.log(tableRowNumber);
+        console.log(typeof (removedItemIndex));
         updateRows(rows.filter((val, index, arr) => { return index.toString() !== removedItemIndex }));
     };
 
     const checkboxChangeHandel = (event) => {
-        const updatedCheckedItemIndex = event.target.attributes.id.value;
-        rows[updatedCheckedItemIndex].completed = event.target.checked;
-        updateRows(oldRows => rows);
-        changeOrgRows(rows);
+        // updateRows([...rows, createData(name, description, priority)])
+        console.log(event.target.checked);
+        console.log(event);
+
     };
 
     return (
@@ -136,11 +122,11 @@ const Todo = () => {
 
                 <Box className="box" sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="filter-select-label">Filter</InputLabel>
+                        <InputLabel id="priority-select-label">Filter</InputLabel>
                         <Select
-                            labelId="filter-select-label"
-                            id="filter-select"
-                            value={compeletedFilterValue}
+                            labelId="priority-select-label"
+                            id="priority-select"
+                            value={priority}
                             label="Priority"
                             onChange={filterSelectHandleChange}
                         >
@@ -175,7 +161,7 @@ const Todo = () => {
                                 </StyledTableCell>
                                 <StyledTableCell align="right">{row.description}</StyledTableCell>
                                 <StyledTableCell align="right">{row.priority}</StyledTableCell>
-                                <StyledTableCell align="right"><Checkbox checked={row.completed} id={`${index}`} onChange={checkboxChangeHandel} /></StyledTableCell>
+                                <StyledTableCell align="right"><Checkbox index={index} onChange={checkboxChangeHandel} /></StyledTableCell>
                                 <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                             </StyledTableRow>
                         ))}
