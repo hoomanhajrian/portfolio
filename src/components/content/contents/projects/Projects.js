@@ -1,12 +1,8 @@
 import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { CardActionArea, Card, CardContent, CardMedia } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 
 
 
@@ -26,7 +22,7 @@ const projectsData = [
         name: 'Farmer Fresh',
         position: 'Full Stack Developer',
         year: ' 2021-2022',
-        href: '#',
+        href: 'https://farmer-fresh-d266e.web.app/',
         description: 'Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.',
         imgUrl: '/img/farmerfresh.jpg'
 
@@ -36,7 +32,7 @@ const projectsData = [
         name: 'Patch App',
         position: 'Full Stack Developer',
         year: ' 2021-2022',
-        href: '#',
+        href: 'https://patch-app-a5afe.web.app/',
         description: 'Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.',
         imgUrl: '/img/patchapp.jpg'
     },
@@ -100,43 +96,41 @@ const Projects = () => {
         <div className="projects">
             <h2 className="projects-header">Project Experience</h2>
             <div className="cards-container">
-                <AppBar position="static">
-                    <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                        <Tab label="Wedding Planner" {...a11yProps(0)} />
-                        <Tab label="Farmer Fresh" {...a11yProps(1)} />
-                        <Tab label="Patch App" {...a11yProps(2)} />
-                        <Tab label="Go Hike" {...a11yProps(3)} />
-                    </Tabs>
-                </AppBar>
-
                 {projectsData.map((data) => {
                     return (
-                        <TabPanel value={value} className="card-container" index={data.id}>
-                            <img className="card-image" alt="gohike-app" src={data.imgUrl} />
-                            <Card className={`project-card card${data.id}`}>
+                        <Card key={data.id} className={`project-card card${data.id}`}>
+                            <CardActionArea
+                                component="a"
+                                href={data.href}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
                                 <CardContent>
-                                    <Typography gutterBottom variant="h4" component="h2">
+                                    <Typography className='project-card-text' gutterBottom variant="h4" >
                                         {data.name}
                                     </Typography>
-                                    <Typography gutterBottom variant="h5" component="h2">
+                                    <Typography className='project-card-text' gutterBottom variant="h6" >
                                         {data.position}
                                     </Typography>
-                                    <Typography gutterBottom variant="h6" component="h2">
+                                    <Typography className='project-card-text' gutterBottom variant="h6" >
                                         {data.year}
                                     </Typography>
-                                    <Typography gutterBottom variant="h5" component="a" href={data.href} target="_blank" rel="noreferrer">
-                                        View project
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
+                                    <CardMedia
+                                        component='img'
+                                        image={data.imgUrl}
+                                    />
+                                    <Typography variant="body2" color="textSecondary"
+                                        className='project-card-description'
+                                        component="p">
                                         {data.description}
                                     </Typography>
                                 </CardContent>
-                            </Card>
-                        </TabPanel>
+                            </CardActionArea>
+                        </Card>
                     )
                 })}
             </div>
-        </div >
+        </div>
     )
 };
 

@@ -34,34 +34,29 @@
 
     }
     .cards-container{
-        @include for-phone-only{
-            display: block;
+        padding: 2rem;
+        .project-card{
+            margin-bottom: 2rem;
+background-color: #d3e1e3;
+        }
+        .project-card-text{
+            margin-bottom: .5rem;
+        }
+        .project-card-description{
+            padding:1rem .5rem  0  0;
+            font-size: 1rem;
         }
         @include for-tablet-landscape-up{
-            width: 90%;
-            margin-right: auto;
-            margin-left: auto;
-        
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 2rem;
         }
-        // .project-card{
-        //     max-width: 350px;
-        //     margin-right: auto;
-        //     margin-left: auto;
-        //     margin-top: 2rem;
-        // }
-    }
-    button{
-text-align: left;   
-a{
-    text-decoration: none;
-} 
-}
-    // card action area hover
-    button:hover{
-        border-radius: 15px;
-        transition: 500ms;
+        @include for-desktop-up{
+            grid-template-columns: repeat(3,1fr);
+        }
         
     }
+    
 }
 
 .MuiButtonBase-root, .MuiCardActionArea-root{
