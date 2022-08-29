@@ -34,6 +34,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
+const getPriorityColor = (priority) => {
+
+    switch (priority) {
+        case "Low":
+            return "green";
+        case "Medium":
+            return "#CCCC00";
+        case "High":
+            return "red";
+        default:
+            break;
+    }
+
+};
+
 function createData(name, description, priority, completed) {
     return { name, description, priority, completed };
 };
@@ -70,9 +85,10 @@ const Todo = () => {
     };
 
     const checkboxChangeHandel = (event) => {
-        console.log(event.target.checked);
-        console.log(event);
-
+        event.preventDefault();
+        let newRows = [...rows];
+        newRows[event.target.id].completed = event.target.checked;
+        updateRows(newRows);
     };
 
     useEffect(() => {
@@ -179,16 +195,15 @@ const Todo = () => {
                                         {row.name}
                                     </StyledTableCell>
                                     <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                    <StyledTableCell align="right">{row.priority}</StyledTableCell>
-                                    <StyledTableCell align="right"><Checkbox index={index} onChange={checkboxChangeHandel} /></StyledTableCell>
+                                    <StyledTableCell sx={{ color: `${getPriorityColor(row.priority)}` }} align="right">{row.priority}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.completed ? 'Done' : <Checkbox id={`${index}`} onChange={checkboxChangeHandel} />}</StyledTableCell>
                                     <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                                 </StyledTableRow>
                             ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-
-        </Card >
+        </Card>
     )
 
 };
