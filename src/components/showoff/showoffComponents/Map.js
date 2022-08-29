@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-import Marker from '../../contact/Marker';
+import Marker from './Marker';
 import { Card, CardHeader } from '@mui/material';
 
 const options = {

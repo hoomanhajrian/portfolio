@@ -1,12 +1,12 @@
 import React from 'react';
+import ContactLinks from '../contact/ContactLinks';
 
 function Footer() {
 
     return (
         <div className="footer">
-
-            <p className="footer-copy">&copy; 2022 Hooman Hajarian All Rights Reserved</p>
-
+            <p className="footer-copy">&copy; {new Date().getFullYear()} hh-portfolio All Rights Reserved</p>
+            <ContactLinks />
         </div>
     );
 }

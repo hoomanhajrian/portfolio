@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, TextField, Checkbox, FormGroup, MenuItem, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -52,29 +52,35 @@ const Todo = () => {
         updateRows(rows.filter(row => row.completed === true));
     };
 
-    const addData = () => {
+    const addData = (event) => {
+        event.preventDefault();
         if (name === "" || description === "" || priority === "") {
 
         }
         else {
-            updateRows([...rows, createData(name, description, priority)])
-        }
+            updateRows([...rows, createData(name, description, priority, false)]);
+            console.log(rows);
+            localStorage.setItem("todoList", JSON.stringify(rows));
+        };
     };
 
     const removeData = (event) => {
         const removedItemIndex = event.target.attributes.index.value;
-        // const tableRowNumber = document.getElementById("tableRow");
-        // console.log(tableRowNumber);
-        console.log(typeof (removedItemIndex));
         updateRows(rows.filter((val, index, arr) => { return index.toString() !== removedItemIndex }));
     };
 
     const checkboxChangeHandel = (event) => {
-        // updateRows([...rows, createData(name, description, priority)])
         console.log(event.target.checked);
         console.log(event);
 
     };
+
+    useEffect(() => {
+        if (localStorage.getItem("todoList")) {
+            updateRows(JSON.parse(localStorage.getItem("todoList")));
+        }
+
+    }, []);
 
     return (
         <Card className='todo-card'>
@@ -98,7 +104,7 @@ const Todo = () => {
 
                 />
 
-                <Box sx={{ minWidth: 120 }}>
+                <Box sx={{ minWidth: 120 }} type="form">
                     <FormControl className="todo-priority-form">
                         <InputLabel id="priority-select-label">Priority</InputLabel>
                         <Select
@@ -117,24 +123,20 @@ const Todo = () => {
                     </FormControl>
                 </Box>
 
-
-
-
                 <Box className="box" sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="priority-select-label">Filter</InputLabel>
+                    {/* <FormControl fullWidth>
+                        <InputLabel id="completed-select-label">Filter</InputLabel>
                         <Select
-                            labelId="priority-select-label"
-                            id="priority-select"
-                            value={priority}
-                            label="Priority"
+                            labelId="completed-select-label"
+                            id="completed-select"
+                            label="completed"
                             onChange={filterSelectHandleChange}
                         >
                             <MenuItem value="all">All</MenuItem>
                             <MenuItem value="completed">Completed</MenuItem>
                             <MenuItem value="notCompleted">Not Completed</MenuItem>
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
                 </Box>
 
             </FormGroup>
