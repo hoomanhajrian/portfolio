@@ -6,7 +6,7 @@ import {
     Route,
     NavLink
 } from "react-router-dom";
-import Contact from './components/contact/Contact'
+import About from './components/about/About'
 import Projects from './components/content/contents/projects/Projects'
 import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
@@ -18,7 +18,7 @@ import NotFound from './components/notfound/NotFound';
 const App = () => {
 
     return (
-        <div className="app">
+        <main className="app">
             <Router>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
                     <div className="container-fluid">
@@ -46,14 +46,14 @@ const App = () => {
                 </nav>
                 <NavSwitch>
                     <Route exact path="/" component={Projects} />
-                    <Route path="/about" component={Contact} />
+                    <Route path="/about" component={About} />
                     <Route path="/resume" component={Resume} />
                     <Route path="/showoff" component={Showoff} />
                     <Route component={NotFound} />
                 </NavSwitch>
             </Router>
             <Footer />
-        </div >
+        </main>
     )
 };
 
