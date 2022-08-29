@@ -201,10 +201,19 @@
     }
     .todo-card{
         .todo-form{
+           
             display: grid;
-            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(4,1fr);
+            padding: 0 2rem;
             grid-gap: .5rem;
-        margin-bottom: .5rem;
+            @include for-tablet-landscape-up
+            { 
+                grid-template-columns: repeat(4,1fr);
+                grid-template-rows: none;
+                grid-gap: .5rem;
+                margin-bottom: .5rem;
+            }
+
         }
         .todo-priority{min-width: 60%;}
         .todo-priority-form{
@@ -216,7 +225,8 @@
         .css-1nrlq1o-MuiFormControl-root{
             display: flex;
             flex-direction: row;
-            justify-content: space-between;       
+            justify-content: space-between;      
+            
         }
         .css-apqrd9-MuiTableBody-root{
             max-width: 100%;
