@@ -52,8 +52,7 @@ const Todo = () => {
         updateRows(rows.filter(row => row.completed === true));
     };
 
-    const addData = (event) => {
-        event.preventDefault();
+    const addData = () => {
         if (name === "" || description === "" || priority === "") {
 
         }
@@ -65,8 +64,11 @@ const Todo = () => {
     };
 
     const removeData = (event) => {
+        event.preventDefault();
         const removedItemIndex = event.target.attributes.index.value;
         updateRows(rows.filter((val, index, arr) => { return index.toString() !== removedItemIndex }));
+        console.log(rows);
+        localStorage.setItem("todoList", JSON.stringify(rows));
     };
 
     const checkboxChangeHandel = (event) => {
@@ -79,8 +81,11 @@ const Todo = () => {
         if (localStorage.getItem("todoList")) {
             updateRows(JSON.parse(localStorage.getItem("todoList")));
         }
-
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem("todoList", JSON.stringify(rows));
+    }, [rows]);
 
     return (
         <Card className='todo-card'>
