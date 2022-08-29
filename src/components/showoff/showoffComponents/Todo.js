@@ -48,9 +48,9 @@ const Todo = () => {
         setPriority(event.target.value);
     };
 
-    const filterSelectHandleChange = () => {
-        updateRows(rows.filter(row => row.completed === true));
-    };
+    // const filterSelectHandleChange = () => {
+    //     updateRows(rows.filter(row => row.completed === true));
+    // };
 
     const addData = () => {
         if (name === "" || description === "" || priority === "") {
@@ -58,7 +58,6 @@ const Todo = () => {
         }
         else {
             updateRows([...rows, createData(name, description, priority, false)]);
-            console.log(rows);
             localStorage.setItem("todoList", JSON.stringify(rows));
         };
     };
@@ -67,7 +66,6 @@ const Todo = () => {
         event.preventDefault();
         const removedItemIndex = event.target.attributes.index.value;
         updateRows(rows.filter((val, index, arr) => { return index.toString() !== removedItemIndex }));
-        console.log(rows);
         localStorage.setItem("todoList", JSON.stringify(rows));
     };
 
@@ -158,25 +156,39 @@ const Todo = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody className='todo-table'>
-                        {rows.map((row, index) => (
-                            <StyledTableRow id={`row${index}`} key={index} >
+                        {rows.length < 1 ?
+                            <StyledTableRow >
                                 <StyledTableCell id='tableRowNumber'>
-                                    {index}
+                                    No data
                                 </StyledTableCell>
                                 <StyledTableCell align="right" component="th" scope="row">
-                                    {row.name}
+                                    No data
                                 </StyledTableCell>
-                                <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                <StyledTableCell align="right">{row.priority}</StyledTableCell>
-                                <StyledTableCell align="right"><Checkbox index={index} onChange={checkboxChangeHandel} /></StyledTableCell>
-                                <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
+                                <StyledTableCell align="right">No data</StyledTableCell>
+                                <StyledTableCell align="right">No data</StyledTableCell>
+                                <StyledTableCell align="right"><Checkbox checked={false} /></StyledTableCell>
+                                <StyledTableCell align="right">No data</StyledTableCell>
                             </StyledTableRow>
-                        ))}
+                            :
+                            rows.map((row, index) => (
+                                <StyledTableRow id={`row${index}`} key={index} >
+                                    <StyledTableCell id='tableRowNumber'>
+                                        {index}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right" component="th" scope="row">
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row.description}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.priority}</StyledTableCell>
+                                    <StyledTableCell align="right"><Checkbox index={index} onChange={checkboxChangeHandel} /></StyledTableCell>
+                                    <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
+                                </StyledTableRow>
+                            ))}
                     </TableBody>
                 </Table>
             </TableContainer>
 
-        </Card>
+        </Card >
     )
 
 };
