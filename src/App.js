@@ -12,6 +12,7 @@ import Resume from './components/resume/Resume';
 import Footer from './components/footer/Footer';
 import Showoff from './components/showoff/showoff';
 import NotFound from './components/notfound/NotFound';
+import ContactLinks from './components/contact/ContactLinks';
 
 
 
@@ -39,6 +40,9 @@ const App = () => {
                                 </li>
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/about">About</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <ContactLinks />
                                 </li>
                             </ul>
                         </div>
