@@ -36,4 +36,41 @@
     width: 50%;
     font-weight: bold;
 }
+
+.about-me-wrapper{
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    .aboutme{
+        width: 90%;
+        margin: 0;
+    }
+    .my-picture{
+        max-width:100px;
+        height: auto;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    @include for-tablet-landscape-up{
+        flex-direction: row;
+        .aboutme{
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+    }
+}
+.aboutme{
+    text-align: center;
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    @include for-tablet-landscape-up{
+        text-align: left;
+    }
+
+}
+
 }

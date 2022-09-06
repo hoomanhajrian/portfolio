@@ -34,13 +34,18 @@ const About = () => {
     return (
         <div className="about">
             <h2>About me</h2>
-            <p className='aboutme'>This website is just an asset for me to show off part of my skills and my resume to help me find my place in tech industry as a full stack developer. I studied Hardware and Software engineering to be able to understand the concepts of computer language and how to build one and become a developer. Also finished my studies in coding for web, mobile, and software and still coding to add to my knowledge day by day.</p>
+            <div className='about-me-wrapper'>
+                <img src='/img/me.jpg' alt='my-image' className='my-picture' />
+                <p className='aboutme'>This website is just an asset for me to show off part of my skills and my resume to help me find my place in tech industry as a full stack developer. I studied Hardware and Software engineering to be able to understand the concepts of computer language and how to build one and become a developer. Also finished my studies in coding for web, mobile, and software and still coding to add to my knowledge day by day.</p>
+            </div>
             <p className='aboutme'>All this project is coded by me usign <a href="https://ant.design/" target="_blank" rel="noreferrer">Ant Design</a> and <a href="https://mui.com/">Material UI</a> and many more liberaries and dependencies for styling and components.</p>
             <p className='aboutme'>Please do not hesitate to contact me through my social media links or phone number.</p>
             <GitHub />
             {isDone ? <p className="message">{message}</p> : <ContactForm sendMessage={sendMessage} />}
         </div>
     );
+
+
 }
 
 export default About;
