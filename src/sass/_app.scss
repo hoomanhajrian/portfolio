@@ -1,3 +1,10 @@
+
+#root{
+    min-height:100vh;
+}
+.app{
+    min-height: 100vh;
+}
 .MuiBox-root{
     padding: 0 !important;
     height: 100%;
@@ -22,5 +29,5 @@ ul{
 
 }
 .projects,.resume,.about,.showoff-container{
-    padding-bottom: 1rem !important;
+   min-height:90vh;
 }
