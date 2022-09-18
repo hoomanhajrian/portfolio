@@ -4,7 +4,6 @@ import { OrbitControls, Stars } from '@react-three/drei';
 import Planet from './Planet';
 import { Card } from '@mui/material';
 import { CardHeader } from '@material-ui/core';
-import { getAngle } from '@nivo/core';
 // import Ring from './Ring';
 
 
