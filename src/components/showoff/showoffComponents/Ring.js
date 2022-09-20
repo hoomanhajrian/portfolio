@@ -21,7 +21,7 @@ const Ring = (props) => {
         <mesh
             {...props}
             position={[0, 0, 0]}
-            rotation={[-90, 0, 0]}
+            rotation={[-(Math.PI / 2), 0, 0]}
             ref={ref}
             onClick={(event) => click(!clicked)}
         >
