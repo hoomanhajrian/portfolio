@@ -8,3 +8,8 @@
     animation-name: menuItemsAnimation;
     animation-duration: 2s;
 }
+
+@keyframes cardAnimationAppearance {
+  from   { transform: scale(0.75); opacity: 0.25; }
+    to { transform: scale(1)   ; opacity: 1;    }
+}

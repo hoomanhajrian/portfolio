@@ -37,7 +37,11 @@
         padding: 2rem;
         .project-card{
             margin-bottom: 2rem;
-background-color: #d3e1e3;
+            background-color: #d3e1e3;
+            animation: cardAnimationAppearance 2s 1;
+            :hover{
+                background-color: darken(#d3e1e3,30);
+            }
         }
         .project-card-text{
             margin-bottom: .5rem;

@@ -9,16 +9,6 @@ import PropTypes from 'prop-types';
 const projectsData = [
     {
         id: 0,
-        name: 'Wedding Planner',
-        position: 'Full Stack Developer',
-        year: ' 2022-2023',
-        href: 'https://react-redux-auth-544ed.web.app/',
-        description: 'We are here to make sure your event planning will go as perfect as it can be with the least affort using this platform. You can estimate your event total cost and book appointment for consultation about your event.',
-        imgUrl: '/img/wedding.jpg'
-
-    },
-    {
-        id: 1,
         name: 'Farmer Fresh',
         position: 'Full Stack Developer',
         year: ' 2021-2022',
@@ -28,7 +18,7 @@ const projectsData = [
 
     },
     {
-        id: 2,
+        id: 1,
         name: 'Patch App',
         position: 'Full Stack Developer',
         year: ' 2021-2022',
@@ -37,13 +27,42 @@ const projectsData = [
         imgUrl: '/img/patchapp.jpg'
     },
     {
-        id: 3,
+        id: 2,
         name: 'Go Hike',
         position: 'Full Stack Developer',
         year: ' 2020-2021',
         href: '#',
         description: 'Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.',
         imgUrl: '/img/gohike.jpg'
+    },
+    {
+        id: 3,
+        name: 'Movie Time',
+        position: 'Front End Developer',
+        year: ' 2022-2023',
+        href: 'https://movie-time-54da1.web.app/',
+        description: 'React based application using movie API and more features such as watching and commenting on the movies will be added later.',
+        imgUrl: '/img/movie-time.jpg'
+    },
+    {
+        id: 4,
+        name: 'Wedding Planner',
+        position: 'Full Stack Developer',
+        year: ' 2022-2023',
+        href: 'https://react-redux-auth-544ed.web.app/',
+        description: 'We are here to make sure your event planning will go as perfect as it can be with the least affort using this platform. You can estimate your event total cost and book appointment for consultation about your event.',
+        imgUrl: '/img/wedding.jpg'
+
+    },
+    {
+        id: 5,
+        name: 'Card Creator',
+        position: 'Full Stack Developer',
+        year: ' 2022-2023',
+        href: 'card-creator-9f5f3.web.app',
+        description: 'Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card',
+        imgUrl: '/img/card-creator.png'
+
     }
 ];
 
