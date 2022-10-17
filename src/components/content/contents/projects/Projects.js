@@ -5,7 +5,6 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 
 
-
 const projectsData = [
     {
         id: 0,
@@ -14,7 +13,8 @@ const projectsData = [
         year: ' 2021-2022',
         href: 'https://farmer-fresh-d266e.web.app/',
         description: 'Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.',
-        imgUrl: '/img/farmerfresh.jpg'
+        imgUrl: '/img/farmerfresh.jpg',
+        gitHub: 'https://github.com/hoomanhajrian/FarmerFresh_android-app'
 
     },
     {
@@ -24,7 +24,8 @@ const projectsData = [
         year: ' 2021-2022',
         href: 'https://patch-app-a5afe.web.app/',
         description: 'Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.',
-        imgUrl: '/img/patchapp.jpg'
+        imgUrl: '/img/patchapp.jpg',
+        gitHub: 'https://github.com/costa-rodrigo/patch-frontend'
     },
     {
         id: 2,
@@ -33,7 +34,8 @@ const projectsData = [
         year: ' 2020-2021',
         href: '#',
         description: 'Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.',
-        imgUrl: '/img/gohike.jpg'
+        imgUrl: '/img/gohike.jpg',
+        gitHub: 'https://github.com/costa-rodrigo/goHike'
     },
     {
         id: 3,
@@ -42,7 +44,8 @@ const projectsData = [
         year: ' 2022-2023',
         href: 'https://movie-time-54da1.web.app/',
         description: 'React based application using movie API and more features such as watching and commenting on the movies will be added later.',
-        imgUrl: '/img/movie-time.jpg'
+        imgUrl: '/img/movie-time.jpg',
+        gitHub: 'https://github.com/hoomanhajrian/Moive-app'
     },
     {
         id: 4,
@@ -51,7 +54,8 @@ const projectsData = [
         year: ' 2022-2023',
         href: 'https://react-redux-auth-544ed.web.app/',
         description: 'We are here to make sure your event planning will go as perfect as it can be with the least affort using this platform. You can estimate your event total cost and book appointment for consultation about your event.',
-        imgUrl: '/img/wedding.jpg'
+        imgUrl: '/img/wedding.jpg',
+        gitHub: 'https://github.com/hoomanhajrian/EventPlanner'
 
     },
     {
@@ -61,7 +65,8 @@ const projectsData = [
         year: ' 2022-2023',
         href: 'https://card-creator-9f5f3.web.app/',
         description: 'Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card.',
-        imgUrl: '/img/card-creator.jpg'
+        imgUrl: '/img/card-creator.jpg',
+        gitHub: 'https://github.com/hoomanhajrian/card-creator'
 
     }
 ];
@@ -127,10 +132,13 @@ const Projects = () => {
                                         component='img'
                                         image={data.imgUrl}
                                     />
-                                    <Typography variant="body2" color="textSecondary"
+                                    <Typography variant="body1" color="textSecondary"
                                         className='project-card-description'
                                         component="p">
                                         {data.description}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                        Source code: <a href={data.gitHub} target="_blank" rel="noreferrer"><i className="fab fa-github-square"></i><span className="visually-hidden">{data.gitHub}</span></a>
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
