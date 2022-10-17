@@ -59,9 +59,9 @@ const projectsData = [
         name: 'Card Creator',
         position: 'Full Stack Developer',
         year: ' 2022-2023',
-        href: 'card-creator-9f5f3.web.app',
-        description: 'Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card',
-        imgUrl: '/img/card-creator.png'
+        href: 'https://card-creator-9f5f3.web.app/',
+        description: 'Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card.',
+        imgUrl: '/img/card-creator.jpg'
 
     }
 ];
