@@ -68,6 +68,17 @@ const projectsData = [
         imgUrl: '/img/card-creator.jpg',
         gitHub: 'https://github.com/hoomanhajrian/card-creator'
 
+    },
+    {
+        id: 6,
+        name: 'Tajhiz Aras',
+        position: 'Full Stack Developer',
+        year: ' 2022-2023',
+        href: 'https://tajhizaras.ir/',
+        description: 'Online store for selling industrial kitchen equipment coded fully in React using Redux and many other libraries.(Site in farsi language)',
+        imgUrl: '/img/tajhizaras.jpg',
+        gitHub: 'https://github.com/hoomanhajrian/arastajhiz'
+
     }
 ];
 
