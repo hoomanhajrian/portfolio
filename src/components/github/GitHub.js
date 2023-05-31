@@ -1,11 +1,25 @@
 import React from "react";
-import { GithubContributions } from "react-github-graph"
+import GitHubCalendar from "react-github-calendar";
 
+const GitHub = (props) => {
+  const gitHubContainerStyle = {
+    margin: "auto",
+  };
 
-const GitHub = () => {
-
-    return <GithubContributions username="hoomanhajrian" />;
-
+  return (
+    <>
+      <h4>{props.year}</h4>
+      <GitHubCalendar
+        username="hoomanhajrian"
+        blockRadius="50"
+        year={props.year}
+        hideColorLegend
+        hideMonthLabels
+        hideTotalCount
+        style={gitHubContainerStyle}
+      />
+    </>
+  );
 };
 
-export default GitHub; 
+export default GitHub;
