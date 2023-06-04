@@ -4,6 +4,7 @@ import GitHubCalendar from "react-github-calendar";
 const GitHub = (props) => {
   const gitHubContainerStyle = {
     margin: "auto",
+    color: 'red blue'
   };
 
   return (
@@ -13,6 +14,7 @@ const GitHub = (props) => {
         username="hoomanhajrian"
         blockRadius="50"
         year={props.year}
+        colorScheme="light"
         hideColorLegend
         hideMonthLabels
         hideTotalCount
