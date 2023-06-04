@@ -67,12 +67,9 @@
     }
   }
   .aboutme {
-    text-align: center;
+    text-align: left;
     width: 70%;
     margin-right: auto;
     margin-left: auto;
-    @include for-tablet-landscape-up {
-      text-align: left;
-    }
   }
 }
