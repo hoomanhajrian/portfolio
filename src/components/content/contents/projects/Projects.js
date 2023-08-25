@@ -107,6 +107,17 @@ const projectsData = [
     imgUrl: "/img/lapsemoon.jpeg",
     gitHub: "https://github.com/hoomanhajrian/lapsemoon",
   },
+  {
+    id: 9,
+    name: "Littlesellca",
+    position: "Full Stack Developer",
+    year: " 2023-current",
+    href: "https://littlesellca.com",
+    description:
+      "Online Platform to connect web customers to Amazon Market place and the business social media.",
+    imgUrl: "/img/littesellca.png",
+    gitHub: "https://github.com/hoomanhajrian/littlesellca",
+  },
 ];
 
 function TabPanel(props) {
