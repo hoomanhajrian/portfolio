@@ -115,7 +115,7 @@ const projectsData = [
     href: "https://littlesellca.com",
     description:
       "Online Platform to connect web customers to Amazon Market place and the business social media.",
-    imgUrl: "/img/littesellca.png",
+    imgUrl: "/img/littesellca.jpg",
     gitHub: "https://github.com/hoomanhajrian/littlesellca",
   },
 ];
