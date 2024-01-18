@@ -118,6 +118,17 @@ const projectsData = [
     imgUrl: "/img/littesellca.jpg",
     gitHub: "https://github.com/hoomanhajrian/littlesellca",
   },
+  {
+    id: 10,
+    name: "Pacivil",
+    position: "Full Stack Developer",
+    year: " 2023-2024",
+    href: "https://pacivil.com",
+    description:
+      "Website using Next.js technology using react for front end and simple mail service for backend all server side rendered.",
+    imgUrl: "/img/pacivil.jpg",
+    gitHub: "https://github.com/hoomanhajrian/pacivil",
+  },
 ];
 
 function TabPanel(props) {
