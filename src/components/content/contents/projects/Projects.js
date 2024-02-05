@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Billboard, Html, Text, RoundedBox } from "@react-three/drei";
+import { Billboard, Html, RoundedBox } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
 
@@ -170,14 +170,14 @@ const Projects = () => {
           camera={{ position: [18, 6, 25], fov: 50, angel: 0 }}
           style={{
             width: "100%",
-            height: "100vh",
+            height: "90vh",
           }}
         >
           <ambientLight intensity={1.2} />
           <pointLight position={[-18, 6, 19]} />
-          <Billboard position={[4, 1.7, 16]}>
+          <Billboard position={[-10, 1.7, 16]}>
             <Html>
-              <h1>Projects</h1>
+              <h1 style={{color:'white'}}>Projects</h1>
             </Html>
           </Billboard>
           {projectsData.map((cardData) => {
@@ -189,16 +189,18 @@ const Projects = () => {
               />
             );
           })}
-          <RoundedBox
-            position={[[0, 0, 0]]}
-            args={[12, 12, 12]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshPhongMaterial color="#000" />
-          </RoundedBox>
+          <group >
+            <RoundedBox
+              position={[-50, 0, -50]}
+              args={[100, 100, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+              radius={0.05} // Radius of the rounded corners. Default is 0.05
+              smoothness={4} // The number of curve segments. Default is 4
+              bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+              creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+            >
+              <meshPhongMaterial color="#000" />
+            </RoundedBox>
+          </group>
         </Canvas>
       </Suspense>
     );
