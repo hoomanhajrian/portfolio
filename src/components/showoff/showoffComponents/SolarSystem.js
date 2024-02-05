@@ -15,7 +15,7 @@ function SolarSystem() {
       />
       <Suspense fallback={<p>loading...</p>}>
         <Canvas
-          camera={{ position: [-300, 250, 45], fov: 70 }}
+          camera={{ position: [0, 100, 50], fov: 90, angle: -70 }}
           style={{
             backgroundColor: "#110626",
             width: "100%",
