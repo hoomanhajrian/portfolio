@@ -1,14 +1,6 @@
-import React, { Suspense, useEffect, useState, useMemo, useRef } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  Billboard,
-  Html,
-  RoundedBox,
-  OrbitControls,
-  Polyhedron,
-} from "@react-three/drei";
-
-import * as THREE from "three";
+import { Billboard, Html, RoundedBox, OrbitControls } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
 
@@ -23,7 +15,7 @@ const projectsData = [
       "Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.",
     imgUrl: "/img/gohike.jpg",
     gitHub: "https://github.com/costa-rodrigo/goHike",
-    position3D: [-4, 0, 20],
+    position3D: [-4, 0, 15],
   },
   {
     id: 1,
@@ -35,7 +27,7 @@ const projectsData = [
       "Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.",
     imgUrl: "/img/farmerfresh.jpg",
     gitHub: "https://github.com/hoomanhajrian/FarmerFresh_android-app",
-    position3D: [0, 0, 20],
+    position3D: [0, 0, 15],
   },
   {
     id: 2,
@@ -47,7 +39,7 @@ const projectsData = [
       "Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.",
     imgUrl: "/img/patchapp.jpg",
     gitHub: "https://github.com/costa-rodrigo/patch-frontend",
-    position3D: [4, 0, 20],
+    position3D: [4, 0, 15],
   },
 
   {
@@ -60,7 +52,7 @@ const projectsData = [
       "React based application using movie API and more features such as watching and commenting on the movies will be added later.",
     imgUrl: "/img/movie-time.jpg",
     gitHub: "https://github.com/hoomanhajrian/Moive-app",
-    position3D: [-4, -6, 20],
+    position3D: [-4, -6, 15],
   },
   {
     id: 4,
@@ -72,7 +64,7 @@ const projectsData = [
       "We are here to make sure your event planning will go as perfect as it can be with the least affort using this platform. You can estimate your event total cost and book appointment for consultation about your event.",
     imgUrl: "/img/wedding.jpg",
     gitHub: "https://github.com/hoomanhajrian/EventPlanner",
-    position3D: [0, -6, 20],
+    position3D: [0, -6, 15],
   },
   {
     id: 5,
@@ -84,7 +76,7 @@ const projectsData = [
       "Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card.",
     imgUrl: "/img/card-creator.jpg",
     gitHub: "https://github.com/hoomanhajrian/card-creator",
-    position3D: [4, -6, 20],
+    position3D: [4, -6, 15],
   },
   {
     id: 6,
@@ -96,7 +88,7 @@ const projectsData = [
       "Online store for selling industrial kitchen equipment coded fully in React using Redux and many other libraries.(Site in farsi language)",
     imgUrl: "/img/tajhizaras.jpg",
     gitHub: "https://github.com/hoomanhajrian/tajhizaras",
-    position3D: [-4, 6, 20],
+    position3D: [-4, 6, 15],
   },
   {
     id: 7,
@@ -108,7 +100,7 @@ const projectsData = [
       "Online web application for small stores accounting and inventory management using React(TypeScript) and Nodejs",
     imgUrl: "/img/hesab.jpg",
     gitHub: "https://github.com/hoomanhajrian/hesabketab",
-    position3D: [0, 6, 20],
+    position3D: [0, 6, 15],
   },
   {
     id: 8,
@@ -120,7 +112,7 @@ const projectsData = [
       "Web site for photographer introduction and portfolio and resume using Nextjs and Nodejs.",
     imgUrl: "/img/lapsemoon.jpeg",
     gitHub: "https://github.com/hoomanhajrian/lapsemoon",
-    position3D: [4, 6, 20],
+    position3D: [4, 6, 15],
   },
   {
     id: 9,
@@ -132,7 +124,7 @@ const projectsData = [
       "Online Platform to connect web customers to Amazon Market place and the business social media.",
     imgUrl: "/img/littesellca.jpg",
     gitHub: "https://github.com/hoomanhajrian/littlesellca",
-    position3D: [-8, 6, 20],
+    position3D: [-8, 6, 15],
   },
   {
     id: 10,
@@ -144,23 +136,44 @@ const projectsData = [
       "Website using Next.js technology using react for front end and simple mail service for backend all server side rendered.",
     imgUrl: "/img/pacivil.jpg",
     gitHub: "https://github.com/hoomanhajrian/pacivil",
-    position3D: [-8, 0, 20],
+    position3D: [-8, 0, 15],
   },
 ];
 
 const Projects = () => {
-  const [screenWidth, updateScreenWidth] = useState();
+  const [screenDimention, updateScreenDimentions] = useState({
+    width: 0,
+    height: 0,
+  });
+  const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
   useEffect(() => {
-    updateScreenWidth(window.innerWidth);
+    updateScreenDimentions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
     const screenSizeHandler = () => {
-      updateScreenWidth(window.innerWidth);
+      updateScreenDimentions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
     };
+
+    const handleWindowMouseMove = (event) => {
+      setGlobalCoords({
+        x: event.screenX,
+        y: event.screenY,
+      });
+    };
+
     window.addEventListener("resize", screenSizeHandler);
+    window.addEventListener("mousemove", handleWindowMouseMove);
+
     return () => {
       window.removeEventListener("resize", screenSizeHandler);
+      window.removeEventListener("mousemove", handleWindowMouseMove);
     };
   }, []);
-  if (screenWidth <= 1200) {
+  if (screenDimention.width <= 1200) {
     return (
       <div className="projects">
         <h2 className="projects-header">Project Experience</h2>
@@ -176,24 +189,43 @@ const Projects = () => {
       <Suspense fallback={<p>loading...</p>}>
         <Canvas
           shadows
-          camera={{ position: [15, 0, 40], fov: 50, angel: 0 }}
+          camera={{ position: [2, 0, 40], fov: 50, angel: 0 }}
           style={{
             width: "100%",
             height: "90vh",
           }}
         >
           {/* <OrbitControls /> */}
-          <spotLight
-            angle={"40"}
-            castShadow
-            position={[0, 6, 40]}
-            color="lightblue"
-            fov={"90"}
-          />
-
-          <Billboard position={[12, 10, 20]}>
+          {globalCoords.x - screenDimention.width / 2 > 200 ||
+          globalCoords.x - screenDimention.width / 2 < -200 ? (
+            <ambientLight />
+          ) : (
+            <spotLight
+              angle={"50"}
+              castShadow
+              position={[
+                globalCoords.x - screenDimention.width / 2,
+                screenDimention.height / 2 - globalCoords.y,
+                40,
+              ]}
+              color="lightblue"
+              fov={"80"}
+            />
+          )}
+          <Billboard position={[12, 8, 20]}>
             <Html>
-              <h2 style={{ color: "white", fontSize: "3rem" }}>Projects</h2>
+              <h2
+                style={{
+                  color:
+                    globalCoords.x - screenDimention.width / 2 > 200 ||
+                    globalCoords.x - screenDimention.width / 2 < -200
+                      ? "black"
+                      : "white",
+                  fontSize: "3rem",
+                }}
+              >
+                Projects
+              </h2>
             </Html>
           </Billboard>
           {projectsData.map((cardData) => {
@@ -201,7 +233,8 @@ const Projects = () => {
               <Project3DCard
                 key={cardData.id}
                 data={cardData}
-                position={cardData.position3D}
+                globalCoords={globalCoords}
+                screenDimention={screenDimention}
               />
             );
           })}
