@@ -10,17 +10,33 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
 
-  // useFrame(({ gl, scene, camera,clock }) => {
-  //   if (camera.position.x > -2) {
-  //     // cardContainerRef.current.position.x =
-  //     //   cardContainerRef.current.position.x + 0.1;
-  //     // cardContainerRef.current.position.z =
-  //     //   cardContainerRef.current.position.z + 0.01;
-  //     // camera.position.z = camera.position.z + 0.001;
-  //     // camera.position.x = camera.position.x - 0.004;
-  //     // camera.rotation.y = camera.rotation.y - 0.0001;
-  //   }
-  // });
+  useFrame(({ gl, scene, camera, clock }) => {
+    // position: [2, 0, 40]
+    if (
+      globalCoords.x - screenDimention.width / 2 > 50 &&
+      camera.position.x < 4
+    ) {
+      camera.position.x = camera.position.x + 0.0004;
+    }
+    if (
+      globalCoords.x - screenDimention.width / 2 < -50 &&
+      camera.position.x > -2
+    ) {
+      camera.position.x = camera.position.x - 0.0004;
+    }
+    if (
+      globalCoords.y - screenDimention.height / 2 < -50 &&
+      camera.position.y > -2
+    ) {
+      camera.position.y = camera.position.y + 0.0009;
+    }
+    if (
+      globalCoords.y - screenDimention.height / 2 > 50 &&
+      camera.position.y < 2
+    ) {
+      camera.position.y = camera.position.y - 0.0009;
+    }
+  });
 
   return (
     <group

@@ -173,6 +173,7 @@ const Projects = () => {
       window.removeEventListener("mousemove", handleWindowMouseMove);
     };
   }, []);
+
   if (screenDimention.width <= 1200) {
     return (
       <div className="projects">
