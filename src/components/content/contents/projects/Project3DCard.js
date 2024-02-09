@@ -12,29 +12,23 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
 
   useFrame(({ gl, scene, camera, clock }) => {
     // position: [2, 0, 40]
-    if (
-      globalCoords.x - screenDimention.width / 2 > 50 &&
-      camera.position.x < 4
-    ) {
-      camera.position.x = camera.position.x + 0.0004;
+
+    const mouseCoordsX = Math.floor(globalCoords.x - screenDimention.width / 2);
+    const mouseCoordsY = Math.floor(
+      globalCoords.y - screenDimention.height / 2
+    );
+
+    if (mouseCoordsX > 50 && camera.position.x < 4) {
+      camera.position.x = camera.position.x + 0.005;
     }
-    if (
-      globalCoords.x - screenDimention.width / 2 < -50 &&
-      camera.position.x > -2
-    ) {
-      camera.position.x = camera.position.x - 0.0004;
+    if (mouseCoordsX < -50 && camera.position.x > -4) {
+      camera.position.x = camera.position.x - 0.005;
     }
-    if (
-      globalCoords.y - screenDimention.height / 2 < -50 &&
-      camera.position.y > -2
-    ) {
-      camera.position.y = camera.position.y + 0.0009;
+    if (mouseCoordsY < -50 && camera.position.y < 2) {
+      camera.position.y = camera.position.y + 0.002;
     }
-    if (
-      globalCoords.y - screenDimention.height / 2 > 50 &&
-      camera.position.y < 2
-    ) {
-      camera.position.y = camera.position.y - 0.0009;
+    if (mouseCoordsY > 50 && camera.position.y > -2) {
+      camera.position.y = camera.position.y - 0.002;
     }
   });
 
