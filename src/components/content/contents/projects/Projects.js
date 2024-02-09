@@ -1,6 +1,12 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Billboard, Html, RoundedBox, OrbitControls } from "@react-three/drei";
+import {
+  Billboard,
+  Html,
+  RoundedBox,
+  OrbitControls,
+  Text3D,
+} from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
 
@@ -205,30 +211,31 @@ const Projects = () => {
               angle={"50"}
               castShadow
               position={[
-                globalCoords.x - screenDimention.width / 2,
-                screenDimention.height / 2 - globalCoords.y,
-                40,
+                Math.floor(globalCoords.x - screenDimention.width / 2),
+                Math.floor(screenDimention.height / 2 - globalCoords.y),
+                30,
               ]}
               color="lightblue"
               fov={"80"}
             />
           )}
-          <Billboard position={[12, 8, 20]}>
-            <Html>
-              <h2
-                style={{
-                  color:
-                    globalCoords.x - screenDimention.width / 2 > 200 ||
-                    globalCoords.x - screenDimention.width / 2 < -200
-                      ? "black"
-                      : "white",
-                  fontSize: "3rem",
-                }}
-              >
-                Projects
-              </h2>
-            </Html>
-          </Billboard>
+
+          <Text3D
+            position={[-15, -6, 20]}
+            font={"/Source Sans 3 ExtraLight_Regular.json"}
+            letterSpacing={-0.06}
+            size={1.5}
+          >
+            PROJECTS
+            <meshPhongMaterial
+              color={
+                globalCoords.x - screenDimention.width / 2 > 200 ||
+                globalCoords.x - screenDimention.width / 2 < -200
+                  ? "#000"
+                  : "#fff"
+              }
+            />
+          </Text3D>
           {projectsData.map((cardData) => {
             return (
               <Project3DCard
