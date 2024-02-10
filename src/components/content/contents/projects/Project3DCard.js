@@ -58,12 +58,12 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            width: "5.5rem",
-            height: "7rem",
+            width: "7rem",
+            height: "9rem",
             overflowY: "scroll",
             color:
               globalCoords.x - screenDimention.width / 2 > 200 ||
-              globalCoords.x - screenDimention.width / 2 < -200
+                globalCoords.x - screenDimention.width / 2 < -200
                 ? "black"
                 : "white",
           }}
