@@ -193,74 +193,72 @@ const Projects = () => {
     );
   } else {
     return (
-      <Suspense fallback={<p>loading...</p>}>
-        <Canvas
-          shadows
-          camera={{ position: [2, 0, 40], fov: 50, angel: 0 }}
-          style={{
-            width: "100%",
-            height: "90vh",
-          }}
-        >
-          {/* <OrbitControls /> */}
-          {globalCoords.x - screenDimention.width / 2 > 200 ||
-            globalCoords.x - screenDimention.width / 2 < -200 ? (
-            <ambientLight />
-          ) : (
-            <spotLight
-              angle={"20"}
-              castShadow
-              position={[
-                Math.floor(globalCoords.x - screenDimention.width / 2),
-                Math.floor(screenDimention.height / 2 - globalCoords.y),
-                30,
-              ]}
-              color="lightblue"
-              fov={"50"}
-            />
-          )}
+      <Canvas
+        shadows
+        camera={{ position: [2, 0, 40], fov: 50, angel: 0 }}
+        style={{
+          width: "100%",
+          height: "90vh",
+        }}
+      >
+        {/* <OrbitControls /> */}
+        {globalCoords.x - screenDimention.width / 2 > 200 ||
+          globalCoords.x - screenDimention.width / 2 < -200 ? (
+          <ambientLight />
+        ) : (
+          <spotLight
+            angle={"20"}
+            castShadow
+            position={[
+              Math.floor(globalCoords.x - screenDimention.width / 2),
+              Math.floor(screenDimention.height / 2 - globalCoords.y),
+              30,
+            ]}
+            color="lightblue"
+            fov={"50"}
+          />
+        )}
 
-          <Text3D
-            position={[-15, -6, 20]}
-            font={"/Source Sans 3 ExtraLight_Regular.json"}
-            letterSpacing={-0.06}
-            size={1.5}
-          >
-            PROJECTS
-            <meshPhongMaterial
-              color={
-                globalCoords.x - screenDimention.width / 2 > 200 ||
-                  globalCoords.x - screenDimention.width / 2 < -200
-                  ? "#000"
-                  : "#fff"
-              }
+        <Text3D
+          position={[-15, -6, 20]}
+          font={"/Source Sans 3 ExtraLight_Regular.json"}
+          letterSpacing={-0.06}
+          size={1.5}
+        >
+          PROJECTS
+          <meshPhongMaterial
+            color={
+              globalCoords.x - screenDimention.width / 2 > 200 ||
+                globalCoords.x - screenDimention.width / 2 < -200
+                ? "#000"
+                : "#fff"
+            }
+          />
+        </Text3D>
+        {projectsData.map((cardData) => {
+          return (
+            <Project3DCard
+              key={cardData.id}
+              data={cardData}
+              globalCoords={globalCoords}
+              screenDimention={screenDimention}
             />
-          </Text3D>
-          {projectsData.map((cardData) => {
-            return (
-              <Project3DCard
-                key={cardData.id}
-                data={cardData}
-                globalCoords={globalCoords}
-                screenDimention={screenDimention}
-              />
-            );
-          })}
-          <group receiveShadow>
-            <RoundedBox
-              receiveShadow
-              position={[0, 0, 0]}
-              args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
-              radius={0.05} // Radius of the rounded corners. Default is 0.05
-              smoothness={4} // The number of curve segments. Default is 4
-              bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-              creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-            >
-              <meshPhongMaterial color="#fff" />
-            </RoundedBox>
-          </group>
-        </Canvas>
-      </Suspense>
+          );
+        })}
+        <group receiveShadow>
+          <RoundedBox
+            receiveShadow
+            position={[0, 0, 0]}
+            args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshPhongMaterial color="#fff" />
+          </RoundedBox>
+        </group>
+      </Canvas>
     );
   }
 };
