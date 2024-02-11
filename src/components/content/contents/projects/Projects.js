@@ -204,11 +204,11 @@ const Projects = () => {
         >
           {/* <OrbitControls /> */}
           {globalCoords.x - screenDimention.width / 2 > 200 ||
-          globalCoords.x - screenDimention.width / 2 < -200 ? (
+            globalCoords.x - screenDimention.width / 2 < -200 ? (
             <ambientLight />
           ) : (
             <spotLight
-              angle={"50"}
+              angle={"20"}
               castShadow
               position={[
                 Math.floor(globalCoords.x - screenDimention.width / 2),
@@ -216,7 +216,7 @@ const Projects = () => {
                 30,
               ]}
               color="lightblue"
-              fov={"80"}
+              fov={"50"}
             />
           )}
 
@@ -230,7 +230,7 @@ const Projects = () => {
             <meshPhongMaterial
               color={
                 globalCoords.x - screenDimention.width / 2 > 200 ||
-                globalCoords.x - screenDimention.width / 2 < -200
+                  globalCoords.x - screenDimention.width / 2 < -200
                   ? "#000"
                   : "#fff"
               }
