@@ -20,15 +20,19 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
 
     if (mouseCoordsX > 50 && camera.position.x < 4) {
       camera.position.x = camera.position.x + 0.005;
+      camera.rotation.y = camera.rotation.y + 0.00005;
     }
     if (mouseCoordsX < -50 && camera.position.x > -4) {
       camera.position.x = camera.position.x - 0.005;
+      camera.rotation.y = camera.rotation.y - 0.00005;
     }
     if (mouseCoordsY < -50 && camera.position.y < 2) {
       camera.position.y = camera.position.y + 0.002;
+      camera.rotation.x = camera.rotation.x - 0.00005;
     }
     if (mouseCoordsY > 50 && camera.position.y > -2) {
       camera.position.y = camera.position.y - 0.002;
+      camera.rotation.x = camera.rotation.x + 0.00005;
     }
   });
 
