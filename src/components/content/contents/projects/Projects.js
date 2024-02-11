@@ -9,6 +9,7 @@ import {
 } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
+import { Button } from "antd";
 
 const projectsData = [
   {
@@ -151,6 +152,10 @@ const Projects = () => {
     width: 0,
     height: 0,
   });
+  const [pointerHovered, updatePointerHover] = useState(false);
+  const [view3D, update3D] = useState(true);
+  const buttonRef = useRef();
+
   const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
   useEffect(() => {
     updateScreenDimentions({
@@ -180,13 +185,22 @@ const Projects = () => {
     };
   }, []);
 
-  if (screenDimention.width <= 1200) {
+  useEffect(() => {
+    if (pointerHovered) {
+      document.body.style.cursor = 'pointer';
+    } else {
+      document.body.style.cursor = 'default';
+    }
+  }, [pointerHovered])
+
+  if (screenDimention.width <= 1200 || !view3D) {
     return (
       <div className="projects">
         <h2 className="projects-header">Project Experience</h2>
+        <Button disabled={screenDimention.width <= 1200} type="primary" style={{ marginRight: 'auto', marginLeft: 'auto', display: 'block' }} onClick={() => { update3D(true) }}>3D View (Desktop Only)</Button>
         <div className="cards-container">
           {projectsData.map((data) => {
-            return <Project2DCard data={data} />;
+            return <Project2DCard data={data} update3D={update3D} />;
           })}
         </div>
       </div>
@@ -233,6 +247,33 @@ const Projects = () => {
                 ? "#000"
                 : "#fff"
             }
+          />
+        </Text3D>
+        <RoundedBox
+          ref={buttonRef}
+          receiveShadow
+          position={[12, 0, 15]}
+          args={[6, 3, 1]} // Width, height, depth. Default is [1, 1, 1]
+          radius={0.1} // Radius of the rounded corners. Default is 0.05
+          smoothness={4} // The number of curve segments. Default is 4
+          bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+          creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          onPointerOver={() => { updatePointerHover(true) }}
+          onPointerOut={() => { updatePointerHover(false) }}
+          onClick={() => { update3D(false) }}
+        >
+          <meshPhongMaterial color={pointerHovered ? "darkblue" : "#1677ff"} />
+        </RoundedBox>
+        <Text3D
+          position={[9, -0.5, 16]}
+          font={"/Source Sans 3 ExtraLight_Regular.json"}
+          letterSpacing={-0.06}
+          size={1}
+        >
+          2D Version
+          <meshPhongMaterial
+            color="#fff"
+
           />
         </Text3D>
         {projectsData.map((cardData) => {
