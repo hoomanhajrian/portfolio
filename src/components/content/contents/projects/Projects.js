@@ -1,14 +1,9 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  Billboard,
-  Html,
-  RoundedBox,
-  OrbitControls,
-  Text3D,
-} from "@react-three/drei";
+import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
+import Model from "./Model";
 
 const projectsData = [
   {
@@ -147,6 +142,7 @@ const projectsData = [
 ];
 
 const Projects = () => {
+  const modelRef = useRef();
   const [screenDimention, updateScreenDimentions] = useState({
     width: 0,
     height: 0,
@@ -205,19 +201,9 @@ const Projects = () => {
           {/* <OrbitControls /> */}
           {globalCoords.x - screenDimention.width / 2 > 200 ||
           globalCoords.x - screenDimention.width / 2 < -200 ? (
-            <ambientLight />
+            <ambientLight intensity={1.25} />
           ) : (
-            <spotLight
-              angle={"50"}
-              castShadow
-              position={[
-                Math.floor(globalCoords.x - screenDimention.width / 2),
-                Math.floor(screenDimention.height / 2 - globalCoords.y),
-                30,
-              ]}
-              color="lightblue"
-              fov={"80"}
-            />
+            <ambientLight intensity={0.2} />
           )}
 
           <Text3D
@@ -232,7 +218,7 @@ const Projects = () => {
                 globalCoords.x - screenDimention.width / 2 > 200 ||
                 globalCoords.x - screenDimention.width / 2 < -200
                   ? "#000"
-                  : "#fff"
+                  : "#000"
               }
             />
           </Text3D>
@@ -246,19 +232,6 @@ const Projects = () => {
               />
             );
           })}
-          <group receiveShadow>
-            <RoundedBox
-              receiveShadow
-              position={[0, 0, 0]}
-              args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
-              radius={0.05} // Radius of the rounded corners. Default is 0.05
-              smoothness={4} // The number of curve segments. Default is 4
-              bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-              creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-            >
-              <meshPhongMaterial color="#fff" />
-            </RoundedBox>
-          </group>
         </Canvas>
       </Suspense>
     );
