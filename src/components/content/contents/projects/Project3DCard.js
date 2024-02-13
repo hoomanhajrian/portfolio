@@ -11,8 +11,6 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
   const [clicked, click] = useState(false);
 
   useFrame(({ gl, scene, camera, clock }) => {
-    // position: [2, 0, 40]
-
     const mouseCoordsX = Math.floor(globalCoords.x - screenDimention.width / 2);
     const mouseCoordsY = Math.floor(
       globalCoords.y - screenDimention.height / 2
@@ -62,12 +60,12 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            width: "6.5rem",
-            height: "8.5rem",
+            width: "5.5rem",
+            height: "7rem",
             overflowY: "scroll",
             color:
               globalCoords.x - screenDimention.width / 2 > 200 ||
-                globalCoords.x - screenDimention.width / 2 < -200
+              globalCoords.x - screenDimention.width / 2 < -200
                 ? "black"
                 : "white",
           }}
