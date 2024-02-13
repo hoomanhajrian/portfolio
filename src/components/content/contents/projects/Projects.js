@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
@@ -225,7 +225,7 @@ const Projects = () => {
         globalCoords.x - screenDimention.width / 2 < -200 ? (
           <ambientLight intensity={1.25} />
         ) : (
-          <ambientLight intensity={0.2} />
+          <ambientLight intensity={0.5} />
         )}
 
         <Text3D
@@ -235,14 +235,7 @@ const Projects = () => {
           size={1.5}
         >
           PROJECTS
-          <meshPhongMaterial
-            color={
-              globalCoords.x - screenDimention.width / 2 > 200 ||
-              globalCoords.x - screenDimention.width / 2 < -200
-                ? "#000"
-                : "#fff"
-            }
-          />
+          <meshPhongMaterial color={"#000"} />
         </Text3D>
         <RoundedBox
           ref={buttonRef}
@@ -296,6 +289,63 @@ const Projects = () => {
           >
             <meshPhongMaterial color="#fff" />
           </RoundedBox>
+        </group>
+        <group receiveShadow>
+          <RoundedBox
+            receiveShadow
+            position={[0, 0, 0]}
+            args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshPhongMaterial color="#fff" />
+          </RoundedBox>
+        </group>
+        <group>
+          <spotLight
+            castShadow
+            position={[-19, -1, 24]}
+            color="white"
+            fov={"20"}
+            intensity={1.5}
+            target={modelRef.current}
+          />
+          <RoundedBox
+            receiveShadow
+            position={[-15, 0, 20]}
+            args={[10, 5, 0]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshPhongMaterial color="red" />
+          </RoundedBox>
+          <RoundedBox
+            receiveShadow
+            position={[-15, -2.5, 22.3]}
+            args={[10, 0, 4.7]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshPhongMaterial color="orange" />
+          </RoundedBox>
+          <RoundedBox
+            receiveShadow
+            position={[-20, 0, 22]}
+            args={[0, 5, 5]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshPhongMaterial color="blue" />
+          </RoundedBox>
+          <Model position={[-15, -2.4, 22]} ref={modelRef} />
         </group>
       </Canvas>
     );
