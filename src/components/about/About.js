@@ -89,6 +89,7 @@ const About = () => {
       <GitHub year="2021" />
       <GitHub year="2022" />
       <GitHub year="2023" />
+      <GitHub year="2024" />
       {isDone ? (
         <p className="message">{message}</p>
       ) : (
