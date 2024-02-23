@@ -4,7 +4,7 @@ import GitHubCalendar from "react-github-calendar";
 const GitHub = (props) => {
   const gitHubContainerStyle = {
     margin: "auto",
-    color: 'red blue'
+    color: "red blue",
   };
 
   return (
