@@ -3,8 +3,9 @@ import { Canvas } from "@react-three/fiber";
 import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import Project3DCard from "./Project3DCard";
-import Model from "./Model";
+import Person3D from "./Person3D";
 import { Button } from "antd";
+import Shoe3D from "./Shoe3D";
 
 const projectsData = [
   {
@@ -143,7 +144,6 @@ const projectsData = [
 ];
 
 const Projects = () => {
-  const modelRef = useRef();
   const [screenDimention, updateScreenDimentions] = useState({
     width: 0,
     height: 0,
@@ -240,7 +240,7 @@ const Projects = () => {
         <RoundedBox
           ref={buttonRef}
           receiveShadow
-          position={[12, 0, 15]}
+          position={[12, 8, 15]}
           args={[6, 3, 1]} // Width, height, depth. Default is [1, 1, 1]
           radius={0.1} // Radius of the rounded corners. Default is 0.05
           smoothness={4} // The number of curve segments. Default is 4
@@ -259,7 +259,7 @@ const Projects = () => {
           <meshPhongMaterial color={pointerHovered ? "darkblue" : "#1677ff"} />
         </RoundedBox>
         <Text3D
-          position={[9, -0.5, 16]}
+          position={[9, 7.5, 16]}
           font={"/Source Sans 3 ExtraLight_Regular.json"}
           letterSpacing={-0.06}
           size={1}
@@ -303,50 +303,8 @@ const Projects = () => {
             <meshPhongMaterial color="#fff" />
           </RoundedBox>
         </group>
-        <group>
-          <spotLight
-            castShadow
-            position={[-19, -1, 24]}
-            color="white"
-            fov={"20"}
-            intensity={1.5}
-            target={modelRef.current}
-          />
-          <RoundedBox
-            receiveShadow
-            position={[-15, 0, 20]}
-            args={[10, 5, 0]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshPhongMaterial color="red" />
-          </RoundedBox>
-          <RoundedBox
-            receiveShadow
-            position={[-15, -2.5, 22.3]}
-            args={[10, 0, 4.7]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshPhongMaterial color="orange" />
-          </RoundedBox>
-          <RoundedBox
-            receiveShadow
-            position={[-20, 0, 22]}
-            args={[0, 5, 5]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshPhongMaterial color="blue" />
-          </RoundedBox>
-          <Model position={[-15, -2.4, 22]} ref={modelRef} />
-        </group>
+        <Person3D />
+        <Shoe3D />
       </Canvas>
     );
   }
