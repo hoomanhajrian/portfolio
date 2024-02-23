@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html, Text, RoundedBox } from "@react-three/drei";
+import { Html, Text, RoundedBox, Billboard } from "@react-three/drei";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
 
@@ -35,7 +35,11 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
   });
 
   return (
-    <group
+    <Billboard
+      follow={true}
+      lockX={false}
+      lockY={false}
+      lockZ={false} // Lock the rotation on the z axis (default=false)
       castShadow
       ref={cardContainerRef}
       onPointerOver={(event) => {
@@ -60,12 +64,12 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            width: "6.7rem",
-            height: "8.5rem",
+            width: "88px",
+            height: "112px",
             overflowY: "scroll",
             color:
               globalCoords.x - screenDimention.width / 2 > 200 ||
-                globalCoords.x - screenDimention.width / 2 < -200
+              globalCoords.x - screenDimention.width / 2 < -200
                 ? "black"
                 : "white",
           }}
@@ -103,7 +107,7 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
       >
         <meshPhongMaterial color="lightblue" />
       </RoundedBox>
-    </group>
+    </Billboard>
   );
 };
 
