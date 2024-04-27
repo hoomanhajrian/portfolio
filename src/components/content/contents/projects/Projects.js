@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useLoader,useFrame } from "@react-three/fiber";
 import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
-import Project3DCard from "./Project3DCard";
-import Person3D from "./Person3D";
 import { Button } from "antd";
-import Shoe3D from "./Shoe3D";
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import Project3DCard from "./Project3DCard";
+import Button2D from './Button2D';
 
 const projectsData = [
   {
@@ -18,7 +18,7 @@ const projectsData = [
       "Cordova-based mobile application that shows the hiking trails around the user and the user is able to see the route to the trail and the trail route itself on the map.",
     imgUrl: "/img/gohike.jpg",
     gitHub: "https://github.com/costa-rodrigo/goHike",
-    position3D: [-4, 0, 15],
+    position3D: [32.5, 7, 10],
   },
   {
     id: 1,
@@ -30,7 +30,7 @@ const projectsData = [
       "Java based mobile application that help farmers share their products and consumers are able to put an order for pick up or delivery.",
     imgUrl: "/img/farmerfresh.jpg",
     gitHub: "https://github.com/hoomanhajrian/FarmerFresh_android-app",
-    position3D: [0, 0, 15],
+    position3D: [32.5, 7, 20],
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const projectsData = [
       "Online Platform for kids to learn, how to fix injuries in case of emergency. This platform was based on React Technology with the back end on AWS servers.",
     imgUrl: "/img/patchapp.jpg",
     gitHub: "https://github.com/costa-rodrigo/patch-frontend",
-    position3D: [4, 0, 15],
+    position3D: [32.5, 7, 30],
   },
 
   {
@@ -55,7 +55,7 @@ const projectsData = [
       "React based application using movie API and more features such as watching and commenting on the movies will be added later.",
     imgUrl: "/img/movie-time.jpg",
     gitHub: "https://github.com/hoomanhajrian/Moive-app",
-    position3D: [-4, -6, 15],
+    position3D: [32.5, 7, 40],
   },
   {
     id: 4,
@@ -67,7 +67,7 @@ const projectsData = [
       "We are here to make sure your event planning will go as perfect as it can be with the least affort using this platform. You can estimate your event total cost and book appointment for consultation about your event.",
     imgUrl: "/img/wedding.jpg",
     gitHub: "https://github.com/hoomanhajrian/EventPlanner",
-    position3D: [0, -6, 15],
+    position3D: [32.5, 7, 50],
   },
   {
     id: 5,
@@ -79,7 +79,7 @@ const projectsData = [
       "Platform for customizing your own business card and ordering it with QR code and NFC features that you can add to your card.",
     imgUrl: "/img/card-creator.jpg",
     gitHub: "https://github.com/hoomanhajrian/card-creator",
-    position3D: [4, -6, 15],
+    position3D: [32.5, 7, 60],
   },
   {
     id: 6,
@@ -91,7 +91,7 @@ const projectsData = [
       "Online store for selling industrial kitchen equipment coded fully in React using Redux and many other libraries.(Site in farsi language)",
     imgUrl: "/img/tajhizaras.jpg",
     gitHub: "https://github.com/hoomanhajrian/tajhizaras",
-    position3D: [-4, 6, 15],
+    position3D: [32.5, -7, 10],
   },
   {
     id: 7,
@@ -103,7 +103,7 @@ const projectsData = [
       "Online web application for small stores accounting and inventory management using React(TypeScript) and Nodejs",
     imgUrl: "/img/hesab.jpg",
     gitHub: "https://github.com/hoomanhajrian/hesabketab",
-    position3D: [0, 6, 15],
+    position3D: [32.5, -7, 20],
   },
   {
     id: 8,
@@ -115,7 +115,7 @@ const projectsData = [
       "Web site for photographer introduction and portfolio and resume using Nextjs and Nodejs.",
     imgUrl: "/img/lapsemoon.jpeg",
     gitHub: "https://github.com/hoomanhajrian/lapsemoon",
-    position3D: [4, 6, 15],
+    position3D: [32.5, -7, 30],
   },
   {
     id: 9,
@@ -127,7 +127,7 @@ const projectsData = [
       "Online Platform to connect web customers to Amazon Market place and the business social media.",
     imgUrl: "/img/littesellca.jpg",
     gitHub: "https://github.com/hoomanhajrian/littlesellca",
-    position3D: [-8, 6, 15],
+    position3D: [32.5, -7, 40],
   },
   {
     id: 10,
@@ -139,19 +139,36 @@ const projectsData = [
       "Website using Next.js technology using react for front end and simple mail service for backend all server side rendered.",
     imgUrl: "/img/pacivil.jpg",
     gitHub: "https://github.com/hoomanhajrian/pacivil",
-    position3D: [-8, 0, 15],
+    position3D: [32.5, -7, 50],
   },
+
+  {
+    id: 11,
+    name: "Tariq Louis",
+    position: "Full Stack Developer",
+    year: " 2024-2025",
+    href: "https://www.tariq-mesopotamiaart.com/en",
+    description:
+      "Website using Next.js technology using react for front end and simple mail service for backend all server side rendered coded for 2 different UIs for 2 languages.",
+    imgUrl: "/img/tariq.jpg",
+    gitHub: "https://github.com/hoomanhajrian/tariq",
+    position3D: [32.5, -7, 60],
+  },
+
 ];
 
 const Projects = () => {
+  const [projects,showProjects] = useState(false);
+  const [view3D, update3D] = useState(false);
+  // loading textures
+  const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])
+  // screen dimentions
   const [screenDimention, updateScreenDimentions] = useState({
     width: 0,
     height: 0,
   });
   const [pointerHovered, updatePointerHover] = useState(false);
-  const [view3D, update3D] = useState(true);
-  const buttonRef = useRef();
-
+  // mouse coords
   const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
   useEffect(() => {
     updateScreenDimentions({
@@ -181,15 +198,9 @@ const Projects = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (pointerHovered) {
-      document.body.style.cursor = "pointer";
-    } else {
-      document.body.style.cursor = "default";
-    }
-  }, [pointerHovered]);
 
-  if (screenDimention.width <= 1200 || !view3D) {
+
+  if (screenDimention.width <= 1200 || view3D) {
     return (
       <div className="projects">
         <h2 className="projects-header">Project Experience</h2>
@@ -198,7 +209,7 @@ const Projects = () => {
           type="primary"
           style={{ marginRight: "auto", marginLeft: "auto", display: "block" }}
           onClick={() => {
-            update3D(true);
+            update3D(false);
           }}
         >
           3D View (Desktop Only)
@@ -214,97 +225,74 @@ const Projects = () => {
     return (
       <Canvas
         shadows
-        camera={{ position: [2, 0, 40], fov: 50, angel: 0 }}
+        camera={{ position: [-5, 6, 50], fov: 50 }}
         style={{
           width: "100%",
           height: "90vh",
+          background: 'black',
         }}
       >
         {/* <OrbitControls /> */}
-        {globalCoords.x - screenDimention.width / 2 > 200 ||
-        globalCoords.x - screenDimention.width / 2 < -200 ? (
-          <ambientLight intensity={1.25} />
-        ) : (
-          <ambientLight intensity={0.5} />
-        )}
+
+        <ambientLight intensity={1.5} />
 
         <Text3D
-          position={[-15, -6, 20]}
+          position={[-15, 0, 1]}
           font={"/Source Sans 3 ExtraLight_Regular.json"}
           letterSpacing={-0.06}
-          size={1.5}
+          size={3.5}
         >
           PROJECTS
-          <meshPhongMaterial color={"#000"} />
+          <meshPhongMaterial color={"yellow"} />
         </Text3D>
-        <RoundedBox
-          ref={buttonRef}
-          receiveShadow
-          position={[12, 8, 15]}
-          args={[6, 3, 1]} // Width, height, depth. Default is [1, 1, 1]
-          radius={0.1} // Radius of the rounded corners. Default is 0.05
-          smoothness={4} // The number of curve segments. Default is 4
-          bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-          creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          onPointerOver={() => {
-            updatePointerHover(true);
-          }}
-          onPointerOut={() => {
-            updatePointerHover(false);
-          }}
-          onClick={() => {
-            update3D(false);
-          }}
-        >
-          <meshPhongMaterial color={pointerHovered ? "darkblue" : "#1677ff"} />
-        </RoundedBox>
-        <Text3D
-          position={[9, 7.5, 16]}
-          font={"/Source Sans 3 ExtraLight_Regular.json"}
-          letterSpacing={-0.06}
-          size={1}
-        >
-          2D Version
-          <meshPhongMaterial color="#fff" />
-        </Text3D>
-        {projectsData.map((cardData) => {
-          return (
-            <Project3DCard
-              key={cardData.id}
-              data={cardData}
-              globalCoords={globalCoords}
-              screenDimention={screenDimention}
-            />
-          );
-        })}
+        {/* buttons */}
+        {/* projects button */}
+        <Button2D text="View Projects" func={()=>{showProjects(true)}} projects={projects} position={[12, -5, 0]} textPos={[-3,-0.5,0.5]} rotation={[0,0,0]} args={[8, 3, 1]} />
+        {/* projects button */}
+        <Button2D text="Go Back" func={()=>{showProjects(false)}} projects={projects} position={[32.5 , 16 , 35]} textPos={[-0.5,-0.65,-2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
+        {/* button */}
+        <Button2D text="2D Version" func={()=>{update3D(true)}} position={[12, 8, 0]} textPos={[-3,-0.5,0.5]} rotation={[0,0,0]} args={[8, 3, 1]} />
+        {/* walls and ground*/}
         <group receiveShadow>
           <RoundedBox
             receiveShadow
             position={[0, 0, 0]}
-            args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+            args={[65, 30, 0.5]} // Width, height, depth. Default is [1, 1, 1]
             radius={0.05} // Radius of the rounded corners. Default is 0.05
             smoothness={4} // The number of curve segments. Default is 4
             bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
             creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
           >
-            <meshPhongMaterial color="#fff" />
+            <meshLambertMaterial map={wallTexture} attach="material" />
           </RoundedBox>
-        </group>
-        <group receiveShadow>
           <RoundedBox
             receiveShadow
-            position={[0, 0, 0]}
-            args={[200, 200, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+            position={[32.5, 0, 32.5]}
+            args={[0.5, 30, 65]} // Width, height, depth. Default is [1, 1, 1]
             radius={0.05} // Radius of the rounded corners. Default is 0.05
             smoothness={4} // The number of curve segments. Default is 4
             bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
             creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
           >
-            <meshPhongMaterial color="#fff" />
+            <meshLambertMaterial map={wallTexture} alphaToCoverage />
+          </RoundedBox>
+          <RoundedBox
+            receiveShadow
+            position={[0, -15, 32.5]}
+            args={[65, 0.5, 65]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshLambertMaterial map={groundTexture} alphaToCoverage />
           </RoundedBox>
         </group>
-        <Person3D />
-        <Shoe3D />
+
+          {projectsData.map((item)=>{
+            return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
+          })}
+
       </Canvas>
     );
   }
