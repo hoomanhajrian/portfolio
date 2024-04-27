@@ -1,6 +1,7 @@
+
 import React, { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Html, Text, RoundedBox, Billboard } from "@react-three/drei";
+import { Html, Text, RoundedBox, Billboard, Text3D, Image } from "@react-three/drei";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
 
@@ -10,46 +11,76 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);
 
-  useFrame(({ gl, scene, camera, clock }) => {
-    const mouseCoordsX = Math.floor(globalCoords.x - screenDimention.width / 2);
-    const mouseCoordsY = Math.floor(
-      globalCoords.y - screenDimention.height / 2
-    );
+  // useFrame(({ gl, scene, camera, clock }) => {
+  //   if(projects){
+  //         camera.position.x = camera.position.x + 0.005;
+  //         camera.rotation.y = camera.rotation.y + 0.00005;
+  //   }
+  // const mouseCoordsX = Math.floor(globalCoords.x - screenDimention.width / 2);
+  // const mouseCoordsY = Math.floor(
+  //   globalCoords.y - screenDimention.height / 2
+  // );
 
-    if (mouseCoordsX > 50 && camera.position.x < 4) {
-      camera.position.x = camera.position.x + 0.005;
-      camera.rotation.y = camera.rotation.y + 0.00005;
-    }
-    if (mouseCoordsX < -50 && camera.position.x > -4) {
-      camera.position.x = camera.position.x - 0.005;
-      camera.rotation.y = camera.rotation.y - 0.00005;
-    }
-    if (mouseCoordsY < -50 && camera.position.y < 2) {
-      camera.position.y = camera.position.y + 0.002;
-      camera.rotation.x = camera.rotation.x - 0.00005;
-    }
-    if (mouseCoordsY > 50 && camera.position.y > -2) {
-      camera.position.y = camera.position.y - 0.002;
-      camera.rotation.x = camera.rotation.x + 0.00005;
-    }
-  });
+  // if (mouseCoordsX > 50 && camera.position.x < 4) {
+  //   camera.position.x = camera.position.x + 0.005;
+  //   camera.rotation.y = camera.rotation.y + 0.00005;
+  // }
+  // if (mouseCoordsX < -50 && camera.position.x > -4) {
+  //   camera.position.x = camera.position.x - 0.005;
+  //   camera.rotation.y = camera.rotation.y - 0.00005;
+  // }
+  // if (mouseCoordsY < -50 && camera.position.y < 2) {
+  //   camera.position.y = camera.position.y + 0.002;
+  //   camera.rotation.x = camera.rotation.x - 0.00005;
+  // }
+  // if (mouseCoordsY > 50 && camera.position.y > -2) {
+  //   camera.position.y = camera.position.y - 0.002;
+  //   camera.rotation.x = camera.rotation.x + 0.00005;
+  // }
+  // });
 
   return (
-    <Billboard
-      follow={true}
-      lockX={false}
-      lockY={false}
-      lockZ={false} // Lock the rotation on the z axis (default=false)
-      castShadow
-      ref={cardContainerRef}
-      onPointerOver={(event) => {
-        hover(true);
-      }}
-      onPointerOut={(event) => {
-        hover(false);
-      }}
-    >
-      <Html
+    <group>
+      <RoundedBox
+        castShadow
+        ref={card}
+        position={data.position3D}
+        args={[1, 12, 8]} // Width, height, depth. Default is [1, 1, 1]
+        radius={0.05} // Radius of the rounded corners. Default is 0.05
+        smoothness={10} // The number of curve segments. Default is 4
+        bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+        creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+      >
+        <meshPhongMaterial color="lightblue" />
+      </RoundedBox>
+      <Text3D  
+        position={[data.position3D[0] - 0.5,data.position3D[1] + 4,data.position3D[2] - 3]}
+        font={"/Source Sans 3 ExtraLight_Regular.json"}
+        letterSpacing={-0.06}
+        size={0.8}
+        rotation={[0, -Math.PI / 2, 0]}
+        >
+        {data.name}
+      </Text3D>
+      <Text3D  
+        position={[data.position3D[0] - 0.5,data.position3D[1] + 4,data.position3D[2] - 3]}
+        font={"/Source Sans 3 ExtraLight_Regular.json"}
+        letterSpacing={-0.06}
+        size={0.8}
+        rotation={[0, -Math.PI / 2, 0]}
+        >
+        {data.name}
+      </Text3D>
+      <Image url={data.imgUrl}/>
+    </group>
+  );
+};
+
+export default Project3DCard
+
+
+
+{/* <Html
         castShadow
         position={[
           data.position3D[0] - 1.7,
@@ -92,23 +123,4 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
         <a href={data.href} target="_blank" rel="noreferrer">
           <LanguageIcon style={{ fontSize: ".7rem" }} />
         </a>
-      </Html>
-      <RoundedBox
-        castShadow
-        ref={card}
-        position={[data.position3D[0], data.position3D[1], data.position3D[2]]}
-        args={[3.6, 5.8, 0.5]} // Width, height, depth. Default is [1, 1, 1]
-        radius={0.05} // Radius of the rounded corners. Default is 0.05
-        smoothness={10} // The number of curve segments. Default is 4
-        bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-        creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-        // scale={hovered ? 3 : 1}
-        onClick={(event) => click(!clicked)}
-      >
-        <meshPhongMaterial color="lightblue" />
-      </RoundedBox>
-    </Billboard>
-  );
-};
-
-export default Project3DCard;
+      </Html> */}
