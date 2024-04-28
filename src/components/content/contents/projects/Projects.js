@@ -159,6 +159,7 @@ const projectsData = [
 
 const Projects = () => {
   const [projects,showProjects] = useState(false);
+  
   const [view3D, update3D] = useState(false);
   // loading textures
   const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])

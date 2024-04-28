@@ -1,49 +1,27 @@
 
-import React, { useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber";
-import { Html, Text, RoundedBox, Billboard, Text3D, Image } from "@react-three/drei";
+import React, { useEffect, useRef, useState } from "react";
+import { RoundedBox, Text3D, Image, Html, Billboard } from "@react-three/drei";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
+import { useFrame } from "@react-three/fiber";
 
 const Project3DCard = ({ data, globalCoords, screenDimention }) => {
-  const cardContainerRef = useRef();
-  const card = useRef();
-  const [hovered, hover] = useState(false);
-  const [clicked, click] = useState(false);
+  const [showText,updateTextShow] = useState(false);
 
-  // useFrame(({ gl, scene, camera, clock }) => {
-  //   if(projects){
-  //         camera.position.x = camera.position.x + 0.005;
-  //         camera.rotation.y = camera.rotation.y + 0.00005;
-  //   }
-  // const mouseCoordsX = Math.floor(globalCoords.x - screenDimention.width / 2);
-  // const mouseCoordsY = Math.floor(
-  //   globalCoords.y - screenDimention.height / 2
-  // );
+  useFrame(({camera}, delta, xrFrame)=>{
+    if(camera.position.x < -12.5){
+      updateTextShow(false);
+    }
+    else{
+      updateTextShow(true);
+    }
+  })
 
-  // if (mouseCoordsX > 50 && camera.position.x < 4) {
-  //   camera.position.x = camera.position.x + 0.005;
-  //   camera.rotation.y = camera.rotation.y + 0.00005;
-  // }
-  // if (mouseCoordsX < -50 && camera.position.x > -4) {
-  //   camera.position.x = camera.position.x - 0.005;
-  //   camera.rotation.y = camera.rotation.y - 0.00005;
-  // }
-  // if (mouseCoordsY < -50 && camera.position.y < 2) {
-  //   camera.position.y = camera.position.y + 0.002;
-  //   camera.rotation.x = camera.rotation.x - 0.00005;
-  // }
-  // if (mouseCoordsY > 50 && camera.position.y > -2) {
-  //   camera.position.y = camera.position.y - 0.002;
-  //   camera.rotation.x = camera.rotation.x + 0.00005;
-  // }
-  // });
 
   return (
     <group>
       <RoundedBox
         castShadow
-        ref={card}
         position={data.position3D}
         args={[1, 12, 8]} // Width, height, depth. Default is [1, 1, 1]
         radius={0.05} // Radius of the rounded corners. Default is 0.05
@@ -53,74 +31,39 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
       >
         <meshPhongMaterial color="lightblue" />
       </RoundedBox>
-      <Text3D  
-        position={[data.position3D[0] - 0.5,data.position3D[1] + 4,data.position3D[2] - 3]}
+      <Text3D
+        position={[data.position3D[0] - 0.5, data.position3D[1] + 4, data.position3D[2] - 3]}
         font={"/Source Sans 3 ExtraLight_Regular.json"}
         letterSpacing={-0.06}
         size={0.8}
         rotation={[0, -Math.PI / 2, 0]}
-        >
+      >
         {data.name}
       </Text3D>
-      <Text3D  
-        position={[data.position3D[0] - 0.5,data.position3D[1] + 4,data.position3D[2] - 3]}
+      <Text3D
+        position={[data.position3D[0] - 0.5, data.position3D[1] + 4, data.position3D[2] - 3]}
         font={"/Source Sans 3 ExtraLight_Regular.json"}
         letterSpacing={-0.06}
         size={0.8}
         rotation={[0, -Math.PI / 2, 0]}
-        >
+      >
         {data.name}
       </Text3D>
-      <Image url={data.imgUrl}/>
+      <Image url={data.imgUrl} position={[data.position3D[0] - 0.6, data.position3D[1] + 0.5, data.position3D[2]]} scale={[8, 6]}
+        rotation={[0, -Math.PI / 2, 0]} />
+      <Html position={[data.position3D[0] - 0.6, data.position3D[1] - 3, data.position3D[2] - 3]} scale={[8, 6]}
+        rotation={[0, -Math.PI / 2, 0]}>
+        <div style={{ display: showText ? 'none' : 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '5rem' }}>
+          <a href={data.gitHub} target="_blank" rel="noreferrer">
+            <GitHubIcon style={{ fontSize: "2rem" }} />
+          </a>
+          <a href={data.href} target="_blank" rel="noreferrer">
+            <LanguageIcon style={{ fontSize: "2rem" }} />
+          </a>
+        </div>
+      </Html>
     </group>
   );
 };
 
 export default Project3DCard
-
-
-
-{/* <Html
-        castShadow
-        position={[
-          data.position3D[0] - 1.7,
-          data.position3D[1] + 2.5,
-          data.position3D[2],
-        ]}
-        className="card-scroll-bar"
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-            width: "88px",
-            height: "112px",
-            overflowY: "scroll",
-            color:
-              globalCoords.x - screenDimention.width / 2 > 200 ||
-              globalCoords.x - screenDimention.width / 2 < -200
-                ? "black"
-                : "white",
-          }}
-        >
-          <h3 style={{ fontSize: ".6rem", wordBreak: "no-break" }}>
-            {data.name}
-          </h3>
-          <p style={{ fontSize: ".4rem", margin: "0" }}>{data.year}</p>
-          <h4 style={{ fontSize: ".4rem" }}>{data.position}</h4>
-          <img
-            style={{ width: "100%", height: "100%" }}
-            src={data.imgUrl}
-            alt={data.name}
-          />
-          <p style={{ fontSize: ".5rem", margin: "0" }}>{data.description}</p>
-        </div>
-        <a href={data.gitHub} target="_blank" rel="noreferrer">
-          <GitHubIcon style={{ fontSize: ".7rem" }} />
-        </a>
-        <a href={data.href} target="_blank" rel="noreferrer">
-          <LanguageIcon style={{ fontSize: ".7rem" }} />
-        </a>
-      </Html> */}
