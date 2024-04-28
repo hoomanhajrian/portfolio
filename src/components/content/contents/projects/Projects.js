@@ -6,6 +6,7 @@ import { Button } from "antd";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Project3DCard from "./Project3DCard";
 import Button2D from './Button2D';
+import Switch from "./Switch";
 
 const projectsData = [
   {
@@ -159,7 +160,7 @@ const projectsData = [
 
 const Projects = () => {
   const [projects,showProjects] = useState(false);
-  
+  const [switchState,updateSwitch] = useState(false);
   const [view3D, update3D] = useState(false);
   // loading textures
   const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])
@@ -168,7 +169,6 @@ const Projects = () => {
     width: 0,
     height: 0,
   });
-  const [pointerHovered, updatePointerHover] = useState(false);
   // mouse coords
   const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
   useEffect(() => {
@@ -235,7 +235,7 @@ const Projects = () => {
       >
         {/* <OrbitControls /> */}
 
-        <ambientLight intensity={1.5} />
+        <ambientLight intensity={switchState ? 0.5 :1.5} />
 
         <Text3D
           position={[-15, 0, 1]}
@@ -253,6 +253,8 @@ const Projects = () => {
         <Button2D text="Go Back" func={()=>{showProjects(false)}} projects={projects} position={[32.5 , 16 , 35]} textPos={[-0.5,-0.65,-2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
         {/* button */}
         <Button2D text="2D Version" func={()=>{update3D(true)}} position={[12, 8, 0]} textPos={[-3,-0.5,0.5]} rotation={[0,0,0]} args={[8, 3, 1]} />
+        {/* light switch */}
+        <Switch position={[-25, 0, 0]} updateSwitch={updateSwitch} switchState={switchState}/>
         {/* walls and ground*/}
         <group receiveShadow>
           <RoundedBox
