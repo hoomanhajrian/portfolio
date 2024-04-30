@@ -5,12 +5,22 @@ const Television = () => {
     const [tvOn, changeTvState] = useState(true);
     const textRef = useRef();
 
-    useFrame(()=>{
-        // if(textRef.current.position.x < 10 || textRef.current.position.x > 35){
-        //     textRef.current.position.x = textRef.current.position.x + 0.005;
-        // }
-        console.log(textRef.current);
-    });
+    // useFrame(() => {
+
+    //     if (tvOn) {
+    //         const wordLength = 21;
+    //         const i = 17.5 - Math.abs(textRef.current.position.x);
+    //         const j = 17.5 - Math.abs(textRef.current.position.x + wordLength);
+    //         // console.log(textRef.current.position);
+    //         if(i < 14.5){
+    //             textRef.current.position.x = textRef.current.position.x + 0.05;
+    //         }
+    //         // if(textRef.current.position.x > -3.5){
+    //         //     textRef.current.position.x = textRef.current.position.x - 0.05;
+    //         // }
+    
+    //     }
+    // });
 
     return <group>
         {/* TV */}
@@ -38,8 +48,8 @@ const Television = () => {
                 <meshBasicMaterial color={'black'} attach="material" />
             </RoundedBox>
             {tvOn ? <Text3D
-            r   ef={textRef}
-                position={[-10, 2, 1]}
+                ref={textRef}
+                position={[-17.5, 7, 1]}
                 font={"/Source Sans 3 ExtraLight_Regular.json"}
                 letterSpacing={-0.06}
                 size={3.5}
@@ -51,6 +61,8 @@ const Television = () => {
             <group>
                 <RoundedBox
                     onClick={() => { changeTvState(!tvOn) }}
+                    onPointerEnter={()=>{document.body.style.cursor = "pointer";}}
+                    onPointerLeave={()=>{document.body.style.cursor = "default";}}
                     receiveShadow
                     position={[16, -7, 1]}
                     args={[1, 1, 1]} // Width, height, depth. Default is [1, 1, 1]
