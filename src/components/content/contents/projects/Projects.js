@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Canvas, useLoader,useFrame } from "@react-three/fiber";
+import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import { Button } from "antd";
@@ -7,6 +7,147 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Project3DCard from "./Project3DCard";
 import Button2D from './Button2D';
 import Switch from "./Switch";
+import Television from "./Television";
+
+
+const Projects = () => {
+  const [projects, showProjects] = useState(false);
+  const [switchState, updateSwitch] = useState(false);
+  const [view3D, update3D] = useState(false);
+  // loading textures
+  const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])
+  // screen dimentions
+  const [screenDimention, updateScreenDimentions] = useState({
+    width: 0,
+    height: 0,
+  });
+  // mouse coords
+  const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    updateScreenDimentions({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+    const screenSizeHandler = () => {
+      updateScreenDimentions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    const handleWindowMouseMove = (event) => {
+      setGlobalCoords({
+        x: event.screenX,
+        y: event.screenY,
+      });
+    };
+
+    window.addEventListener("resize", screenSizeHandler);
+    window.addEventListener("mousemove", handleWindowMouseMove);
+
+    return () => {
+      window.removeEventListener("resize", screenSizeHandler);
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+    };
+  }, []);
+
+
+
+  if (screenDimention.width <= 1200 || view3D) {
+    return (
+      <div className="projects">
+        <h2 className="projects-header">Project Experience</h2>
+        <Button
+          disabled={screenDimention.width <= 1200}
+          type="primary"
+          style={{ marginRight: "auto", marginLeft: "auto", display: "block" }}
+          onClick={() => {
+            update3D(false);
+          }}
+        >
+          3D View (Desktop Only)
+        </Button>
+        <div className="cards-container">
+          {projectsData.map((data) => {
+            return <Project2DCard data={data} update3D={update3D} />;
+          })}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <Canvas
+        shadows
+        camera={{ position: [-5, 6, 50], fov: 50 }}
+        style={{
+          width: "100%",
+          height: "90vh",
+          background: 'black',
+        }}
+      >
+        {/* <OrbitControls /> */}
+
+        <ambientLight intensity={switchState ? 0.2 : 1.2} />
+        {/* The TV */}
+        <Television />
+        {/* buttons */}
+        {/* projects button */}
+        <Button2D text="Go Back" func={() => { showProjects(false) }} projects={projects} position={[32.5, 16, 35]} textPos={[-0.5, -0.65, -2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
+        {/* projects button */}
+        <Button2D text="View Projects" func={() => { showProjects(true) }} projects={projects} position={[25, -1, 1]} textPos={[-4, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
+         {/* button */}
+        <Button2D text="2D Version" func={() => { update3D(true) }} position={[25, 5, 1]} textPos={[-3, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
+        {/* light switch */}
+        <Switch position={[-25, 0, 0]} updateSwitch={updateSwitch} switchState={switchState} />
+        {/* walls and ground*/}
+        <group receiveShadow>
+          <RoundedBox
+            receiveShadow
+            position={[0, 0, 0]}
+            args={[65, 30, 0.5]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshLambertMaterial map={wallTexture} attach="material" />
+          </RoundedBox>
+          <RoundedBox
+            receiveShadow
+            position={[32.5, 0, 32.5]}
+            args={[0.5, 30, 65]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshLambertMaterial map={wallTexture} alphaToCoverage />
+          </RoundedBox>
+          <RoundedBox
+            receiveShadow
+            position={[0, -15, 32.5]}
+            args={[65, 0.5, 65]} // Width, height, depth. Default is [1, 1, 1]
+            radius={0.05} // Radius of the rounded corners. Default is 0.05
+            smoothness={4} // The number of curve segments. Default is 4
+            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+          >
+            <meshLambertMaterial map={groundTexture} alphaToCoverage />
+          </RoundedBox>
+        </group>
+
+        {projectsData.map((item) => {
+          return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
+        })}
+
+      </Canvas>
+    );
+  }
+};
+
+export default Projects;
+
+
 
 const projectsData = [
   {
@@ -157,148 +298,3 @@ const projectsData = [
   },
 
 ];
-
-const Projects = () => {
-  const [projects,showProjects] = useState(false);
-  const [switchState,updateSwitch] = useState(false);
-  const [view3D, update3D] = useState(false);
-  // loading textures
-  const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])
-  // screen dimentions
-  const [screenDimention, updateScreenDimentions] = useState({
-    width: 0,
-    height: 0,
-  });
-  // mouse coords
-  const [globalCoords, setGlobalCoords] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    updateScreenDimentions({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-    const screenSizeHandler = () => {
-      updateScreenDimentions({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-
-    const handleWindowMouseMove = (event) => {
-      setGlobalCoords({
-        x: event.screenX,
-        y: event.screenY,
-      });
-    };
-
-    window.addEventListener("resize", screenSizeHandler);
-    window.addEventListener("mousemove", handleWindowMouseMove);
-
-    return () => {
-      window.removeEventListener("resize", screenSizeHandler);
-      window.removeEventListener("mousemove", handleWindowMouseMove);
-    };
-  }, []);
-
-
-
-  if (screenDimention.width <= 1200 || view3D) {
-    return (
-      <div className="projects">
-        <h2 className="projects-header">Project Experience</h2>
-        <Button
-          disabled={screenDimention.width <= 1200}
-          type="primary"
-          style={{ marginRight: "auto", marginLeft: "auto", display: "block" }}
-          onClick={() => {
-            update3D(false);
-          }}
-        >
-          3D View (Desktop Only)
-        </Button>
-        <div className="cards-container">
-          {projectsData.map((data) => {
-            return <Project2DCard data={data} update3D={update3D} />;
-          })}
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <Canvas
-        shadows
-        camera={{ position: [-5, 6, 50], fov: 50 }}
-        style={{
-          width: "100%",
-          height: "90vh",
-          background: 'black',
-        }}
-      >
-        {/* <OrbitControls /> */}
-
-        <ambientLight intensity={switchState ? 0.5 :1.5} />
-
-        <Text3D
-          position={[-15, 0, 1]}
-          font={"/Source Sans 3 ExtraLight_Regular.json"}
-          letterSpacing={-0.06}
-          size={3.5}
-        >
-          PROJECTS
-          <meshPhongMaterial color={"yellow"} />
-        </Text3D>
-        {/* buttons */}
-        {/* projects button */}
-        <Button2D text="View Projects" func={()=>{showProjects(true)}} projects={projects} position={[12, -5, 0]} textPos={[-3,-0.5,0.5]} rotation={[0,0,0]} args={[8, 3, 1]} />
-        {/* projects button */}
-        <Button2D text="Go Back" func={()=>{showProjects(false)}} projects={projects} position={[32.5 , 16 , 35]} textPos={[-0.5,-0.65,-2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
-        {/* button */}
-        <Button2D text="2D Version" func={()=>{update3D(true)}} position={[12, 8, 0]} textPos={[-3,-0.5,0.5]} rotation={[0,0,0]} args={[8, 3, 1]} />
-        {/* light switch */}
-        <Switch position={[-25, 0, 0]} updateSwitch={updateSwitch} switchState={switchState}/>
-        {/* walls and ground*/}
-        <group receiveShadow>
-          <RoundedBox
-            receiveShadow
-            position={[0, 0, 0]}
-            args={[65, 30, 0.5]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshLambertMaterial map={wallTexture} attach="material" />
-          </RoundedBox>
-          <RoundedBox
-            receiveShadow
-            position={[32.5, 0, 32.5]}
-            args={[0.5, 30, 65]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshLambertMaterial map={wallTexture} alphaToCoverage />
-          </RoundedBox>
-          <RoundedBox
-            receiveShadow
-            position={[0, -15, 32.5]}
-            args={[65, 0.5, 65]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshLambertMaterial map={groundTexture} alphaToCoverage />
-          </RoundedBox>
-        </group>
-
-          {projectsData.map((item)=>{
-            return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
-          })}
-
-      </Canvas>
-    );
-  }
-};
-
-export default Projects;
