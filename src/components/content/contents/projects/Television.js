@@ -4,23 +4,43 @@ import { useRef, useState } from "react";
 const Television = () => {
     const [tvOn, changeTvState] = useState(true);
     const textRef = useRef();
+    const [textVerDirection, updateTextVerDirection] = useState('down');
+    const [textHorDirection, updateTextHorDirection] = useState('right');
 
-    // useFrame(() => {
+    const checkHorLimit = (limit) => {
+        if (limit < -17.5) {
+            updateTextHorDirection('right');
+        }
+        if (limit >= 17.5) {
+            updateTextHorDirection('left');
+        }
+    };
 
-    //     if (tvOn) {
-    //         const wordLength = 21;
-    //         const i = 17.5 - Math.abs(textRef.current.position.x);
-    //         const j = 17.5 - Math.abs(textRef.current.position.x + wordLength);
-    //         // console.log(textRef.current.position);
-    //         if(i < 14.5){
-    //             textRef.current.position.x = textRef.current.position.x + 0.05;
-    //         }
-    //         // if(textRef.current.position.x > -3.5){
-    //         //     textRef.current.position.x = textRef.current.position.x - 0.05;
-    //         // }
-    
-    //     }
-    // });
+    useFrame(() => {
+
+
+        if (tvOn) {
+
+            const wordLength = 21;
+            const textLeftPos = textRef.current.position.x;
+            const textRightPos = textLeftPos + wordLength;
+            // console.log("left", textLeftPos);
+            // console.log("right", textRightPos);
+            // console.log("dir", textHorDirection);
+
+
+            if (textHorDirection === 'right') {
+                textRef.current.position.x = textRef.current.position.x + 0.05;
+                checkHorLimit(textRightPos);
+            }
+            if (textHorDirection === 'left') {
+                textRef.current.position.x = textRef.current.position.x - 0.05;
+                checkHorLimit(textLeftPos);
+            }
+
+
+        }
+    });
 
     return <group>
         {/* TV */}
@@ -61,8 +81,8 @@ const Television = () => {
             <group>
                 <RoundedBox
                     onClick={() => { changeTvState(!tvOn) }}
-                    onPointerEnter={()=>{document.body.style.cursor = "pointer";}}
-                    onPointerLeave={()=>{document.body.style.cursor = "default";}}
+                    onPointerEnter={() => { document.body.style.cursor = "pointer"; }}
+                    onPointerLeave={() => { document.body.style.cursor = "default"; }}
                     receiveShadow
                     position={[16, -7, 1]}
                     args={[1, 1, 1]} // Width, height, depth. Default is [1, 1, 1]
