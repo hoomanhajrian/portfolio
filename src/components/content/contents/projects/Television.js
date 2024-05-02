@@ -11,8 +11,16 @@ const Television = () => {
         if (limit < -17.5) {
             updateTextHorDirection('right');
         }
-        if (limit >= 17.5) {
+        if (limit > 17.5) {
             updateTextHorDirection('left');
+        }
+    };
+    const checkVerLimit = (limit) => {
+        if (limit > 5) {
+            updateTextVerDirection('down');
+        }
+        if (limit < -5) {
+            updateTextVerDirection('up');
         }
     };
 
@@ -20,10 +28,13 @@ const Television = () => {
 
 
         if (tvOn) {
-
             const wordLength = 21;
+            const Textheight = 2;
             const textLeftPos = textRef.current.position.x;
             const textRightPos = textLeftPos + wordLength;
+            const textTopPos =  textRef.current.position.y;
+            const textBottomPos =  textTopPos - Textheight;
+
             // console.log("left", textLeftPos);
             // console.log("right", textRightPos);
             // console.log("dir", textHorDirection);
@@ -37,7 +48,14 @@ const Television = () => {
                 textRef.current.position.x = textRef.current.position.x - 0.05;
                 checkHorLimit(textLeftPos);
             }
-
+            if(textVerDirection === 'down'){
+                textRef.current.position.y = textRef.current.position.y - 0.05;
+                checkVerLimit(textTopPos);
+            }
+            if(textVerDirection === 'up'){
+                textRef.current.position.y = textRef.current.position.y + 0.05;
+                checkVerLimit(textBottomPos);
+            }
 
         }
     });
