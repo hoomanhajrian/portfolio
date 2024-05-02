@@ -8,6 +8,7 @@ import Project3DCard from "./Project3DCard";
 import Button2D from './Button2D';
 import Switch from "./Switch";
 import Television from "./Television";
+import ShoeModel from "./ShoeModel";
 
 
 const Projects = () => {
@@ -135,7 +136,6 @@ const Projects = () => {
             <meshLambertMaterial map={groundTexture} alphaToCoverage />
           </RoundedBox>
         </group>
-
         {projectsData.map((item) => {
           return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
         })}
