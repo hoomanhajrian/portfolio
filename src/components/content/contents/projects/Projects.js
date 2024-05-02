@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
-import { RoundedBox, OrbitControls, Text3D } from "@react-three/drei";
+import React, { useEffect, useState } from "react";
+import { Canvas, useLoader } from "@react-three/fiber";
+import { RoundedBox, OrbitControls } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import { Button } from "antd";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -8,7 +8,6 @@ import Project3DCard from "./Project3DCard";
 import Button2D from './Button2D';
 import Switch from "./Switch";
 import Television from "./Television";
-import ShoeModel from "./ShoeModel";
 
 
 const Projects = () => {
