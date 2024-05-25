@@ -87,7 +87,7 @@ const Projects = () => {
       >
         {/* <OrbitControls /> */}
 
-        <ambientLight intensity={switchState ? 0.2 : 1.2} />
+        <ambientLight intensity={switchState ? 0.2 : 1} />
         {/* The TV */}
         <Television />
         {/* buttons */}
