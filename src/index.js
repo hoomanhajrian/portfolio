@@ -9,7 +9,6 @@ const container = document.getElementById("app");
 const root = createRoot(container);
 
 root.render(
-   <AppLoading/>
-)
+    <Suspense fallback={<AppLoading />}><App /></Suspense>);
 
 reportWebVitals();
