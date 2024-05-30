@@ -12,14 +12,14 @@ const Switch = ({ position, updateSwitch, switchState }) => {
         <group>
             <Cone
                 receiveShadow
-                position={[position[0], position[1] + 10, position[2] + 3]}
+                position={[position[0], position[1] + 10, position[2] + 1]}
                 args={[3, 2, 3]} // Width, height, depth. Default is [1, 1, 1]
             >
                 <meshStandardMaterial color={switchState ? '#bbb' : '#FFDB58'} />
             </Cone>
             <SpotLight
                 castShadow
-                position={[position[0], position[1] + 10, position[2] + 3]}
+                position={[position[0], position[1] + 10, position[2] + 1]}
                 distance={Infinity}
                 penumbra={.2}
                 angle={Math.PI / 4}
@@ -33,14 +33,14 @@ const Switch = ({ position, updateSwitch, switchState }) => {
         <group>
             <Cone
                 receiveShadow
-                position={[position[0] + 48, position[1] + 10, position[2] + 3]}
+                position={[position[0] + 48, position[1] + 10, position[2] + 1]}
                 args={[3, 2, 3]} // Width, height, depth. Default is [1, 1, 1]
             >
                 <meshStandardMaterial color={switchState ? '#bbb' : '#FFDB58'} />
             </Cone>
             <SpotLight
                 castShadow
-                position={[position[0] + 48, position[1] + 10, position[2] + 3]}
+                position={[position[0] + 48, position[1] + 10, position[2] + 1]}
                 distance={Infinity}
                 penumbra={.2}
                 angle={Math.PI / 4}

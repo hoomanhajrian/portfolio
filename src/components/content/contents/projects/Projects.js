@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { RoundedBox, OrbitControls } from "@react-three/drei";
+import {OrbitControls, Plane } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import { Button } from "antd";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -9,13 +9,13 @@ import Button2D from './Button2D';
 import Switch from "./Switch";
 import Television from "./Television";
 
-
 const Projects = () => {
   const [projects, showProjects] = useState(false);
   const [switchState, updateSwitch] = useState(false);
   const [view3D, update3D] = useState(false);
   // loading textures
-  const [wallTexture, groundTexture] = useLoader(TextureLoader, ["/textures/brick_wall.jpeg", "/textures/asphalt.jpg"])
+  const [wallTexture, wallRoughness, groundTexture] = useLoader(TextureLoader, ["/textures/wall/brick-wall.jpg", "/textures/wall/brick-wall-rough.jpg"
+    , "/textures/asphalt.jpg"])
   // screen dimentions
   const [screenDimention, updateScreenDimentions] = useState({
     width: 0,
@@ -95,45 +95,35 @@ const Projects = () => {
         <Button2D text="Go Back" func={() => { showProjects(false) }} projects={projects} position={[32.5, 16, 35]} textPos={[-0.5, -0.65, -2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
         {/* projects button */}
         <Button2D text="View Projects" func={() => { showProjects(true) }} projects={projects} position={[25, -1, 1]} textPos={[-4, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
-         {/* button */}
+        {/* button */}
         <Button2D text="2D Version" func={() => { update3D(true) }} position={[25, 5, 1]} textPos={[-3, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
         {/* light switch */}
         <Switch position={[-25, 0, 0]} updateSwitch={updateSwitch} switchState={switchState} />
         {/* walls and ground*/}
         <group receiveShadow>
-          <RoundedBox
+          <Plane
             receiveShadow
             position={[0, 0, 0]}
-            args={[65, 30, 0.5]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+            args={[65, 30]} // Width, height, depth. Default is [1, 1, 1]
           >
-            <meshLambertMaterial map={wallTexture} attach="material" />
-          </RoundedBox>
-          <RoundedBox
+            <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
+          </Plane>
+          <Plane
             receiveShadow
             position={[32.5, 0, 32.5]}
-            args={[0.5, 30, 65]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshLambertMaterial map={wallTexture} alphaToCoverage />
-          </RoundedBox>
-          <RoundedBox
+            rotation={[0, -Math.PI / 2, 0]}
+            args={[65, 30]} // Width, height, depth. Default is [1, 1, 1]
+           >
+            <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
+          </Plane>
+          <Plane
             receiveShadow
             position={[0, -15, 32.5]}
-            args={[65, 0.5, 65]} // Width, height, depth. Default is [1, 1, 1]
-            radius={0.05} // Radius of the rounded corners. Default is 0.05
-            smoothness={4} // The number of curve segments. Default is 4
-            bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
-            creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-          >
-            <meshLambertMaterial map={groundTexture} alphaToCoverage />
-          </RoundedBox>
+            rotation={[-Math.PI / 2, 0, 0]}
+            args={[65, 65]} // Width, height, depth. Default is [1, 1, 1]
+           >
+           <meshPhongMaterial map={groundTexture} bumpScale={1.3}/>
+          </Plane>
         </group>
         {projectsData.map((item) => {
           return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
