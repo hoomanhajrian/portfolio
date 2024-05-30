@@ -1,7 +1,9 @@
 import ReactLoading from 'react-loading';
 
 const AppLoading = () => (
-    <ReactLoading type={"balls"} color={'lightblue'} height={'50vh'} width={'100%'} st/>
+    <div style={{maxWidth:'40%',height:'50vh',marginRight:'auto',marginLeft:'auto'}}>
+    <ReactLoading type={"spinningBubbles"} color={'lightblue'} height={'100%'} width={'100%'}/>
+    </div>
 );
 
 export default AppLoading;
