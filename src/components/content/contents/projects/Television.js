@@ -1,18 +1,25 @@
 import { Text3D, RoundedBox } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
+
+const colors = ['red','yellow','blue','lightgreen','purple','orange','lightblue','cyan','hotpink'];
+
 const Television = () => {
     const [tvOn, changeTvState] = useState(true);
     const textRef = useRef();
     const [textVerDirection, updateTextVerDirection] = useState('down');
     const [textHorDirection, updateTextHorDirection] = useState('right');
+    const [textColor,updateColor] = useState(colors[0]);
+
 
     const checkHorLimit = (limit) => {
         if (limit < -17.5) {
             updateTextHorDirection('right');
+            updateColor(colors[Math.ceil(Math.random() * colors.length)]);
         }
         if (limit > 17.5) {
             updateTextHorDirection('left');
+            updateColor(colors[Math.ceil(Math.random() * colors.length)]);
         }
     };
     const checkVerLimit = (limit) => {
@@ -34,11 +41,6 @@ const Television = () => {
             const textRightPos = textLeftPos + wordLength;
             const textTopPos =  textRef.current.position.y;
             const textBottomPos =  textTopPos - Textheight;
-
-            // console.log("left", textLeftPos);
-            // console.log("right", textRightPos);
-            // console.log("dir", textHorDirection);
-
 
             if (textHorDirection === 'right') {
                 textRef.current.position.x = textRef.current.position.x + 0.05;
@@ -93,7 +95,7 @@ const Television = () => {
                 size={3.5}
             >
                 PROJECTS
-                <meshPhongMaterial color={"yellow"} />
+                <meshPhongMaterial color={textColor} />
             </Text3D> : <></>}
             {/* tv buttons */}
             <group>
