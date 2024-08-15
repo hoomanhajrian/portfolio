@@ -1,6 +1,6 @@
 
-import React, { useEffect, useRef, useState } from "react";
-import { RoundedBox, Text3D, Image, Html, Billboard } from "@react-three/drei";
+import React, {useState } from "react";
+import { RoundedBox, Text3D, Image, Html } from "@react-three/drei";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LanguageIcon from "@mui/icons-material/Language";
 import { useFrame } from "@react-three/fiber";
