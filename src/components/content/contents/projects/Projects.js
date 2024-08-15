@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import {OrbitControls, Plane } from "@react-three/drei";
+import { OrbitControls,Plane } from "@react-three/drei";
 import Project2DCard from "./Project2DCard";
 import { Button } from "antd";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
@@ -78,7 +78,7 @@ const Projects = () => {
     return (
       <Canvas
         shadows
-        camera={{ position: [-5, 6, 50], fov: 50 }}
+        camera={{ position: [-5, 6, 50], fov: 55 }}
         style={{
           width: "100%",
           height: "90vh",
@@ -110,9 +110,24 @@ const Projects = () => {
           </Plane>
           <Plane
             receiveShadow
+            position={[0, 0, 65]}
+            args={[65, 30]} // Width, height, depth. Default is [1, 1, 1]
+          >
+            <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
+          </Plane>
+          <Plane
+            receiveShadow
             position={[32.5, 0, 32.5]}
             rotation={[0, -Math.PI / 2, 0]}
-            args={[65, 30]} // Width, height, depth. Default is [1, 1, 1]
+            args={[90, 30]} // Width, height, depth. Default is [1, 1, 1]
+           >
+            <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
+          </Plane>
+          <Plane
+            receiveShadow
+            position={[-32.5, 0, 0]}
+            rotation={[0, Math.PI / 2, 0]}
+            args={[90, 30]} // Width, height, depth. Default is [1, 1, 1]
            >
             <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
           </Plane>
@@ -120,7 +135,7 @@ const Projects = () => {
             receiveShadow
             position={[0, -15, 32.5]}
             rotation={[-Math.PI / 2, 0, 0]}
-            args={[65, 65]} // Width, height, depth. Default is [1, 1, 1]
+            args={[65, 90]} // Width, height, depth. Default is [1, 1, 1]
            >
            <meshPhongMaterial map={groundTexture} bumpMap={groundRoughness} bumpScale={1.3}/>
           </Plane>
@@ -253,7 +268,7 @@ const projectsData = [
     name: "Littlesellca",
     position: "Full Stack Developer",
     year: " 2023-current",
-    href: "https://littlesellca.com",
+    href: "https://littlesellca-hooman-hajarians-projects.vercel.app/",
     description:
       "Online Platform to connect web customers to Amazon Market place and the business social media.",
     imgUrl: "/img/littesellca.jpg",
@@ -284,6 +299,18 @@ const projectsData = [
     imgUrl: "/img/tariq.jpg",
     gitHub: "https://github.com/hoomanhajrian/tariq",
     position3D: [32.5, -7, 60],
+  },
+  {
+    id: 12,
+    name: "Gojunk4moving",
+    position: "Full Stack Developer",
+    year: " 2024-2025",
+    href: "https://www.gojunk4moving.ca/",
+    description:
+      "Website using Next.js technology using react for front end and simple mail service for backend. Components being rendered on server mostly.",
+    imgUrl: "/img/gojunk.jpg",
+    gitHub: "https://github.com/hoomanhajrian/gojunk4moving",
+    position3D: [32.5, 7, 70],
   },
 
 ];
