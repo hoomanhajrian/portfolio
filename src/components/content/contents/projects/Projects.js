@@ -101,6 +101,7 @@ const Projects = () => {
         <Switch position={[-25, 0, 0]} updateSwitch={updateSwitch} switchState={switchState} />
         {/* walls and ground*/}
         <group receiveShadow>
+          {/* tv wall */}
           <Plane
             receiveShadow
             position={[0, 0, 0]}
@@ -108,13 +109,16 @@ const Projects = () => {
           >
             <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
           </Plane>
+          {/* oposite tv wall */}
           <Plane
             receiveShadow
-            position={[0, 0, 65]}
+            position={[0, 0, 75]}
+            rotation={[-Math.PI, 0, 0]}
             args={[65, 30]} // Width, height, depth. Default is [1, 1, 1]
           >
             <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
           </Plane>
+          {/* projects wall */}
           <Plane
             receiveShadow
             position={[32.5, 0, 32.5]}
@@ -123,14 +127,16 @@ const Projects = () => {
            >
             <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
           </Plane>
+          {/* oposite projects wall */}
           <Plane
             receiveShadow
-            position={[-32.5, 0, 0]}
+            position={[-32.5, 0, 32.5]}
             rotation={[0, Math.PI / 2, 0]}
             args={[90, 30]} // Width, height, depth. Default is [1, 1, 1]
            >
             <meshPhongMaterial map={wallTexture} bumpMap={wallRoughness} bumpScale={1.3}/>
           </Plane>
+          {/* ground */}
           <Plane
             receiveShadow
             position={[0, -15, 32.5]}
