@@ -1,13 +1,10 @@
-import { RoundedBox, Cone, Text, SpotLight } from "@react-three/drei";
+import { RoundedBox, Cone, SpotLight } from "@react-three/drei";
 import { useRef } from "react";
 
 const Switch = ({ position, updateSwitch, switchState }) => {
     const coneRef = useRef();
     const cone2Ref = useRef();
     return <group>
-        <Text>
-            Light switch
-        </Text>
         {/* light 1 */}
         <group>
             <Cone
