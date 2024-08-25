@@ -12,6 +12,7 @@ const About = lazy(()=>import("./components/about/About"));
 const Projects = lazy(()=>import("./components/content/contents/projects/Projects"));
 const Resume = lazy(()=>import("./components/resume/Resume"));
 const Showoff = lazy(()=>import("./components/showoff/showoff"));
+const Game = lazy(()=>import("./components/content/game/Game"));
 const NotFound = lazy(()=>import("./components/notfound/NotFound"));
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/about" component={About} />
           <Route path="/resume" component={Resume} />
           <Route path="/showoff" component={Showoff} />
+          <Route path="/game" component={Game} />
           <Route component={NotFound} />
         </NavSwitch>
       </Router>

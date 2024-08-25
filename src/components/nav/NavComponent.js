@@ -38,6 +38,11 @@ const NavComponent = () => {
                         </NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink className="nav-link" to="/game">
+                            Game
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="nav-link" to="/about">
                             About
                         </NavLink>
