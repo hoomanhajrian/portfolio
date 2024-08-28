@@ -1,7 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { Text, RoundedBox, Text3D,Html } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-
+import React from 'react';
+import {RoundedBox,Html } from '@react-three/drei';
 
 export const Tooltip = ({ position, offset, text }) => {
   console.log(position);
