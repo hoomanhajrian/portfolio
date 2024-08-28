@@ -1,0 +1,28 @@
+import React, { useRef, useEffect, useState } from 'react';
+import { Text, RoundedBox, Text3D,Html } from '@react-three/drei';
+import { useFrame, useThree } from '@react-three/fiber';
+
+
+export const Tooltip = ({ position, offset, text }) => {
+  console.log(position);
+  
+  return (
+    <group>
+      <RoundedBox
+        castShadow
+        position={[25, 20, 10]}
+        args={[1, 12, 20]} // Width, height, depth. Default is [1, 1, 1]
+        radius={0.15} // Radius of the rounded corners. Default is 0.05
+        smoothness={10} // The number of curve segments. Default is 4
+        bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
+        creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
+      >
+        <meshPhongMaterial color="lightblue" />
+      </RoundedBox>
+      <Html position={[23, 25, 3]} rotation={[0, -Math.PI / 2, 0]}>
+        <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>Description:</p>
+        <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>{text}</p>
+      </Html>
+    </group>
+  )
+};
