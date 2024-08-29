@@ -8,6 +8,7 @@ import Project3DCard from "./Project3DCard";
 import Button2D from './Button2D';
 import Switch from "./Switch";
 import Television from "./Television";
+import { Table } from "../../../table/Table";
 
 const Projects = () => {
   const [projects, showProjects] = useState(false);
@@ -90,6 +91,8 @@ const Projects = () => {
         <ambientLight intensity={switchState ? 0.2 : 1} />
         {/* The TV */}
         <Television />
+        {/* table */}
+        <Table/>
         {/* buttons */}
         {/* projects button */}
         <Button2D text="Go Back" func={() => { showProjects(false) }} projects={projects} position={[32.5, 16, 35]} textPos={[-0.5, -0.65, -2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
