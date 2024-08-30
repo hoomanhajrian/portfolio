@@ -1,8 +1,7 @@
 import React, { useEffect, useState,Suspense } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls,PerspectiveCamera,Plane } from "@react-three/drei";
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
-import {Model} from "./model/Model";
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import {Running} from './model/Running';
 
 const Game = ()=>{
@@ -61,7 +60,6 @@ const Game = ()=>{
         <ambientLight intensity={switchState ? 0.2 : 1} />
        
         {/* walls and ground*/}
-       <Walls/>
         <Suspense fallback={null}>
             <Running position={[0, -15, 5]} />
          </Suspense>
