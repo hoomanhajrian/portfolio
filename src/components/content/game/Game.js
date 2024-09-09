@@ -1,19 +1,12 @@
-import React, { useEffect, useState, Suspense, useRef } from "react";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, Plane } from "@react-three/drei";
-import { TextureLoader } from 'three/src/loaders/TextureLoader';
-import { Running } from './model/Running';
-import { Model } from "./model/Model";
+import React, { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { Model } from './model/Model';
 import { Walls } from "../../walls/Walls";
 
 
 
 const Game = () => {
-  const [modelPos, updateModelPos] = useState([0, -15, 0]);
-  const [switchState, updateSwitch] = useState(false);
-  // loading textures
-  const [wallTexture, wallRoughness, groundTexture, groundRoughness] = useLoader(TextureLoader, ["/textures/wall/brick-wall.jpg", "/textures/wall/brick-wall-rough.jpg"
-    , "/textures/ground/asphalt.jpg", "/textures/ground/asphalt-rough.jpg"])
   // screen dimentions
   const [screenDimention, updateScreenDimentions] = useState({
     width: 0,
@@ -60,14 +53,14 @@ const Game = () => {
         height: "90vh",
         background: 'black',
       }}
-      perspectiveCamera={{fov:90}}
     >
+      <PerspectiveCamera fov={90}/>
       <OrbitControls/>
       <ambientLight intensity={1} />
       {/* walls and ground*/}
       <Walls />
       {/* model */}
-      <Running position={modelPos} />;
+      <Model />;
     </Canvas>
   )
 };
