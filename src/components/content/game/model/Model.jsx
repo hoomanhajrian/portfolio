@@ -25,12 +25,12 @@ export const Model = (props) => {
           // left
           updateModelState('turnLeft');
           // updateModelPos((prePos) => { return prePos[0] === -18 ? [0, prePos[1], prePos[2]] : [18, prePos[1], prePos[2]] });
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] - Math.PI / 8]});
+          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] - Math.PI / 32]});
           actions['Armature.001|mixamo.com|Layer0.001'].play();
           break;
         case 38:
           // up
-          updateModelSpeed((preSpeed)=>{preSpeed<maxSpeed ? preSpeed + 0.01 : preSpeed})
+          updateModelSpeed((preSpeed)=>{return preSpeed<maxSpeed ? preSpeed + 0.01 : preSpeed})
           updateModelState('walking');
           updateModelPos((prePos) => { return [prePos[0], prePos[1], prePos[2] + modelSpeed] });
           actions['Armature.001|mixamo.com|Layer0.001'].play();
@@ -48,7 +48,7 @@ export const Model = (props) => {
           // right
           updateModelState('turnLeft');
           // updateModelPos((prePos) => { return prePos[0] === -18 ? [0, prePos[1], prePos[2]] : [18, prePos[1], prePos[2]] });
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] + Math.PI / 8]});
+          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] + Math.PI / 32]});
           actions['Armature.001|mixamo.com|Layer0.001'].play();
           break;
 
