@@ -7,17 +7,17 @@ export const Model = (props) => {
   const modelRef = useRef();
   const [modelState, updateModelState] = useState('idle');
   const [modelPos, updateModelPos] = useState([0, -15, 0]);
-  const [modelRotation,updateModelRotation] = useState([Math.PI / 2, 0, 0]);
-  const [modelSpeed,updateModelSpeed] = useState(.6);
+  const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
+  const [modelSpeed, updateModelSpeed] = useState(.6);
   const { scene, animations } = useGLTF('/models/model-walking.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone)
   const { actions } = useAnimations(animations, modelRef);
   const maxSpeed = 3;
-  const rotationSpeed = Math.PI / 32;
+  const rotationSpeed = Math.PI / 64;
 
   useEffect(() => {
-    console.log("actions", actions);
+    // console.log("actions", actions);
     const handleKeydown = (e) => {
       e.preventDefault();
       const { key, keyCode } = e;
@@ -25,17 +25,33 @@ export const Model = (props) => {
         case 37:
           // left
           updateModelState('turnLeft');
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] - rotationSpeed]});
+          updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] - rotationSpeed] });
+          actions['Armature.001|mixamo.com|Layer0.001'].play();
+          break;
+        case 39:
+          // right
+          updateModelState('turnLeft');
+          updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] + rotationSpeed] });
           actions['Armature.001|mixamo.com|Layer0.001'].play();
           break;
         case 38:
           // up
-          updateModelSpeed((preSpeed)=>{return preSpeed<maxSpeed ? preSpeed + 0.01 : preSpeed})
-          updateModelState('walking');
-          updateModelPos((prePos) => { return [prePos[0], prePos[1], prePos[2] + modelSpeed] });
+          // updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed })
+          // updateModelState('walking');
+          // updateModelPos((prePos) => { return [prePos[0], prePos[1], prePos[2] + modelSpeed] });
           actions['Armature.001|mixamo.com|Layer0.001'].play();
-              // start walking animation
-              // actions['Armature|mixamo.com|Layer0'].play();
+          console.log(modelRotation[2]);
+          
+        switch (true){
+          case 0 < modelRotation[2]*(180/Math.PI) < 90:
+            console.log('0-90');
+            break;
+          default:
+            console.log('default');
+            break;
+        }
+          // start walking animation
+          // actions['Armature|mixamo.com|Layer0'].play();
           break;
         case 40:
           // down
@@ -44,12 +60,7 @@ export const Model = (props) => {
           actions['Armature.002|mixamo.com|Layer0'].play();
           break;
 
-        case 39:
-          // right
-          updateModelState('turnLeft');
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] + rotationSpeed]});
-          actions['Armature.001|mixamo.com|Layer0.001'].play();
-          break;
+
 
         default:
           idleState();
@@ -69,18 +80,11 @@ export const Model = (props) => {
     };
   }, []);
 
-
-  useEffect(()=>{
-    console.log(modelRotation)
-  },[modelRotation]);
-
-
   useFrame(({ gl, camera }) => {
     // camera.position 
     camera.position.x = 0;
     camera.position.y = 15;
     camera.position.z = -20;
-
   });
   return (
     <group ref={modelRef} position={modelPos} {...props} dispose={null}>
