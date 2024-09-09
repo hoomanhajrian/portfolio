@@ -14,6 +14,7 @@ export const Model = (props) => {
   const { nodes, materials } = useGraph(clone)
   const { actions } = useAnimations(animations, modelRef);
   const maxSpeed = 3;
+  const rotationSpeed = Math.PI / 32;
 
   useEffect(() => {
     console.log("actions", actions);
@@ -24,8 +25,7 @@ export const Model = (props) => {
         case 37:
           // left
           updateModelState('turnLeft');
-          // updateModelPos((prePos) => { return prePos[0] === -18 ? [0, prePos[1], prePos[2]] : [18, prePos[1], prePos[2]] });
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] - Math.PI / 32]});
+          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] - rotationSpeed]});
           actions['Armature.001|mixamo.com|Layer0.001'].play();
           break;
         case 38:
@@ -47,8 +47,7 @@ export const Model = (props) => {
         case 39:
           // right
           updateModelState('turnLeft');
-          // updateModelPos((prePos) => { return prePos[0] === -18 ? [0, prePos[1], prePos[2]] : [18, prePos[1], prePos[2]] });
-          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] + Math.PI / 32]});
+          updateModelRotation((preDeg)=>{return [preDeg[0] ,preDeg[1],preDeg[2] + rotationSpeed]});
           actions['Armature.001|mixamo.com|Layer0.001'].play();
           break;
 
@@ -69,6 +68,12 @@ export const Model = (props) => {
       window.removeEventListener('keyup', idleState);
     };
   }, []);
+
+
+  useEffect(()=>{
+    console.log(modelRotation)
+  },[modelRotation]);
+
 
   useFrame(({ gl, camera }) => {
     // camera.position 
