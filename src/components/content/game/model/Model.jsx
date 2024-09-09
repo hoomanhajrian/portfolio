@@ -8,6 +8,7 @@ export const Model = (props) => {
   const [modelState, updateModelState] = useState('idle');
   const [modelPos, updateModelPos] = useState([0, -15, 0]);
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
+  const [modelDirectionPercentage, updateModelDirectionPercentage] = useState({ x: 0, y: 1 });
   const [modelSpeed, updateModelSpeed] = useState(.6);
   const { scene, animations } = useGLTF('/models/model-walking.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -36,20 +37,15 @@ export const Model = (props) => {
           break;
         case 38:
           // up
-          // updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed })
+          console.log(modelDirectionPercentage);
+
+          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed })
           // updateModelState('walking');
-          // updateModelPos((prePos) => { return [prePos[0], prePos[1], prePos[2] + modelSpeed] });
+          updateModelPos((prePos) => { return [prePos[0] + (modelSpeed * modelDirectionPercentage.x), prePos[1], prePos[2] + (modelSpeed * modelDirectionPercentage.y)] });
+
+
           actions['Armature.001|mixamo.com|Layer0.001'].play();
-          console.log(modelRotation[2]);
-          
-        switch (true){
-          case 0 < modelRotation[2]*(180/Math.PI) < 90:
-            console.log('0-90');
-            break;
-          default:
-            console.log('default');
-            break;
-        }
+
           // start walking animation
           // actions['Armature|mixamo.com|Layer0'].play();
           break;
@@ -80,11 +76,63 @@ export const Model = (props) => {
     };
   }, []);
 
+  // Character rotation
+  useEffect(() => {
+
+    const charDeg = (modelRotation[2] * (180 / Math.PI).toFixed(0)) % 360;
+
+    const convertToPercent = (x) => {
+      const result = ((charDeg%90) * 100) / 90;
+      if (charDeg > 0) {
+      if (charDeg <= 90) {
+        return { x: result, y: 100 - result }
+      }
+      else if (charDeg > 90 && charDeg <= 180) {
+        return { x: result, y: -(100 - result) }
+      }
+      else if (charDeg > 180 && charDeg <= 270) {
+        return { x: -result, y: -(100 - result) }
+      }
+      else if (charDeg > 270 && charDeg <= 359) {
+        return { x: -result, y: 100 - result }
+      }
+    }else{
+      const charDegAbs = Math.abs(charDeg);
+      
+      if (charDegAbs <= 90) {
+        return { x: result, y: 100 + result }
+      }
+      else if (charDegAbs > 90 && charDegAbs <= 180) {
+        return { x:  - (100 + result), y: result}
+      }
+      else if (charDegAbs > 180 && charDegAbs <= 270) {
+        return { x:-result , y: -(100 + result)}
+      }
+      else if (charDegAbs > 270 && charDegAbs <= 359) {
+        return { x: 100 + result , y: -result  }
+      }
+    }
+    }
+
+
+    // checks the rotation side right or left...
+   
+      console.log(convertToPercent(charDeg));
+      updateModelDirectionPercentage(convertToPercent(charDeg));
+
+  }, [modelRotation]);
+
+  useEffect(()=>{
+    console.log(modelDirectionPercentage);
+    
+  },[modelDirectionPercentage])
+
   useFrame(({ gl, camera }) => {
     // camera.position 
     camera.position.x = 0;
     camera.position.y = 15;
     camera.position.z = -20;
+    // modelRef.current.rotation.y += 0.01;
   });
   return (
     <group ref={modelRef} position={modelPos} {...props} dispose={null}>
