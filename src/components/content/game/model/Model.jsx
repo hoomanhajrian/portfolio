@@ -8,7 +8,7 @@ export const Model = (props) => {
   const [modelState, updateModelState] = useState('idle');
   const [modelPos, updateModelPos] = useState([0, -15, 0]);
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
-  const [modelDirectionPercentage, updateModelDirectionPercentage] = useState({ x: 0, y: 1 });
+  const modelDirectionPercentageRef = useRef({ x: 0, y: 1 });
   const [modelSpeed, updateModelSpeed] = useState(.6);
   const { scene, animations } = useGLTF('/models/model-walking.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -37,11 +37,10 @@ export const Model = (props) => {
           break;
         case 38:
           // up
-          console.log(modelDirectionPercentage);
-
+          console.log('direction', modelDirectionPercentageRef.current);
           updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed })
           // updateModelState('walking');
-          updateModelPos((prePos) => { return [prePos[0] + (modelSpeed * modelDirectionPercentage.x), prePos[1], prePos[2] + (modelSpeed * modelDirectionPercentage.y)] });
+          updateModelPos((prePos) => { return [prePos[0] + (modelSpeed * (modelDirectionPercentageRef.current.x / 100)), prePos[1], prePos[2] + (modelSpeed * (modelDirectionPercentageRef.current.y) / 100)] });
 
 
           actions['Armature.001|mixamo.com|Layer0.001'].play();
@@ -66,6 +65,7 @@ export const Model = (props) => {
     const idleState = () => {
       actions['Armature.002|mixamo.com|Layer0'].stop();
       actions['Armature.001|mixamo.com|Layer0.001'].stop();
+      updateModelSpeed(.6);
     };
     window.addEventListener('keydown', handleKeydown);
     window.addEventListener('keyup', idleState);
@@ -82,50 +82,51 @@ export const Model = (props) => {
     const charDeg = (modelRotation[2] * (180 / Math.PI).toFixed(0)) % 360;
 
     const convertToPercent = (x) => {
-      const result = ((charDeg%90) * 100) / 90;
+      const result = ((charDeg % 90) * 100) / 90;
       if (charDeg > 0) {
-      if (charDeg <= 90) {
-        return { x: result, y: 100 - result }
+        if (charDeg <= 90) {
+          return { x: -result, y: 100 - result }
+        }
+        else if (charDeg > 90 && charDeg <= 180) {
+          return { x: -(100 - result), y: -result  }
+        }
+        else if (charDeg > 180 && charDeg <= 270) {
+          return { x: result, y: -(100 - result) }
+        }
+        else if (charDeg > 270 && charDeg <= 359) {
+          return { x: 100 - result, y:result  }
+        }
+      } else {
+        const charDegAbs = Math.abs(charDeg);
+
+        if (charDegAbs <= 90) {
+          console.log('91');
+          return { x: - result, y: 100 + result }
+        }
+        else if (charDegAbs > 90 && charDegAbs <= 180) {
+          console.log('94');
+          return { x: -result , y: -(100 + result) }
+        }
+        else if (charDegAbs > 180 && charDegAbs <= 270) {
+          console.log('93');
+          return { x:result, y:  - (100 + result) }
+        }
+        else if (charDegAbs > 270 && charDegAbs <= 359) {
+          console.log('92');
+          console.log(result);
+          
+          return { x: result, y: 100+result}
+        }
       }
-      else if (charDeg > 90 && charDeg <= 180) {
-        return { x: result, y: -(100 - result) }
-      }
-      else if (charDeg > 180 && charDeg <= 270) {
-        return { x: -result, y: -(100 - result) }
-      }
-      else if (charDeg > 270 && charDeg <= 359) {
-        return { x: -result, y: 100 - result }
-      }
-    }else{
-      const charDegAbs = Math.abs(charDeg);
-      
-      if (charDegAbs <= 90) {
-        return { x: result, y: 100 + result }
-      }
-      else if (charDegAbs > 90 && charDegAbs <= 180) {
-        return { x:  - (100 + result), y: result}
-      }
-      else if (charDegAbs > 180 && charDegAbs <= 270) {
-        return { x:-result , y: -(100 + result)}
-      }
-      else if (charDegAbs > 270 && charDegAbs <= 359) {
-        return { x: 100 + result , y: -result  }
-      }
-    }
     }
 
 
     // checks the rotation side right or left...
-   
-      console.log(convertToPercent(charDeg));
-      updateModelDirectionPercentage(convertToPercent(charDeg));
+
+    modelDirectionPercentageRef.current = convertToPercent(charDeg);
 
   }, [modelRotation]);
 
-  useEffect(()=>{
-    console.log(modelDirectionPercentage);
-    
-  },[modelDirectionPercentage])
 
   useFrame(({ gl, camera }) => {
     // camera.position 
