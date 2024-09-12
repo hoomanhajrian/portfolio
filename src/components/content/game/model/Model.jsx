@@ -73,15 +73,7 @@ export const Model = (props) => {
   // Character rotation
   useEffect(() => {
     const deg = modelRotation[2];
-      if(deg < 90){
-        modelDeg.current = { x: -Math.sin(deg), y: Math.cos(deg) };
-      }
-      else if(deg >= 90 && deg < 180){
-        console.log({ x: -Math.sin(deg), y: -Math.cos(deg)});
-        modelDeg.current = { x: -Math.sin(deg), y: -Math.cos(deg) };
-      }
-    
-
+        modelDeg.current = { x: -Math.sin(deg), y: Math.cos(deg)};
   }, [modelRotation]);
 
 
