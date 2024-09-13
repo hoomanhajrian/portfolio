@@ -9,15 +9,16 @@ export const Model = (props) => {
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
   const modelDeg = useRef({ x: 0, y: 1 });
   const [modelSpeed, updateModelSpeed] = useState(.6);
-  const { scene, animations } = useGLTF('/models/model-walking.glb')
+  const { scene, animations } = useGLTF('/models/model.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone)
   const { actions } = useAnimations(animations, modelRef);
   const maxSpeed = 3;
-  const rotationSpeed = Math.PI / 64;
+  const rotationSpeed = Math.PI / 32;
 
   useEffect(() => {
-    // console.log("actions", actions);
+    console.log("actions", actions);
+    actions['idle'].play();
     const handleKeydown = (e) => {
       e.preventDefault();
       const { key, keyCode } = e;
@@ -25,28 +26,32 @@ export const Model = (props) => {
         case 37:
           // left
           updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] - rotationSpeed] });
-          actions['Armature.001|mixamo.com|Layer0.001'].play();
+          actions['lookright'].play();
           break;
         case 39:
           // right
           updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] + rotationSpeed] });
-          actions['Armature.001|mixamo.com|Layer0.001'].play();
+          actions['lookleft'].play();
           break;
         case 38:
           // up
-          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
+          actions['idle'].stop();
+          actions['walking.001'].play();
+          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
           updateModelPos((prePos) => {
             return [prePos[0] + modelSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelSpeed * modelDeg.current.y]
           });
-          actions['Armature.001|mixamo.com|Layer0.001'].play();
 
           // start walking animation
           // actions['Armature|mixamo.com|Layer0'].play();
           break;
         case 40:
           // down
-          updateModelPos((prePos) => { return [prePos[0], prePos[1], prePos[2] - 0.5] });
-          actions['Armature.002|mixamo.com|Layer0'].play();
+          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
+          updateModelPos((prePos) => {
+            return [prePos[0] - modelSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelSpeed * modelDeg.current.y]
+          });
+          actions['walkback'].play();
           break;
 
 
@@ -57,8 +62,11 @@ export const Model = (props) => {
       }
     };
     const idleState = () => {
-      actions['Armature.002|mixamo.com|Layer0'].stop();
-      actions['Armature.001|mixamo.com|Layer0.001'].stop();
+      actions['walking.001'].stop();
+      actions['walkback'].stop();
+      actions['lookleft'].stop();
+actions['lookright'].stop();
+      actions['idle'].play();
       updateModelSpeed(.6);
     };
     window.addEventListener('keydown', handleKeydown);
@@ -73,7 +81,7 @@ export const Model = (props) => {
   // Character rotation
   useEffect(() => {
     const deg = modelRotation[2];
-        modelDeg.current = { x: -Math.sin(deg), y: Math.cos(deg)};
+    modelDeg.current = { x: -Math.sin(deg), y: Math.cos(deg) };
   }, [modelRotation]);
 
 
@@ -86,14 +94,14 @@ export const Model = (props) => {
   });
   return (
     <group ref={modelRef} position={modelPos} {...props} dispose={null}>
-      <group name="walking">
-        <group name="Armature001" rotation={modelRotation} scale={0.15}>
-          <primitive object={nodes.mixamorigHips_1} />
-          <skinnedMesh name="ely_vanguardsoldier_kerwinatienza_Mesh001" geometry={nodes.ely_vanguardsoldier_kerwinatienza_Mesh001.geometry} material={materials['ely_vanguardsoldier_kerwinatienza_M2.001']} skeleton={nodes.ely_vanguardsoldier_kerwinatienza_Mesh001.skeleton} />
+      <group name="model">
+        <group name="Armature" rotation={modelRotation} scale={0.15}>
+          <primitive object={nodes.mixamorigHips} />
+          <skinnedMesh name="ely_vanguardsoldier_kerwinatienza_Mesh" geometry={nodes.ely_vanguardsoldier_kerwinatienza_Mesh.geometry} material={materials['ely_vanguardsoldier_kerwinatienza_M2.003']} skeleton={nodes.ely_vanguardsoldier_kerwinatienza_Mesh.skeleton} />
         </group>
       </group>
     </group>
   )
 }
 
-useGLTF.preload('/models/model-walking.glb');
+useGLTF.preload('/models/model.glb');
