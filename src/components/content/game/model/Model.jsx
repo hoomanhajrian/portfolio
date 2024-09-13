@@ -9,6 +9,7 @@ export const Model = (props) => {
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
   const modelDeg = useRef({ x: 0, y: 1 });
   const [modelSpeed, updateModelSpeed] = useState(.6);
+  const [modelBackSpeed, updatemodelBackSpeed] = useState(.3);
   const { scene, animations } = useGLTF('/models/model.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone)
@@ -49,7 +50,7 @@ export const Model = (props) => {
           // down
           updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
           updateModelPos((prePos) => {
-            return [prePos[0] - modelSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelSpeed * modelDeg.current.y]
+            return [prePos[0] - modelBackSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelBackSpeed * modelDeg.current.y]
           });
           actions['walkback'].play();
           break;
