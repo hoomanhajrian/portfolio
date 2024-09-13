@@ -8,7 +8,8 @@ export const Model = (props) => {
   const [modelPos, updateModelPos] = useState([0, -15, 0]);
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
   const modelDeg = useRef({ x: 0, y: 1 });
-  const [modelSpeed, updateModelSpeed] = useState(.6);
+  const [modelWalkSpeed, updateModelWalkSpeed] = useState(.6);
+  const [modelRunSpeed, updateModelRunSpeed] = useState(1.5);
   const [modelBackSpeed, updatemodelBackSpeed] = useState(.3);
   const { scene, animations } = useGLTF('/models/model.glb')
   const clone = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -22,33 +23,45 @@ export const Model = (props) => {
     actions['idle'].play();
     const handleKeydown = (e) => {
       e.preventDefault();
-      const { key, keyCode } = e;
+      const { key, keyCode, shiftKey } = e;
+      // console.log(key, keyCode, shiftKey);
       switch (keyCode) {
         case 37:
           // left
           updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] - rotationSpeed] });
           actions['lookright'].play();
+          actions['walking'].play();
           break;
         case 39:
           // right
           updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] + rotationSpeed] });
           actions['lookleft'].play();
+          actions['walking'].play();
           break;
         case 38:
           // up
-          actions['idle'].stop();
-          actions['walking.001'].play();
-          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
-          updateModelPos((prePos) => {
-            return [prePos[0] + modelSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelSpeed * modelDeg.current.y]
-          });
+          if (!shiftKey) {
+            updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
+            updateModelPos((prePos) => {
+              return [prePos[0] + modelWalkSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelWalkSpeed * modelDeg.current.y]
+            });
+            actions['idle'].stop();
+            actions['walking'].play();
+          } else {
+            updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
+            updateModelPos((prePos) => {
+              return [prePos[0] + modelRunSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelRunSpeed * modelDeg.current.y]
+            });
+            actions['idle'].stop();
+            actions['running'].play();
+          }
 
           // start walking animation
           // actions['Armature|mixamo.com|Layer0'].play();
           break;
         case 40:
           // down
-          updateModelSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
+          updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
           updateModelPos((prePos) => {
             return [prePos[0] - modelBackSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelBackSpeed * modelDeg.current.y]
           });
@@ -63,12 +76,13 @@ export const Model = (props) => {
       }
     };
     const idleState = () => {
-      actions['walking.001'].stop();
+      actions['walking'].stop();
       actions['walkback'].stop();
       actions['lookleft'].stop();
-actions['lookright'].stop();
+      actions['running'].stop();
+      actions['lookright'].stop();
       actions['idle'].play();
-      updateModelSpeed(.6);
+      updateModelWalkSpeed(.6);
     };
     window.addEventListener('keydown', handleKeydown);
     window.addEventListener('keyup', idleState);
