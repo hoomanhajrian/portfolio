@@ -2,6 +2,11 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import { useFrame, useGraph } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import { SkeletonUtils } from 'three-stdlib';
+import { ArrowUpward } from '@mui/icons-material';
+
+
+
+
 
 export const Model = (props) => {
   const modelRef = useRef();
@@ -18,78 +23,89 @@ export const Model = (props) => {
   const maxSpeed = 3;
   const rotationSpeed = Math.PI / 32;
 
-  useEffect(() => {
-    console.log("actions", actions);
+
+
+  const idleState = () => {
+    actions['walking'].stop();
+    actions['walkback'].stop();
+    actions['lookleft'].stop();
+    actions['running'].stop();
+    actions['lookright'].stop();
     actions['idle'].play();
-    const handleKeydown = (e) => {
-      e.preventDefault();
-      const { key, keyCode, shiftKey } = e;
-      // console.log(key, keyCode, shiftKey);
-      switch (keyCode) {
-        case 37:
-          // left
-          updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] - rotationSpeed] });
-          actions['lookright'].play();
-          actions['walking'].play();
-          break;
-        case 39:
-          // right
-          updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] + rotationSpeed] });
-          actions['lookleft'].play();
-          actions['walking'].play();
-          break;
-        case 38:
-          // up
-          if (!shiftKey) {
-            updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
-            updateModelPos((prePos) => {
-              return [prePos[0] + modelWalkSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelWalkSpeed * modelDeg.current.y]
-            });
-            actions['idle'].stop();
-            actions['walking'].play();
-          } else {
-            updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
-            updateModelPos((prePos) => {
-              return [prePos[0] + modelRunSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelRunSpeed * modelDeg.current.y]
-            });
-            actions['idle'].stop();
-            actions['running'].play();
-          }
+    updateModelWalkSpeed(.6);
+    updateModelRunSpeed(1.5)
+  };
 
-          // start walking animation
-          // actions['Armature|mixamo.com|Layer0'].play();
-          break;
-        case 40:
-          // down
-          updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
+
+
+  // on key press and leave
+
+  const onkeyup = (e) => {
+    idleState();
+  };
+
+  const onkeydown = (e) => {
+    e.preventDefault();
+    console.log("actions", actions);
+    const { key, keyCode, shiftKey } = e;
+    console.log(key, keyCode, shiftKey);
+
+    /*conditionals here */
+    switch (keyCode) {
+      case 37:
+        // left
+        updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] - rotationSpeed] });
+        actions['lookright'].play();
+        actions['walking'].play();
+        break;
+      case 39:
+        // right
+        updateModelRotation((preDeg) => { return [preDeg[0], preDeg[1], preDeg[2] + rotationSpeed] });
+        actions['lookleft'].play();
+        actions['walking'].play();
+        break;
+      case 38:
+        // up
+        if (!shiftKey) {
+          updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
           updateModelPos((prePos) => {
-            return [prePos[0] - modelBackSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelBackSpeed * modelDeg.current.y]
+            return [prePos[0] + modelWalkSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelWalkSpeed * modelDeg.current.y]
           });
-          actions['walkback'].play();
-          break;
+          actions['walking'].play();
+          actions['running'].stop();
+        } else {
+          updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.02 : preSpeed });
+          updateModelPos((prePos) => {
+            return [prePos[0] + modelRunSpeed * modelDeg.current.x, prePos[1], prePos[2] + modelRunSpeed * modelDeg.current.y]
+          });
+          actions['walking'].stop();
+          actions['running'].play();
+        }
 
+        // start walking animation
+        // actions['Armature|mixamo.com|Layer0'].play();
+        break;
+      case 40:
+        // down
+        updateModelWalkSpeed((preSpeed) => { return preSpeed < maxSpeed ? preSpeed + 0.01 : preSpeed });
+        updateModelPos((prePos) => {
+          return [prePos[0] - modelBackSpeed * modelDeg.current.x, prePos[1], prePos[2] - modelBackSpeed * modelDeg.current.y]
+        });
+        actions['walkback'].play();
+        break;
+      default:
+        idleState();
+        break;
+    }
+  };
 
-
-        default:
-          idleState();
-          break;
-      }
-    };
-    const idleState = () => {
-      actions['walking'].stop();
-      actions['walkback'].stop();
-      actions['lookleft'].stop();
-      actions['running'].stop();
-      actions['lookright'].stop();
-      actions['idle'].play();
-      updateModelWalkSpeed(.6);
-    };
-    window.addEventListener('keydown', handleKeydown);
-    window.addEventListener('keyup', idleState);
+  useEffect(() => {
+    window.addEventListener('keydown', onkeydown);
+    window.addEventListener('keyup', onkeyup);
 
     return () => {
-      window.removeEventListener('keydown', handleKeydown);
-      window.removeEventListener('keyup', idleState);
+      window.removeEventListener('keydown', onkeydown);
+      window.removeEventListener('keyup', onkeyup);
     };
   }, []);
 
@@ -100,7 +116,13 @@ export const Model = (props) => {
   }, [modelRotation]);
 
 
-  useFrame(({ gl, camera }) => {
+
+  useEffect(() => {
+    actions['idle'].play();
+  }, [onkeydown]);
+
+
+  useFrame(({ gl, camera, delta }) => {
     // camera.position 
     camera.position.x = 0;
     camera.position.y = 15;
