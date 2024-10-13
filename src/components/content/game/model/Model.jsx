@@ -10,7 +10,7 @@ import { ArrowUpward } from '@mui/icons-material';
 
 export const Model = (props) => {
   const modelRef = useRef();
-  const [modelPos, updateModelPos] = useState([0, -15, 0]);
+  const [modelPos, updateModelPos] = useState([0, -15, -10]);
   const [modelRotation, updateModelRotation] = useState([Math.PI / 2, 0, 0]);
   const modelDeg = useRef({ x: 0, y: 1 });
   const [modelWalkSpeed, updateModelWalkSpeed] = useState(.6);
