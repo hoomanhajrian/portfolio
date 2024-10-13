@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { Model } from './model/Model';
-import { Walls } from "../../walls/Walls";
+import { Walls } from "../../menu/Walls";
 import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
 
 
@@ -63,10 +63,8 @@ const Game = () => {
         {/* model */}
         <Model />;
         <CuboidCollider position={[0, 0, 0]} args={[20, 0.5, 20]} />
-        <PerspectiveCamera fov={90} />
         <OrbitControls />
         <ambientLight intensity={1} />
-
       </Physics>
     </Canvas>
   )
