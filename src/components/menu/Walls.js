@@ -1,11 +1,16 @@
-import { Plane } from "@react-three/drei";
+import { Plane,RoundedBox } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
+import {MenuButton}  from "../interactives/menubutton/MenuButton";
+
+const menuOptions = [{position:[-18, -15, 15]},{position:[18,-15,15]}]
+
 export const Walls = ()=>{
   const [wallTexture, wallRoughness, groundTexture,groundRoughness] = useLoader(TextureLoader, ["/textures/wall/brick-wall.jpg", "/textures/wall/brick-wall-rough.jpg"
     , "/textures/ground/asphalt.jpg","/textures/ground/asphalt-rough.jpg"])
   
   
+
   return(
       <group receiveShadow>
       {/* tv wall */}
@@ -52,6 +57,10 @@ export const Walls = ()=>{
        >
        <meshPhongMaterial map={groundTexture} bumpMap={groundRoughness} bumpScale={1.3}/>
       </Plane>
+      {/* floor Buttons */}
+      {menuOptions.map((item)=>{
+        return <MenuButton position={item.position}/>
+      })}
     </group>
     )
 };
