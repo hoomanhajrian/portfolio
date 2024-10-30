@@ -2,8 +2,6 @@ import React from 'react';
 import {RoundedBox,Html } from '@react-three/drei';
 
 export const Tooltip = ({ position, offset, text }) => {
-  console.log(position);
-  
   return (
     <group>
       <RoundedBox
@@ -17,10 +15,10 @@ export const Tooltip = ({ position, offset, text }) => {
       >
         <meshPhongMaterial color="lightblue" />
       </RoundedBox>
-      <Html position={[23, 25, 3]} rotation={[0, -Math.PI / 2, 0]}>
-        <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>Description:</p>
-        <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>{text}</p>
-      </Html>
+        <Html position={[23, 25, 3]} rotation={[0, -Math.PI / 2, 0]}>
+          <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>Description:</p>
+          <p style={{width:'18rem',color:'white',fontWeight:'bold'}}>{text}</p>
+        </Html>
     </group>
   )
 };

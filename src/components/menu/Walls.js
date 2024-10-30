@@ -1,4 +1,4 @@
-import { Plane,RoundedBox } from "@react-three/drei";
+import { Plane } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 import {MenuButton}  from "../interactives/menubutton/MenuButton";

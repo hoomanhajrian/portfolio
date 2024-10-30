@@ -7,6 +7,7 @@ const NavComponent = () => {
     return (<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
             <a className="navbar-brand" href="/">
+            <img alt="portfolio-logo" src="/logo.png" style={{width:'100px',height:'100px'}}/>
                 Hooman Hajarian
             </a>
             <button

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { RoundedBox, Plane } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader';

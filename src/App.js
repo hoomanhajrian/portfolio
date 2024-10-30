@@ -1,8 +1,8 @@
 import React, { lazy } from "react";
 import "./sass/main.scss";
 import {
-  HashRouter as Router,
-  Switch as NavSwitch,
+  HashRouter,
+  Switch,
   Route,
 } from "react-router-dom";
 import Footer from "./components/footer/Footer";
@@ -18,17 +18,17 @@ const NotFound = lazy(()=>import("./components/notfound/NotFound"));
 const App = () => {
   return (
     <main className="app">
-      <Router>
+      <HashRouter>
         <NavComponent/>
-        <NavSwitch>
+        <Switch>
           <Route exact path="/" component={Projects} />
           <Route path="/about" component={About} />
           <Route path="/resume" component={Resume} />
           <Route path="/showoff" component={Showoff} />
           <Route path="/game" component={Game} />
           <Route component={NotFound} />
-        </NavSwitch>
-      </Router>
+        </Switch>
+      </HashRouter>
       <Footer />
     </main>
   );
