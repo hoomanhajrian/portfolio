@@ -26,6 +26,7 @@
     "axios": "^0.23.0",
     "bootstrap": "^4.6.0",
     "google-map-react": "^2.1.10",
+    "jquery": "^3.7.1",
     "mathjs": "^10.0.0",
     "node-sass": "^9.0.0",
     "pdfjs-dist": "3.4.120",
