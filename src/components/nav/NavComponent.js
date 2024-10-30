@@ -1,13 +1,29 @@
+import { useEffect, useState } from "react";
 import ContactLinks from "../contact/ContactLinks";
 import {
     NavLink,
-  } from "react-router-dom";
+} from "react-router-dom";
+
 
 const NavComponent = () => {
+    const [screenWidth, updateScreenWidth] = useState(null);
+
+
+
+    useEffect(() => {
+        updateScreenWidth(window.innerWidth);
+        function handleResize() {
+            updateScreenWidth(window.innerWidth);
+        }
+    
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
+    
     return (<nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
             <a className="navbar-brand" href="/">
-            <img alt="portfolio-logo" src="/logo.png" style={{width:'100px',height:'100px'}}/>
+                {screenWidth >500 ? <img alt="portfolio-logo" src="/logo.png" style={{ width: '100px', height: '100px' }} />: <></>}
                 Hooman Hajarian
             </a>
             <button
