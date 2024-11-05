@@ -30,7 +30,7 @@ const AppLoading = ({loadingTitle}) => {
 
         <div style={{ display: 'grid',gridTemplateRows:'1fr 1fr', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
             <div style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', width:'100%',height:'50%x'}}>
-                <img id='appLoadingLogo' alt="portfolio-logo" src="/logo.png" style={{ width: '100px', height: '100px', zIndex: '99' }} />
+                <img id='appLoadingLogo' alt="portfolio-logo" src="/logo.png" style={{ width: '100px', height: '100px', zIndex: '99',imageResolution:'20dpi' }} />
                 <h3>{loadingTitle}</h3>
                 <div id='logoShadow' style={{ background: 'rgba(0,0,0,.1)', height: '105px', width: '105px', borderRadius: '50%' }}></div>
             </div>
