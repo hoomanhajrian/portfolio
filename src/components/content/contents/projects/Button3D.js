@@ -14,6 +14,7 @@ const Button3D = ({ func, position, text, projects, about, args, textPos, rotati
       if (!about && projects && camera.rotation.y >= -Math.PI / 2.2) {
         camera.position.x -= 0.05;
         camera.rotation.y -= 0.005;
+        camera.rotation.z -= 0.0005;
       }
       // about animation
       if (about && !projects && camera.rotation.y <= Math.PI / 2.2) {
@@ -25,10 +26,11 @@ const Button3D = ({ func, position, text, projects, about, args, textPos, rotati
         if (camera.rotation.y < 0.1) {
           camera.position.x += 0.05;
           camera.rotation.y += 0.005;
+          camera.rotation.z += 0.0005;
         }
         else if (camera.rotation.y > -0.1) {
           camera.position.x -= .05;
-          camera.rotation.y -= 0.006;
+          camera.rotation.y -= 0.005;
         }
       }
     }
