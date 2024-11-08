@@ -5,13 +5,14 @@ import Project2DCard from "./Project2DCard";
 import { Button } from "antd";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 import Project3DCard from "./Project3DCard";
-import Button2D from './Button2D';
+import Button2D from './Button3D';
 import Switch from "./Switch";
 import Television from "./Television";
 import { Table } from "../../../table/Table";
 
 const Projects = () => {
   const [projects, showProjects] = useState(false);
+  const [about, showAbout] = useState(false);
   const [switchState, updateSwitch] = useState(false);
   const [view3D, update3D] = useState(false);
   // loading textures
@@ -79,7 +80,7 @@ const Projects = () => {
     return (
       <Canvas
         shadows
-        camera={{ position: [-5, 6, 50], fov: 55 }}
+        camera={{ position: [0, 6, 50], fov: 55 }}
         style={{
           width: "100%",
           height: "90vh",
@@ -96,8 +97,11 @@ const Projects = () => {
         {/* buttons */}
         {/* projects button */}
         <Button2D text="Go Back" func={() => { showProjects(false) }} projects={projects} position={[32.5, 16, 35]} textPos={[-0.5, -0.65, -2.5]} rotation={[0, -Math.PI / 2, 0]} args={[1, 3, 8]} />
+        <Button2D text="Go Back" func={() => { showAbout(false) }} projects={projects} position={[-32.5, 10, 35]} textPos={[0.5, -0.65, 2.5]} rotation={[0, Math.PI / 2, 0]} args={[1, 3, 8]} />
         {/* projects button */}
         <Button2D text="View Projects" func={() => { showProjects(true) }} projects={projects} position={[25, -1, 1]} textPos={[-4, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
+        {/* about button */}
+        <Button2D text="About Me" func={() => { showAbout(true) }} projects={projects} about={about} position={[-25, -6, 1]} textPos={[-2, -0.4, 1]}  rotation={[0, 0, 0]} args={[8, 3, 1]}  />
         {/* button */}
         <Button2D text="2D Version" func={() => { update3D(true) }} position={[25, 5, 1]} textPos={[-3, -0.5, 1]} rotation={[0, 0, 0]} args={[8, 3, 1]} />
         {/* light switch */}

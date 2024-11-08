@@ -1,25 +1,41 @@
 import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text3D, RoundedBox } from "@react-three/drei";
-const Button2D = ({ func, position, text, projects,args,textPos,rotation }) => {
+
+
+const Button3D = ({ func, position, text, projects, about, args, textPos, rotation }) => {
 
   const [pointerHovered, updatePointerHover] = useState(false);
   const buttonRef = useRef();
 
   useFrame(({ gl, camera }) => {
-    if (projects && camera.rotation.y > -1.5) {
-        camera.position.x = camera.position.x - 0.05;
-        camera.position.z = camera.position.z - 0.05;
-        camera.rotation.y = camera.rotation.y - 0.005;
-        camera.rotation.z = camera.rotation.z - 0.0004;
-    }else if(!projects && camera.rotation.y < -0.2){
-      camera.position.x = camera.position.x + 0.05;
-        camera.position.z = camera.position.z + 0.05;
-      camera.rotation.y = camera.rotation.y + 0.005;
-      camera.rotation.z = camera.rotation.z + 0.0004;
+    if (about !== undefined && projects !== undefined) {
+      // projects animation
+      if (!about && projects && camera.rotation.y >= -Math.PI / 2.2) {
+        camera.position.x -= 0.05;
+        camera.rotation.y -= 0.005;
+      }
+      // about animation
+      if (about && !projects && camera.rotation.y <= Math.PI / 2.2) {
+        camera.position.x += .05;
+        camera.rotation.y += 0.005;
+      }
+      // back from about and project animation
+      if (!about && !projects && (camera.rotation.y < -0.1 || camera.rotation.y > 0.1)) {
+        if (camera.rotation.y < 0.1) {
+          camera.position.x += 0.05;
+          camera.rotation.y += 0.005;
+        }
+        else if (camera.rotation.y > -0.1) {
+          camera.position.x -= .05;
+          camera.rotation.y -= 0.006;
+        }
+      }
     }
-  
   });
+
+
+
 
   useEffect(() => {
     if (pointerHovered) {
@@ -52,7 +68,7 @@ const Button2D = ({ func, position, text, projects,args,textPos,rotation }) => {
       <meshPhongMaterial color={pointerHovered ? "darkblue" : "#1677ff"} />
     </RoundedBox>
     <Text3D
-    rotation={rotation}
+      rotation={rotation}
       position={[position[0] + textPos[0], position[1] + textPos[1], position[2] + textPos[2]]}
       font={"/Source Sans 3 ExtraLight_Regular.json"}
       letterSpacing={-0.06}
@@ -64,4 +80,4 @@ const Button2D = ({ func, position, text, projects,args,textPos,rotation }) => {
   </>
 };
 
-export default Button2D;
+export default Button3D;
