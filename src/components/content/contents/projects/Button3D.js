@@ -11,7 +11,7 @@ const Button3D = ({ func, position, text, projects, about, args, textPos, rotati
   useFrame(({ gl, camera }) => {
     if (about !== undefined && projects !== undefined) {
       // projects animation
-      if (!about && projects && camera.rotation.y >= -Math.PI / 2.1) {
+      if (!about && projects && camera.rotation.y >= -Math.PI / 2.4) {
         camera.position.x -= 0.05;
         camera.rotation.y -= 0.005;
         camera.rotation.z -= 0.0005;
