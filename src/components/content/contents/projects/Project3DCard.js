@@ -1,33 +1,35 @@
 
-import React, {useState } from "react";
-import { RoundedBox, Text3D, Image, Html } from "@react-three/drei";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LanguageIcon from "@mui/icons-material/Language";
-import { useFrame } from "@react-three/fiber";
+import React, { useState,useEffect } from "react";
+import { RoundedBox, Text3D, Image, Plane, Circle } from "@react-three/drei";
 import { Tooltip } from "../../../tooltip/Tooltip";
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
-const Project3DCard = ({ data, globalCoords, screenDimention }) => {
-  const [showText,updateTextShow] = useState(false);
-  const [hovered,updateCardHovered] = useState(false);
+const Project3DCard = ({ data }) => {
+  const [hovered, updateCardHovered] = useState(false);
+  
+  const [pointerHovered, updatePointerHover] = useState(false);
 
-  useFrame(({camera}, delta, xrFrame)=>{
-    if(camera.position.x < -12.5){
-      updateTextShow(false);
+  const [github, website] = useLoader(TextureLoader, ['/img/github.png', '/img/website.png']);
+
+
+
+  useEffect(() => {
+    if (pointerHovered) {
+      document.body.style.cursor = "pointer";
+    } else {
+      document.body.style.cursor = "default";
     }
-    else{
-      updateTextShow(true);
-    }
-  })
-
+  }, [pointerHovered]);
 
   return (
-    <group 
-    onPointerEnter={()=>{
-      updateCardHovered(true);
-    }}
-    onPointerLeave={()=>{
-      updateCardHovered(false);
-    }}
+    <group
+      onPointerEnter={() => {
+        updateCardHovered(true);
+      }}
+      onPointerLeave={() => {
+        updateCardHovered(false);
+      }}
     >
       <RoundedBox
         castShadow
@@ -37,8 +39,8 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
         smoothness={10} // The number of curve segments. Default is 4
         bevelSegments={4} // The number of bevel segments. Default is 4, setting it to 0 removes the bevel, as a result the texture is applied to the whole geometry.
         creaseAngle={0.4} // Smooth normals everywhere except faces that meet at an angle greater than the crease angle
-     >
-        <meshPhongMaterial color={hovered?"lightBlue":"#007bff"} />
+      >
+        <meshPhongMaterial color={hovered ? "lightBlue" : "#007bff"} />
       </RoundedBox>
       <Text3D
         position={[data.position3D[0] - 0.5, data.position3D[1] + 4, data.position3D[2] - 3]}
@@ -58,23 +60,28 @@ const Project3DCard = ({ data, globalCoords, screenDimention }) => {
       >
         {data.name}
       </Text3D>
-      
+
       {/* tooltip */}
-     {hovered?<Tooltip text={data.description} position={data.position3D} offset={[-2,10,0]}/>:<></>}
-     {/* links */}
+      {hovered ? <Tooltip text={data.description} position={data.position3D} offset={[-2, 10, 0]} /> : <></>}
+      {/* links */}
       <Image url={data.imgUrl} position={[data.position3D[0] - 0.6, data.position3D[1] + 0.5, data.position3D[2]]} scale={[8, 6]}
         rotation={[0, -Math.PI / 2, 0]} />
-      <Html position={[data.position3D[0] - 0.6, data.position3D[1] - 3, data.position3D[2] - 3]} scale={[8, 6]}
-        rotation={[0, -Math.PI / 2, 0]}>
-        <div style={{ display: showText ? 'none' : 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '5rem' }}>
-          <a href={data.gitHub} target="_blank" rel="noreferrer">
-            <GitHubIcon style={{ fontSize: "2rem" }} />
-          </a>
-          <a href={data.href} target="_blank" rel="noreferrer">
-            <LanguageIcon style={{ fontSize: "2rem" }} />
-          </a>
-        </div>
-      </Html>
+      <Circle onPointerOver={() => {
+        updatePointerHover(true);
+      }}
+        onPointerOut={() => {
+          updatePointerHover(false);
+        }} onClick={() => { window.open(data.gitHub,'_blank') }} args={[1, 360]} position={[data.position3D[0] - 0.8, data.position3D[1] - 4, data.position3D[2] - 2]} rotation={[0, -Math.PI / 2, 0]}>
+        <meshPhongMaterial map={github} bumpScale={1.3} />
+      </Circle>
+      <Circle onPointerOver={() => {
+        updatePointerHover(true);
+      }}
+        onPointerOut={() => {
+          updatePointerHover(false);
+        }} onClick={() => { window.open(data.href,'_blank') }} args={[1, 360]} position={[data.position3D[0] - 0.8, data.position3D[1] - 4, data.position3D[2] + 2]} rotation={[0, -Math.PI / 2, 0]}>
+        <meshPhongMaterial map={website} bumpScale={1.3} />
+      </Circle>
     </group>
   );
 };
