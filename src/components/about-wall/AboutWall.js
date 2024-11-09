@@ -1,21 +1,29 @@
-import { Plane, Text3D } from "@react-three/drei";
+import { Plane, RoundedBox, Text3D } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
 
-export const Painting = () => {
-
-
-    const [photo] = useLoader(TextureLoader, ['/img/me.jpg'])
+export const AboutWall = () => {
+const [photo,photoFrame] = useLoader(TextureLoader, ['/img/me.jpg','/textures/table/table.jpg'])
     return (
         <group>
+            <group>
             <Plane
                 receiveShadow
-                position={[-32, 0, 12]}
+                position={[-31.4, 0, 12]}
                 rotation={[0, Math.PI / 2, 0]}
-                args={[10, 16]} // Width, height, depth. Default is [1, 1, 1]
+                args={[9.5, 15.5]} // Width, height, depth. Default is [1, 1, 1]
             >
                 <meshPhongMaterial map={photo} bumpScale={1.3} />
             </Plane>
+            <RoundedBox
+                receiveShadow
+                position={[-32, 0, 12]}
+                rotation={[0, Math.PI / 2, 0]}
+                args={[11, 17]} // Width, height, depth. Default is [1, 1, 1]
+            >
+                <meshPhongMaterial map={photoFrame} bumpScale={1.3} />
+            </RoundedBox>
+            </group>
             <Plane
                 receiveShadow
                 position={[-32, 1, 48]}

@@ -9,7 +9,7 @@ import Button2D from './Button3D';
 import Switch from "./Switch";
 import Television from "./Television";
 import { Table } from "../../../table/Table";
-import { Painting } from "../../../painting/Painting";
+import { AboutWall } from "../../../about-wall/AboutWall";
 
 const Projects = () => {
   const [projects, showProjects] = useState(false);
@@ -158,7 +158,7 @@ const Projects = () => {
           return <Project3DCard key={item.id} data={item} globalCoords={globalCoords} screenDimention={screenDimention} />
         })}
         {/* about wall */}
-        <Painting/>
+        <AboutWall/>
       </Canvas>
     );
   }
