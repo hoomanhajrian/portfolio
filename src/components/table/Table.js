@@ -13,7 +13,7 @@ export const Table = () => {
     const [tableTexture] = useLoader(TextureLoader, ["/textures/table/table.jpg"])
 
     return (
-        <Physics debug>
+        <Physics>
         <RigidBody type="fixed" >
             <Plane
                 receiveShadow
