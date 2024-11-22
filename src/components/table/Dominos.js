@@ -1,6 +1,9 @@
 import { Box, Sphere } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import { useRef, useState } from "react";
+import { useLoader } from "@react-three/fiber";
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
+
 
 const dominos = [
     { id: 0, position: { x: -8, y: 20 } },
@@ -18,6 +21,8 @@ const dominos = [
 export const Dominos = () => {
     const [hovered, hover] = useState(null);
     const boxRef = useRef({});
+    const [ballTexture,dominoTexture] = useLoader(TextureLoader, ["/textures/dominos/ball.jpg","/textures/dominos/light-wood.jpg"])
+
 
     const jumpRight = (id) => {
         const rigidBody = boxRef.current[id];
@@ -43,7 +48,7 @@ export const Dominos = () => {
                             castShadow
                             receiveShadow
                             args={[0.5, 3, 1]}>
-                            <meshStandardMaterial color={hovered ? "lightgreen" : 'darkGreen'} />
+                            <meshPhongMaterial map={dominoTexture} />
                         </Box>
                     </RigidBody>)
             })}
@@ -56,7 +61,7 @@ export const Dominos = () => {
                     castShadow
                     receiveShadow
                     args={[1.3, 360, 360]}>
-                    <meshStandardMaterial color={'darkgreen'} />
+                    <meshPhongMaterial map={ballTexture} />
                 </Sphere>
             </RigidBody>
         </>
