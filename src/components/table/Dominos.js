@@ -42,9 +42,8 @@ export const Dominos = () => {
                         ref={(el) => (boxRef.current[item.id] = el)} // Store refs
                         colliders={"cuboid"}>
                         <Box
-                            onPointerEnter={() => hover(item.id)} // Track hover
+                            onPointerEnter={() => jumpRight(item.id)} // Track hover
                             onPointerLeave={() => hover(null)}
-                            onClick={() => jumpRight(item.id)} // Pass function reference
                             castShadow
                             receiveShadow
                             args={[0.5, 3, 1]}>
@@ -56,6 +55,7 @@ export const Dominos = () => {
                 position={[-12, -6, 20]}
                 colliders={'ball'}
                 type="dynamic"
+                restitution={2}
                 >
                 <Sphere
                     castShadow
