@@ -72,7 +72,7 @@ const Projects = () => {
           3D View (Desktop Only)
         </Button>
         <div className="cards-container">
-          {projectsData.map((data) => {
+          {projectsData.reverse.map((data) => {
             return <Project2DCard data={data} update3D={update3D} />;
           })}
         </div>
