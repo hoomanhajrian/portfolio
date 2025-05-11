@@ -75,7 +75,7 @@ const NavComponent = () => {
                         </li> */}
                         <li className="nav-item">
                             <NavLink onClick={toggleMenu} className="nav-link" to="/about">
-                                About and Github
+                                Coding History
                             </NavLink>
                         </li>
                         <li className="nav-item">

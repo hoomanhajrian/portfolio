@@ -69,7 +69,7 @@ const About = () => {
         collaboration.
       </p>
 
-      <h3>GitHub Activity</h3>
+      <h3>GitHub History</h3>
       <GitHub />
 
       {/* Contact form (optional) */}
