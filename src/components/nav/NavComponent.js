@@ -68,11 +68,11 @@ const NavComponent = () => {
                                 Showoff
                             </NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink onClick={toggleMenu} className="nav-link" to="/game">
                                 Game
                             </NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink onClick={toggleMenu} className="nav-link" to="/about">
                                 About
