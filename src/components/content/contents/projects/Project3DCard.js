@@ -1,6 +1,6 @@
 
 import React, { useState,useEffect } from "react";
-import { RoundedBox, Text3D, Image, Plane, Circle } from "@react-three/drei";
+import { RoundedBox, Text3D, Image, Circle } from "@react-three/drei";
 import { Tooltip } from "../../../tooltip/Tooltip";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from 'three/src/loaders/TextureLoader'

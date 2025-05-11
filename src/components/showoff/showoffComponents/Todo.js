@@ -195,7 +195,7 @@ const Todo = () => {
                                         {row.name}
                                     </StyledTableCell>
                                     <StyledTableCell align="right">{row.description}</StyledTableCell>
-                                    <StyledTableCell sx={{ color: `${getPriorityColor(row.priority)}` }} align="right">{row.priority}</StyledTableCell>
+                                    <StyledTableCell sx={{ color: `white`,background: `${getPriorityColor(row.priority)}`}} align="right">{row.priority}</StyledTableCell>
                                     <StyledTableCell align="right">{row.completed ? 'Done' : <Checkbox id={`${index}`} onChange={checkboxChangeHandel} />}</StyledTableCell>
                                     <StyledTableCell align="right"><Button onClick={removeData} index={index} >Remove</Button></StyledTableCell>
                                 </StyledTableRow>

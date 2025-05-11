@@ -177,7 +177,7 @@ const Projects = () => {
     position3D: [32.5, 7, 70],
   },
 
-]);
+].reverse());
   // loading textures
   const [wallTexture, wallRoughness, groundTexture, groundRoughness] = useLoader(TextureLoader, ["/textures/wall/brick-wall.jpg", "/textures/wall/brick-wall-rough.jpg"
     , "/textures/ground/asphalt.jpg", "/textures/ground/asphalt-rough.jpg"])
@@ -233,7 +233,7 @@ const Projects = () => {
           3D View (Desktop Only)
         </Button>
         <div className="cards-container">
-          {projectsData.current.reverse().map((data) => {
+          {projectsData.current.map((data) => {
             return <Project2DCard data={data} update3D={update3D} />;
           })}
         </div>
