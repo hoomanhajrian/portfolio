@@ -16,7 +16,7 @@ const Projects = () => {
   const [projects, showProjects] = useState(false);
   const [about, showAbout] = useState(false);
   const [switchState, updateSwitch] = useState(false);
-  const [view3D, update3D] = useState(false);
+  const [view3D, update3D] = useState(true);
   const projectsData = useRef( [
   {
     id: 0,
