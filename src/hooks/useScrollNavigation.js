@@ -7,14 +7,25 @@ const useScrollNavigation = () => {
   const isNavigatingRef = useRef(false);
   const lastScrollRef = useRef(0);
   const scrollTimeoutRef = useRef(null);
+  const isPageLoadedRef = useRef(false);
 
   const routes = ['/', '/projects', '/about', '/contact'];
+
+  useEffect(() => {
+    // Delay scroll detection to allow page to fully render
+    isPageLoadedRef.current = false;
+    const loadTimeout = setTimeout(() => {
+      isPageLoadedRef.current = true;
+    }, 500); // Wait 500ms after route change before enabling scroll detection
+
+    return () => clearTimeout(loadTimeout);
+  }, [location.pathname]);
 
   useEffect(() => {
     let timeout;
 
     const handleScroll = () => {
-      if (isNavigatingRef.current) return;
+      if (isNavigatingRef.current || !isPageLoadedRef.current) return;
 
       // Clear previous timeout
       if (scrollTimeoutRef.current) {

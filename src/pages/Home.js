@@ -11,34 +11,12 @@ import { useTheme } from "../context/ThemeContext";
 const Home = () => {
   useScrollNavigation();
   const containerRef = useRef(null);
-  const [isDark, setIsDark] = useState(() => 
-    document.documentElement.classList.contains("dark")
-  );
-
+  const { isDarkMode } = useTheme();
   // Theme-aware colors matching site's sky blue palette
-  const backgroundColors = isDark
-    ? ["#0ea5e9", "#38bdf8", "#0284c7", "#0369a1"] // Sky blues for dark mode
-    : ["#7dd3fc", "#38bdf8", "#0ea5e9", "#0c4a6e"]; // Lighter sky blues for light mode
 
-  useEffect(() => {
-    // Check and update dark mode state
-    const checkDarkMode = () => {
-      const isDarkMode = document.documentElement.classList.contains("dark");
-      setIsDark(isDarkMode);
-    };
-
-    // Initial check
-    checkDarkMode();
-
-    // Watch for changes to the dark class
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"]
-    });
-
-    return () => observer.disconnect();
-  }, []);
+    useEffect(() => {
+      console.log(isDarkMode);
+    }, [isDarkMode]);
 
   return (
     <>
@@ -49,7 +27,7 @@ const Home = () => {
       />
       <AnimatedBackground
         className="fixed inset-0 z-10"
-        colors={backgroundColors}
+        colors={isDarkMode ? ["#0ea5e9", "#38bdf8", "#fff", "#0ea5e9"] : ["#000", "#fff", "#f2f2d7", "#fff2b3"]}
       />
       <div
         ref={containerRef}
@@ -99,7 +77,7 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.2 }}
-              href="https://github.com"
+              href="https://github.com/hoomanhajrian"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all text-gray-700 dark:text-gray-300 hover:text-sky-500 dark:hover:text-sky-400"
@@ -117,7 +95,7 @@ const Home = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1.4 }}
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/hooman-hajarian"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all text-gray-700 dark:text-gray-300 hover:text-sky-500 dark:hover:text-sky-400"

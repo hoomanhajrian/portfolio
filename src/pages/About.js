@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SEO from '../components/SEO';
 import useScrollNavigation from '../hooks/useScrollNavigation';
 
@@ -43,6 +43,10 @@ const About = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 10);
+  }, []);
 
   return (
     <>

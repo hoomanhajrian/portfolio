@@ -28,7 +28,7 @@ const TiltCard = ({ children, className = '' }) => {
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`bg-white dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl overflow-visible ${className}`}
+        className={`bg-gray-200 dark:bg-gray-800 rounded-3xl shadow-lg hover:shadow-2xl overflow-visible ${className}`}
         style={{
           transformStyle: 'preserve-3d',
           transform: tiltTransform || 'perspective(1500px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
