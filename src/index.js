@@ -1,12 +1,17 @@
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import { ThemeProvider } from './context/ThemeContext';
+import { HelmetProvider } from 'react-helmet-async';
 
-import App from "./App";
-const container = document.getElementById("app");
-const root = createRoot(container);
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <App />);
-
-reportWebVitals();
+  <React.StrictMode>
+    <HelmetProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </HelmetProvider>
+  </React.StrictMode>
+);

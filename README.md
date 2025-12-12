@@ -1,33 +1,113 @@
-# Getting Started with Create React App
+# Modern Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio website built with React 19 and Material UI v6, featuring dark mode support and smooth animations.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- 🎨 Beautiful Material Design UI with Material UI v6
+- 🌓 Dark/Light mode toggle with MUI theming
+- 📱 Fully responsive design with Material UI Grid
+- ⚡ Fast and optimized with React 19
+- 🎭 Smooth animations with Fade and Zoom effects
+- 🧭 Client-side routing with React Router v6
+- 📧 Contact form with Material UI components
+- 🎯 Projects showcase with filtering
+- 🎨 Customizable theme with Material UI theming system
 
-### `yarn start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js 14+ and yarn installed
 
-### `yarn test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repository
+```bash
+git clone https://github.com/hoomanhajrian/portfolio.git
+cd portfolio
+```
 
-### `yarn build`
+2. Install dependencies
+```bash
+yarn install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Start the development server
+```bash
+yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app will open at [http://localhost:3000](http://localhost:3000)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Building for Production
+
+```bash
+yarn build
+```
+
+This creates an optimized production build in the `build` folder.
+
+## 🛠️ Tech Stack
+
+- **React 19** - Latest stable React version
+- **Material UI v6** - React component library with beautiful design
+- **React Router v6** - Client-side routing
+- **Tailwind CSS** - Utility-first CSS framework (complementary)
+- **Emotion** - CSS-in-JS library for Material UI styling
+- **Context API** - State management for dark mode
+
+## 📁 Project Structure
+
+```
+portfolio/
+├── public/          # Static files
+├── src/
+│   ├── components/  # Reusable components
+│   │   └── Navbar.js
+│   ├── context/     # React context providers
+│   │   └── ThemeContext.js
+│   ├── pages/       # Page components
+│   │   ├── Home.js
+│   │   ├── About.js
+│   │   ├── Projects.js
+│   │   └── Contact.js
+│   ├── App.js       # Main app component
+│   ├── index.js     # Entry point
+│   └── index.css    # Global styles
+├── tailwind.config.js
+├── postcss.config.js
+└── package.json
+```
+
+## 🎨 Customization
+
+### Update Personal Information
+
+Edit the following files to add your information:
+- [src/pages/Home.js](src/pages/Home.js) - Update name, title, and social links
+- [src/pages/About.js](src/pages/About.js) - Add your skills and experience
+- [src/pages/Projects.js](src/pages/Projects.js) - Add your projects
+- [src/pages/Contact.js](src/pages/Contact.js) - Update contact information
+
+### Customize Colors
+
+Edit [tailwind.config.js](tailwind.config.js) to change the color scheme:
+```js
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        // Your custom colors
+      },
+    },
+  },
+}
+```
+
+## 📝 License
+
+This project is open source and available under the MIT License.
 
 ### `yarn eject`
 
