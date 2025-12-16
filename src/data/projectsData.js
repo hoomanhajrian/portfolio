@@ -168,6 +168,30 @@ const projectsData = [
     tags: ["Next.js", "SSR", "React"],
     category: "fullstack",
   },
+  {
+    id: 13,
+    name: "Speedo360",
+    position: "Full Stack Developer",
+    year: "2025-current",
+    href: "https://speedo360.com/",
+    description:"Mobile application for both Android and iOS platforms using React Native framework for tracking your driving speed and your location.",
+    imgUrl: "/img/speedo360.jpg",
+    gitHub: "https://github.com/hoomanhajrian/speedo360",
+    tags: ["Frontend", "React Native", "Android","iOS","OAuth"],
+    category: "frontend",
+  },
+  {
+    id: 14,
+    name: "Threeprinted",
+    position: "Full Stack Developer",
+    year: "2025-current",
+    href: "https://threeprinted.com/",
+    description:"3D printed products e-commerce website using Next.js for front end and Nodejs for back end with server side rendering for better SEO performance.",
+    imgUrl: "/img/threeprinted.jpg",
+    gitHub: "https://github.com/hoomanhajrian/threeprinted-main",
+    tags: ["Next.js", "API", "E-commerce","Full Stack"],
+    category: "fullstack",
+  },
 ].reverse();
 
 export default projectsData;
