@@ -192,6 +192,18 @@ const projectsData = [
     tags: ["Next.js", "API", "E-commerce","Full Stack"],
     category: "fullstack",
   },
+  {
+    id: 15,
+    name: "ICBC Test",
+    position: "Full Stack Developer",
+    year: "2026",
+    href: "https://www.icbcpracticetest.com/",
+    description:"Icbc practice test with sample questions, results and study materials.",
+    imgUrl: "/img/icbc-test.jpg",
+    gitHub: "https://github.com/hoomanhajrian/ICBC-test",
+    tags: ["Next.js", "API","Full Stack"],
+    category: "frontend",
+  },
 ].reverse();
 
 export default projectsData;
