@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const routes = ['/', '/projects', '/about', '/contact'];
+
 const useScrollNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -8,8 +10,6 @@ const useScrollNavigation = () => {
   const lastScrollRef = useRef(0);
   const scrollTimeoutRef = useRef(null);
   const isPageLoadedRef = useRef(false);
-
-  const routes = ['/', '/projects', '/about', '/contact'];
 
   useEffect(() => {
     // Delay scroll detection to allow page to fully render

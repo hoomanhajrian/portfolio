@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 
 const VariableProximity = ({
@@ -11,7 +11,6 @@ const VariableProximity = ({
   falloff = 'linear',
   ...props
 }) => {
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const textRef = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -20,12 +19,6 @@ const VariableProximity = ({
   const springConfig = { stiffness: 200, damping: 20 };
   const mouseXSpring = useSpring(mouseX, springConfig);
   const mouseYSpring = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    if (!textRef.current) return;
-    const rect = textRef.current.getBoundingClientRect();
-    setDimensions({ width: rect.width, height: rect.height });
-  }, [label]);
 
   useEffect(() => {
     const container = containerRef?.current || document.body;

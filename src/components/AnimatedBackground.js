@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { useTheme } from '../context/ThemeContext';
 
 export default function LiquidEther({
   mouseForce = 20,

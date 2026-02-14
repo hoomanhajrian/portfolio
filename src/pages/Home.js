@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import SEO from "../components/SEO";
@@ -13,10 +13,6 @@ const Home = () => {
   const containerRef = useRef(null);
   const { isDarkMode } = useTheme();
   // Theme-aware colors matching site's sky blue palette
-
-    useEffect(() => {
-      console.log(isDarkMode);
-    }, [isDarkMode]);
 
   return (
     <>
