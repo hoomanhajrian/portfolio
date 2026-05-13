@@ -211,7 +211,7 @@ const projectsData = [
     year: "2026-current",
     href: "https://www.suntagandtitle.com/",
     description:"Tag And Title authorized business in Maryland, USA website.",
-    imgUrl: "/img/suntag.png",
+    imgUrl: "/img/suntag.jpg",
     gitHub: "https://github.com/hoomanhajrian/suntag",
     tags: ["Next.js", "API","Full Stack","SEO"],
     category: "fullstack",
