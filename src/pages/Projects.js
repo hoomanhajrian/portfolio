@@ -70,14 +70,33 @@ const Projects = () => {
                     {!loadedImages[project.id] && (
                       <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse" />
                     )}
-                    <img
-                      src={project.imgUrl}
-                      alt={project.name}
-                      onLoad={() => handleImageLoad(project.id)}
-                      className={`w-full h-full object-cover transition-opacity ${
-                        loadedImages[project.id] ? 'opacity-100' : 'opacity-0'
-                      }`}
-                    />
+                    <picture>
+                      {/* WebP sources (optimized) */}
+                      <source
+                        type="image/webp"
+                        srcSet={`/img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-400.webp 400w, /img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-800.webp 800w, /img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-1200.webp 1200w`}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+
+                      {/* JPEG fallback optimized */}
+                      <source
+                        type="image/jpeg"
+                        srcSet={`/img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-400.jpg 400w, /img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-800.jpg 800w, /img/optimized/${project.imgUrl.replace('/img/', '').replace(/\.[^/.]+$/, '')}-1200.jpg 1200w`}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+
+                      {/* Fallback to original image if optimized not present */}
+                      <img
+                        src={project.imgUrl}
+                        alt={project.name}
+                        onLoad={() => handleImageLoad(project.id)}
+                        loading="lazy"
+                        decoding="async"
+                        className={`w-full h-full object-cover transition-opacity ${
+                          loadedImages[project.id] ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      />
+                    </picture>
                   </div>
 
                   {/* Content */}
