@@ -7,7 +7,6 @@ const useScrollNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isNavigatingRef = useRef(false);
-  const scrollTimeoutRef = useRef(null);
   const isPageLoadedRef = useRef(false);
   const navigationCooldownRef = useRef(false);
   const navigationLockMs = 900;
@@ -76,7 +75,6 @@ const useScrollNavigation = () => {
     return () => {
       window.removeEventListener('wheel', handleWheel);
       if (timeout) clearTimeout(timeout);
-      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [location.pathname, navigate]);
 };
