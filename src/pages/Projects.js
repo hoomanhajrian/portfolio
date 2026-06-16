@@ -32,9 +32,10 @@ const Projects = () => {
         keywords="Portfolio Projects, React Projects, Next.js Applications, Web Development Portfolio, Mobile Apps, E-commerce Platforms, Full Stack Projects"
         url="https://hoomanhajrian.github.io/portfolio/projects"
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 bg-white dark:bg-gray-900">
-        <div className="animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white">
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+          <div className="animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-900 dark:text-white">
             My Projects
           </h2>
           <p className="text-xl text-center text-gray-600 dark:text-gray-400 mb-8">
@@ -157,6 +158,7 @@ const Projects = () => {
               </div>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </>

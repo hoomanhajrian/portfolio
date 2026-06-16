@@ -17,9 +17,10 @@ const About = () => {
         keywords="Full Stack Developer, Data Analyst, SQL, PostgreSQL, React, AWS, Data Analytics"
         url="https://hoomanhajarian.github.io/portfolio/about"
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 bg-white dark:bg-gray-900">
-        <div className="space-y-10">
-          <section className="text-center">
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+          <div className="space-y-10">
+            <section className="text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-sky-500 mb-3">Full Stack Developer | Data Analyst</p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
               I build reliable web applications and turn data into practical business insight.
@@ -129,6 +130,7 @@ const About = () => {
               </div>
             </div>
           </section>
+        </div>
         </div>
       </div>
     </>

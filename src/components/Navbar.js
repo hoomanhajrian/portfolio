@@ -22,13 +22,14 @@ const Navbar = () => {
     <>
       <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20 md:h-16">
             {/* Logo */}
             <Link
               to="/"
-              className="text-xl md:text-2xl font-bold text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300 transition-colors no-underline"
+              className="text-base sm:text-lg md:text-2xl font-bold text-sky-500 hover:text-sky-600 dark:text-sky-400 dark:hover:text-sky-300 transition-colors no-underline truncate pr-2"
             >
-              Hooman Hajarian Portfolio
+              <span className="md:hidden">Hooman Hajarian</span>
+              <span className="hidden md:inline">Hooman Hajarian Portfolio</span>
             </Link>
 
             {/* Desktop Navigation */}

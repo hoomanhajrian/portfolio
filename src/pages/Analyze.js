@@ -35,8 +35,8 @@ const Analyze = () => {
         url="https://hoomanhajrian.github.io/portfolio/analyze"
       />
 
-      <div className="px-4 sm:px-6 lg:px-8 py-10 md:py-14 bg-white dark:bg-gray-900">
-        <div className="max-w-6xl mx-auto space-y-12">
+      <div className="w-full min-h-screen bg-white dark:bg-gray-900 pt-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 space-y-12">
           <section className="text-center">
             <p className="text-sm uppercase tracking-[0.3em] text-sky-500 mb-3">Data Analysis Portfolio</p>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
@@ -151,7 +151,7 @@ const Analyze = () => {
             </div>
           </section>
         </div>
-      </div>
+        </div>
     </>
   );
 };
