@@ -182,18 +182,6 @@ const projectsData = [
   },
   {
     id: 14,
-    name: "Threeprinted",
-    position: "Full Stack Developer",
-    year: "2025-current",
-    href: "https://threeprinted.com/",
-    description:"3D printed products e-commerce website using Next.js for front end and Nodejs for back end with server side rendering for better SEO performance.",
-    imgUrl: "/img/threeprinted.jpg",
-    gitHub: "https://github.com/hoomanhajrian/threeprinted-main",
-    tags: ["Next.js", "API", "E-commerce","Full Stack"],
-    category: "fullstack",
-  },
-  {
-    id: 15,
     name: "ICBC Test",
     position: "Full Stack Developer",
     year: "2026",
@@ -205,7 +193,7 @@ const projectsData = [
     category: "frontend",
   },
     {
-    id: 16,
+    id: 15,
     name: "Sun Tag And Title",
     position: "Full Stack Developer",
     year: "2026-current",
@@ -217,7 +205,7 @@ const projectsData = [
     category: "fullstack",
   },
     {
-    id: 17,
+    id: 16,
     name: "Threeprinted",
     position: "Full Stack Developer",
     year: "2026-current",
