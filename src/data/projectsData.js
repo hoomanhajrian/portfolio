@@ -216,6 +216,18 @@ const projectsData = [
     tags: ["Next.js", "API","Full Stack","SEO"],
     category: "fullstack",
   },
+    {
+    id: 17,
+    name: "Threeprinted",
+    position: "Full Stack Developer",
+    year: "2026-current",
+    href: "https://www.threeprinted.com/",
+    description:"3D printed products e-commerce website using Next.js for front end and Nodejs for back end with server side rendering for better SEO performance.",
+    imgUrl: "/img/threeprinted.jpg",
+    gitHub: "https://github.com/hoomanhajrian/threeprinted-main",
+    tags: ["Next.js", "API","Full Stack","SEO"],
+    category: "fullstack",
+  },
 ].reverse();
 
 export default projectsData;
