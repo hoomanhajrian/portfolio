@@ -14,7 +14,7 @@ export type Project = {
   description: string
   highlights: string[]
   stack: string[]
-  links: { live?: string; code?: string }
+  links: { live?: string; code?: string; appStore?: string; androidBeta?: string }
   image: { src: string; texture: string; width: number; height: number; alt: string; fit: 'cover' | 'contain' }
   featured?: boolean
   team?: boolean
@@ -102,19 +102,26 @@ export const projects: Project[] = [
     period: { start: '2025', end: 'Present' },
     role: 'Creator & developer',
     category: 'mobile',
-    summary: 'Cross-platform mobile app for Android and iOS that tracks your driving speed and location.',
+    summary: 'GPS speedometer app for iPhone and Android with live speed limits, speeding alerts, trip history and a windshield HUD.',
     description:
-      'A React Native app I built and run, shipping to both Android and iPhone from one codebase. It tracks driving speed and location in real time and supports sign-in with OAuth. The app is currently in beta.',
+      'Speedo360 turns a phone into a GPS speedometer for the car or the bike. It shows the speed limit for the road you are on and warns you before you go over it. I built and run the product end to end, from the React Native app to the marketing site at speedo360.com. It is live on the App Store and in beta on Android, with a free tier and a Premium subscription. No account is needed and trips stay on the device.',
     highlights: [
-      'One React Native codebase shipping to both Android and iOS.',
-      'Real-time speed and location tracking.',
-      'OAuth sign-in.',
+      'Live speed limits from OpenStreetMap, fetched for the square kilometre around you (never your exact position) and cached on the phone for a week, so familiar roads need no data.',
+      'Escalating alerts at 80%, 100% and 120% of the limit, with sound and vibration levels the user chooses; the speedometer itself works fully offline.',
+      'Bike mode: motorcycle lean angle from GPS speed and the gyroscope, sensor-free bicycle cadence from the phone’s motion, and climb and grade from the barometer or GPS.',
+      'Premium features: trip history with route maps and GPX/CSV export, a GPS-timed 0–100 km/h and quarter-mile timer, and a mirrored windshield HUD for night driving.',
+      'Free tier with ads plus monthly, yearly and lifetime Premium plans sold through the App Store and Google Play.',
+      'Private by design: no sign-up, no background tracking, and trips, timer runs and settings live only on the device.',
     ],
-    stack: ['React Native', 'Android', 'iOS', 'OAuth'],
-    links: { live: 'https://speedo360.com/' },
-    image: img('speedo360', 'Speedo360 app icon: a glowing speedometer', 'contain'),
+    stack: ['React Native', 'iOS', 'Android', 'GPS & motion sensors', 'OpenStreetMap', 'In-app subscriptions', 'Offline-first'],
+    links: {
+      live: 'https://www.speedo360.com/',
+      appStore: 'https://apps.apple.com/app/id6825876545',
+      androidBeta: 'https://www.speedo360.com/beta/android',
+    },
+    image: img('speedo360', 'Speedo360 website: “Know your speed. Know the limit.” with the in-app speedometer showing 83 km/h under a 100 limit'),
     featured: true,
-    status: 'Beta',
+    status: 'Live',
     accent: '#22d3ee',
   },
   {

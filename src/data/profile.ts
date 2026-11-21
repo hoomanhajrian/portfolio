@@ -138,7 +138,7 @@ export const experience: Experience[] = [
       'Integrate third-party APIs and services, resolve complex technical issues, find bottlenecks and optimize code for performance.',
       'Built cloud-native applications with Docker and Kubernetes on AWS, and administered PostgreSQL databases for query performance, security and data integrity.',
       'Implemented automated tests and data-validation checks that let releases ship reliably.',
-      'Built and run speedo360.com, a React Native app for Android and iOS (currently in beta).',
+      'Built and run Speedo360, a React Native GPS speedometer with live OpenStreetMap speed limits, alerts and a windshield HUD: live on the App Store, in beta on Android, with in-app Premium subscriptions.',
     ],
     stack: ['Next.js', 'React', 'TypeScript', 'Node.js', 'SASS', 'AWS', 'Docker', 'PostgreSQL'],
   },

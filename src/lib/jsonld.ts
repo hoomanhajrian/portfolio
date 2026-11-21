@@ -38,9 +38,11 @@ export function websiteJsonLd() {
 }
 
 export function projectJsonLd(project: Project) {
+  const isApp = project.category === 'mobile' && Boolean(project.links.appStore || project.links.androidBeta)
   return {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
+    '@type': isApp ? 'MobileApplication' : 'CreativeWork',
+    ...(isApp ? { operatingSystem: 'iOS, Android', applicationCategory: 'TravelApplication' } : {}),
     name: project.name,
     description: project.summary,
     url: absoluteUrl(`/projects/${project.slug}`),
@@ -48,6 +50,8 @@ export function projectJsonLd(project: Project) {
     dateCreated: project.period.start,
     keywords: project.stack.join(', '),
     author: { '@id': `${SITE_URL}/#person` },
-    ...(project.links.live ? { sameAs: project.links.live } : {}),
+    ...(project.links.live || project.links.appStore
+      ? { sameAs: [project.links.live, project.links.appStore].filter(Boolean) }
+      : {}),
   }
 }
