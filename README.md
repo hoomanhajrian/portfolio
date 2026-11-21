@@ -52,7 +52,26 @@ To add a project screenshot:
 | `CONTACT_FROM_EMAIL` | `Portfolio <contact@hoomanhajarian.com>` | Domain must be verified in Resend |
 | `NEXT_PUBLIC_SITE_URL` | `https://www.hoomanhajarian.com` | Canonical URLs, sitemap and Open Graph (this is the default; it must match the primary domain in Vercel) |
 
+| `CONTACT_FORM_SECRET` | any long random string | Optional. Signs contact-form tokens (derived from `RESEND_API_KEY` if unset) |
+| `KV_REST_API_URL` / `KV_REST_API_TOKEN` | set by the Upstash integration | Optional, recommended. Shared rate limits across all server instances (`UPSTASH_REDIS_REST_URL` / `_TOKEN` also work) |
+
 Without the Resend variables the form still validates input, but shows a friendly "temporarily unavailable" message instead of sending.
+
+### Contact form protection
+
+- **Same-origin only:** Next.js rejects cross-origin Server Action calls; requests without an `Origin` header are rejected too. The request body is capped at 64 KB.
+- **Bot traps:** a hidden honeypot field, plus a signed form token. The token is issued on first interaction, accepted only 2.5 s to 2 h after issue, and sends one email at most. Bots get a fake "sent" response so they don't adapt.
+- **Input rules** (`src/lib/contact-schema.ts`):
+  - name 2–80 letters, email ≤ 254, company ≤ 100, message 20–3,000 characters;
+  - Unicode normalized; control and invisible characters removed;
+  - no line breaks in single-line fields, at most 3 links, no HTML.
+- **Rate limits** (`src/lib/contact/rate-limit.ts`):
+  - 15 attempts per 10 minutes per IP;
+  - 3 emails per 10 minutes and 10 per day per IP;
+  - 3 per day per sender address;
+  - 40 per day for the whole site.
+
+  IPs and addresses are hashed before they are used as keys.
 
 ## Deploying (Vercel)
 
