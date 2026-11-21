@@ -29,6 +29,12 @@ type State = {
   ready: boolean
   interacted: boolean
   tier: 'high' | 'low'
+  /** The first full load finished; after this the full-screen loader never shows again. */
+  introDone: boolean
+  /** Controls guide visible. */
+  guideOpen: boolean
+  /** Number of nearby frames whose artwork is still loading (drives the small loading pill). */
+  loadingFrames: number
 }
 
 let state: State = {
@@ -39,7 +45,12 @@ let state: State = {
   ready: false,
   interacted: false,
   tier: 'high',
+  introDone: false,
+  guideOpen: false,
+  loadingFrames: 0,
 }
+
+const loadingSet = new Set<string>()
 
 const listeners = new Set<() => void>()
 const set = (patch: Partial<State>) => {
@@ -94,6 +105,21 @@ export const actions = {
   },
   setTier(tier: State['tier']) {
     set({ tier })
+  },
+  finishIntro() {
+    if (state.introDone) return
+    set({ introDone: true, guideOpen: true })
+  },
+  openGuide() {
+    set({ guideOpen: true })
+  },
+  closeGuide() {
+    set({ guideOpen: false })
+  },
+  frameLoading(slug: string, loading: boolean) {
+    if (loading) loadingSet.add(slug)
+    else loadingSet.delete(slug)
+    set({ loadingFrames: loadingSet.size })
   },
   interacted() {
     set({ interacted: true })

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useProgress } from '@react-three/drei'
 import { profile } from '@/data/profile'
@@ -97,10 +97,7 @@ function NearestHint() {
 }
 
 export function Hud() {
-  const interacted = useHallway((s) => s.interacted)
   const busy = useHallway((s) => s.focused !== null || s.panel !== null)
-  // The hallway is client-only (never server-rendered), so reading the media query during render is safe.
-  const [touch] = useState(() => window.matchMedia('(pointer: coarse)').matches)
 
   return (
     <div className="pointer-events-none absolute inset-0 z-10 flex flex-col justify-between p-3 sm:p-4">
@@ -118,6 +115,18 @@ export function Hud() {
         </button>
 
         <div className="pointer-events-auto flex flex-wrap items-center justify-end gap-2">
+          <button
+            type="button"
+            onClick={() => actions.openGuide()}
+            className="btn btn-ghost glass !px-3 !py-2 text-sm"
+            aria-label="Show controls"
+            title="How to move around"
+          >
+            <span aria-hidden className="grid size-4 place-items-center rounded-full border border-current font-mono text-[10px] leading-none">
+              ?
+            </span>
+            Controls
+          </button>
           <button type="button" onClick={() => actions.openPanel('projects')} className="btn btn-ghost glass !px-3 !py-2 text-sm">
             Projects
           </button>
@@ -144,30 +153,28 @@ export function Hud() {
       <div className={`space-y-3 transition-opacity duration-300 ${busy ? 'pointer-events-none opacity-0' : 'opacity-100'}`}>
         <NearestHint />
         <ProgressRail />
-        <AnimatePresence>
-          {!interacted && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="mx-auto w-fit rounded-full border border-line bg-bg/70 px-4 py-1.5 text-center font-mono text-[11px] tracking-wider text-muted backdrop-blur"
-            >
-              {touch ? 'Swipe up to walk · drag sideways to look · tap a frame' : 'Scroll or W/S to walk · A/D to jump · move the mouse to look · click a frame'}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        <LoadingPill />
       </div>
     </div>
   )
 }
 
+/**
+ * Full-screen loader for the first load only. Textures for frames further down the hallway load
+ * later in the background; those never bring this screen back (see LoadingPill instead).
+ */
 export function Loader() {
   const { progress, active } = useProgress()
   const ready = useHallway((s) => s.ready)
-  const done = ready && !active
+  const introDone = useHallway((s) => s.introDone)
+
+  useEffect(() => {
+    if (ready && !active) actions.finishIntro()
+  }, [ready, active])
+
   return (
     <AnimatePresence>
-      {!done && (
+      {!introDone && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.6 } }}
@@ -188,6 +195,29 @@ export function Loader() {
             Skip to the 2D site
           </button>
         </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+/** Small, non-blocking indicator shown while frames near the visitor are still loading their artwork. */
+function LoadingPill() {
+  const loading = useHallway((s) => s.introDone && s.loadingFrames > 0)
+  return (
+    <AnimatePresence>
+      {loading && (
+        <motion.p
+          role="status"
+          aria-live="polite"
+          initial={{ opacity: 0, y: 6 }}
+          // Short delay so quick loads (usually from cache) don't flash the pill.
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.35 } }}
+          exit={{ opacity: 0, y: 6 }}
+          className="mx-auto flex w-fit items-center gap-2 rounded-full border border-line bg-bg/70 px-3 py-1 font-mono text-[11px] tracking-wider text-muted backdrop-blur"
+        >
+          <span aria-hidden className="size-3 animate-spin rounded-full border-2 border-line border-t-accent" />
+          Loading project images
+        </motion.p>
       )}
     </AnimatePresence>
   )
