@@ -50,7 +50,7 @@ To add a project screenshot:
 | `RESEND_API_KEY` | `re_…` | Create at resend.com → API Keys |
 | `CONTACT_TO_EMAIL` | `you@example.com` | Inbox that receives contact-form messages |
 | `CONTACT_FROM_EMAIL` | `Portfolio <contact@hoomanhajarian.com>` | Domain must be verified in Resend |
-| `NEXT_PUBLIC_SITE_URL` | `https://hoomanhajarian.com` | Canonical URLs, sitemap and Open Graph (this is the default) |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.hoomanhajarian.com` | Canonical URLs, sitemap and Open Graph (this is the default; it must match the primary domain in Vercel) |
 
 Without the Resend variables the form still validates input, but shows a friendly "temporarily unavailable" message instead of sending.
 
