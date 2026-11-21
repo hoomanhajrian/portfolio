@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { profile } from '@/data/profile'
 import { NAV_SECTIONS } from '@/lib/site'
@@ -13,6 +13,7 @@ export function Navbar({ home = false }: { home?: boolean }) {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
+  const pendingTarget = useRef<string | null>(null)
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
 
@@ -39,12 +40,28 @@ export function Navbar({ home = false }: { home?: boolean }) {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+    if (!open && pendingTarget.current) {
+      const id = pendingTarget.current
+      pendingTarget.current = null
+      requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ block: 'start' })
+        history.replaceState(null, '', `#${id}`)
+      })
+    }
     return () => {
       document.body.style.overflow = ''
     }
   }, [open])
 
   const href = (id: string) => (home ? `#${id}` : `/#${id}`)
+
+  // Close the menu first; the effect above unlocks page scrolling and then scrolls to the section.
+  const goTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    setOpen(false)
+    if (!home) return
+    e.preventDefault()
+    pendingTarget.current = id
+  }
 
   return (
     <header
@@ -102,20 +119,22 @@ export function Navbar({ home = false }: { home?: boolean }) {
 
       <AnimatePresence>
         {open && (
+          // Its own fixed layer below the bar (not part of the header's height), so the header never
+          // grows taller than the screen and mobile browsers don't shift the visual viewport.
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100dvh' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden md:hidden"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto overscroll-contain border-t border-line bg-bg/95 pb-10 backdrop-blur-xl md:hidden"
           >
             <ul className="space-y-1 px-4 pt-4">
               {NAV_SECTIONS.map((s, i) => (
                 <motion.li key={s.id} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i + 0.1 }}>
                   <a
                     href={href(s.id)}
-                    onClick={() => setOpen(false)}
+                    onClick={(e) => goTo(e, s.id)}
                     className="flex items-baseline gap-3 rounded-xl px-3 py-3 font-display text-2xl font-semibold"
                   >
                     <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, '0')}</span>

@@ -27,8 +27,9 @@ export function Starfield({ className = '' }: { className?: string }) {
     let stars: Star[] = []
 
     const resize = () => {
-      w = window.innerWidth
-      h = window.innerHeight
+      // clientWidth/Height = the real viewport, unaffected by any content overflow.
+      w = document.documentElement.clientWidth
+      h = document.documentElement.clientHeight
       canvas.width = Math.floor(w * dpr)
       canvas.height = Math.floor(h * dpr)
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
@@ -84,5 +85,7 @@ export function Starfield({ className = '' }: { className?: string }) {
     }
   }, [])
 
-  return <canvas ref={ref} aria-hidden className={`pointer-events-none fixed inset-0 -z-10 ${className}`} />
+  // Explicit size: a canvas's default CSS size is its pixel buffer (viewport × DPR), which would
+  // overflow the page and widen the mobile layout viewport.
+  return <canvas ref={ref} aria-hidden className={`pointer-events-none fixed inset-0 -z-10 h-full w-full ${className}`} />
 }
