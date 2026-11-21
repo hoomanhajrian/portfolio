@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatPeriod, type Project } from '@/data/projects'
-import { ExternalIcon, GitHubIcon, ArrowRightIcon } from '@/components/site/icons'
+import { AndroidIcon, AppleIcon, ExternalIcon, GitHubIcon, ArrowRightIcon } from '@/components/site/icons'
 
 export function StatusBadge({ status }: { status?: Project['status'] }) {
   if (!status) return null
@@ -25,6 +25,16 @@ export function ProjectLinks({ project, size = 'md' }: { project: Project; size?
       {project.links.live && (
         <a href={project.links.live} target="_blank" rel="noopener noreferrer" className={size === 'sm' ? cls : 'btn btn-primary !py-2.5 text-sm'}>
           <ExternalIcon size={16} /> Live site
+        </a>
+      )}
+      {project.links.appStore && (
+        <a href={project.links.appStore} target="_blank" rel="noopener noreferrer" className={cls}>
+          <AppleIcon size={16} /> App Store
+        </a>
+      )}
+      {project.links.androidBeta && (
+        <a href={project.links.androidBeta} target="_blank" rel="noopener noreferrer" className={cls}>
+          <AndroidIcon size={16} /> Android beta
         </a>
       )}
       {project.links.code && (
