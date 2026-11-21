@@ -23,6 +23,22 @@ function rateLimited(key: string) {
 
 const FIELDS = ['name', 'email', 'company', 'message'] as const
 
+/**
+ * Reads an env var defensively. Vercel stores values literally, so a value pasted with quotes
+ * (e.g. "Portfolio <contact@example.com>") would keep them and Resend would reject the address.
+ */
+function env(name: string) {
+  const value = process.env[name]?.trim().replace(/^(['"])(.*)\1$/, '$2').trim()
+  return value || undefined
+}
+
+/** Accepts "Name <email>" or a bare email; a bare email gets a friendly sender name. */
+function senderAddress(from: string) {
+  return /<[^<>\s]+@[^<>\s]+>$/.test(from) ? from : `Portfolio <${from}>`
+}
+
+const domainOf = (address: string) => address.match(/@([^>\s]+)/)?.[1] ?? '(none)'
+
 export async function sendContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   const raw = Object.fromEntries(FIELDS.map((f) => [f, String(formData.get(f) ?? '')]))
   const values = raw as Record<(typeof FIELDS)[number], string>
@@ -53,17 +69,23 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
     return { status: 'error', message: 'Too many messages in a short time. Please try again in a few minutes.', values }
   }
 
-  const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = process.env
+  const RESEND_API_KEY = env('RESEND_API_KEY')
+  const CONTACT_TO_EMAIL = env('CONTACT_TO_EMAIL')
+  const CONTACT_FROM_EMAIL = env('CONTACT_FROM_EMAIL')
   if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) {
-    console.error('[contact] Missing RESEND_API_KEY, CONTACT_TO_EMAIL or CONTACT_FROM_EMAIL')
+    const missing = Object.entries({ RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL })
+      .filter(([, v]) => !v)
+      .map(([k]) => k)
+    console.error(`[contact] Missing environment variables: ${missing.join(', ')} (set them in Vercel, then redeploy)`)
     return { status: 'error', message: 'The contact form is temporarily unavailable. Please reach out on LinkedIn instead.', values }
   }
 
   const sentAt = new Date().toUTCString()
   const company = data.company || undefined
   const resend = new Resend(RESEND_API_KEY)
+  const from = senderAddress(CONTACT_FROM_EMAIL)
   const { error } = await resend.emails.send({
-    from: CONTACT_FROM_EMAIL,
+    from,
     to: CONTACT_TO_EMAIL,
     replyTo: data.email,
     subject: `Portfolio contact: ${data.name}${company ? ` (${company})` : ''}`,
@@ -73,7 +95,11 @@ export async function sendContact(_prev: ContactState, formData: FormData): Prom
   })
 
   if (error) {
-    console.error('[contact] Resend error:', error)
+    // Shows up in Vercel → Logs. Never logs the API key or the visitor's message.
+    console.error(
+      `[contact] Resend rejected the email: ${error.name} – ${error.message} ` +
+        `(from domain: ${domainOf(from)}, to domain: ${domainOf(CONTACT_TO_EMAIL)}, key: ${RESEND_API_KEY.slice(0, 3)}…${RESEND_API_KEY.length} chars)`,
+    )
     return { status: 'error', message: 'Sorry, your message could not be sent. Please try again or reach out on LinkedIn.', values }
   }
 
