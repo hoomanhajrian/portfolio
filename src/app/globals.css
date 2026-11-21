@@ -117,6 +117,8 @@ html[data-view='3d'] .site-2d[data-home] { display: none; }
 html[data-view='3d'] #boot-loader { display: flex; }
 html[data-view='3d']:has(#boot-loader) body { overflow: hidden; }
 html[data-view='3d']:has(#boot-loader) .only-2d { display: none; }
+/* 3D-only controls are server-rendered and hidden before paint on devices that can't run the hallway. */
+html[data-can3d='0'] .needs-3d { display: none; }
 
 /* ---------- Building blocks ---------- */
 @utility glass {

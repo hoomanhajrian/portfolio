@@ -2,13 +2,16 @@
 
 import { useActionState, useEffect, useId, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import { sendContact } from '@/app/actions/contact'
-import type { ContactState } from '@/lib/contact-schema'
+import { getContactToken, sendContact } from '@/app/actions/contact'
+import { LIMITS, type ContactField, type ContactState } from '@/lib/contact-schema'
 import { CheckIcon } from '@/components/site/icons'
 
 const initialState: ContactState = { status: 'idle' }
 
-type FieldName = 'name' | 'email' | 'company' | 'message'
+/** Keep in sync with TOKEN_MIN_AGE_MS on the server (submitting sooner is treated as a bot). */
+const TOKEN_MIN_AGE_MS = 2600
+const TOKEN_REFRESH_MS = 100 * 60 * 1000
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 function Field({
   name,
@@ -20,8 +23,13 @@ function Field({
   error,
   defaultValue,
   placeholder,
+  maxLength,
+  minLength,
+  inputMode,
+  onInput,
+  hint,
 }: {
-  name: FieldName
+  name: ContactField
   label: string
   type?: string
   required?: boolean
@@ -30,6 +38,11 @@ function Field({
   error?: string
   defaultValue?: string
   placeholder?: string
+  maxLength: number
+  minLength?: number
+  inputMode?: 'text' | 'email'
+  onInput?: (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  hint?: React.ReactNode
 }) {
   const id = useId()
   const errId = `${id}-error`
@@ -51,7 +64,9 @@ function Field({
           name={name}
           required={required}
           rows={6}
-          maxLength={5000}
+          maxLength={maxLength}
+          minLength={minLength}
+          onInput={onInput}
           defaultValue={defaultValue}
           placeholder={placeholder}
           aria-invalid={Boolean(error)}
@@ -65,6 +80,11 @@ function Field({
           type={type}
           required={required}
           autoComplete={autoComplete}
+          maxLength={maxLength}
+          minLength={minLength}
+          inputMode={inputMode}
+          autoCapitalize={type === 'email' ? 'off' : undefined}
+          spellCheck={type === 'email' ? false : undefined}
           defaultValue={defaultValue}
           placeholder={placeholder}
           aria-invalid={Boolean(error)}
@@ -72,11 +92,16 @@ function Field({
           className={cls}
         />
       )}
-      {error && (
-        <p id={errId} className="mt-1.5 text-sm text-rose-400">
-          {error}
-        </p>
-      )}
+      <div className="mt-1.5 flex items-start justify-between gap-3">
+        {error ? (
+          <p id={errId} className="text-sm text-rose-400">
+            {error}
+          </p>
+        ) : (
+          <span />
+        )}
+        {hint}
+      </div>
     </div>
   )
 }
@@ -87,21 +112,46 @@ export function ContactForm() {
 }
 
 function ContactFormInner({ onReset }: { onReset: () => void }) {
-  const [state, formAction, pending] = useActionState(sendContact, initialState)
   const formRef = useRef<HTMLFormElement>(null)
-  const startedAtRef = useRef<HTMLInputElement>(null)
+  const counterRef = useRef<HTMLSpanElement>(null)
+  const token = useRef<{ value: string; at: number } | null>(null)
+  const tokenRequest = useRef<Promise<{ value: string; at: number } | null> | null>(null)
 
-  const startedAt = useRef(0)
+  // A signed, short-lived token from the server is required to send. It is requested the first time the
+  // visitor interacts with the form (not on page load), and refreshed if it is about to expire.
+  const ensureToken = () => {
+    if (token.current && Date.now() - token.current.at < TOKEN_REFRESH_MS) return Promise.resolve(token.current)
+    tokenRequest.current ??= getContactToken()
+      .then((value) => (token.current = value ? { value, at: Date.now() } : null))
+      .catch(() => null)
+      .finally(() => (tokenRequest.current = null))
+    return tokenRequest.current
+  }
 
-  // When the form first appeared (used server-side to reject instant bot submissions). React resets the
-  // form after every submission, so the same original timestamp is written back after each response.
+  const submit = async (prev: ContactState, formData: FormData): Promise<ContactState> => {
+    const t = await ensureToken()
+    if (!t) return { status: 'error', message: 'Too many attempts. Please wait a few minutes and try again.' }
+    const wait = TOKEN_MIN_AGE_MS - (Date.now() - t.at)
+    if (wait > 0) await sleep(wait)
+    formData.set('token', t.value)
+    const result = await sendContact(prev, formData)
+    if (result.status === 'success' || (result.status === 'error' && result.message.startsWith('Your session expired'))) token.current = null
+    return result
+  }
+
+  const [state, formAction, pending] = useActionState(submit, initialState)
+
+  const updateCounter = (length: number) => {
+    const el = counterRef.current
+    if (!el) return
+    el.textContent = `${length.toLocaleString('en-US')} / ${LIMITS.message.max.toLocaleString('en-US')}`
+    el.classList.toggle('text-amber-400', length > LIMITS.message.max * 0.9)
+  }
+
+  // React resets the form after each submission; keep the counter in step with the restored message.
   useEffect(() => {
-    if (!startedAt.current) startedAt.current = Date.now()
-    if (startedAtRef.current) startedAtRef.current.value = String(startedAt.current)
-  }, [state])
-
-  useEffect(() => {
-    if (state.status === 'success') formRef.current?.reset()
+    const textarea = formRef.current?.elements.namedItem('message') as HTMLTextAreaElement | null
+    updateCounter(textarea?.value.length ?? 0)
   }, [state])
 
   const values = state.status === 'error' ? state.values : undefined
@@ -129,20 +179,59 @@ function ContactFormInner({ onReset }: { onReset: () => void }) {
             </button>
           </motion.div>
         ) : (
-          <motion.form key="form" ref={formRef} action={formAction} exit={{ opacity: 0 }} noValidate className="space-y-5" aria-describedby="contact-status">
+          <motion.form
+            key="form"
+            ref={formRef}
+            action={formAction}
+            onFocusCapture={() => void ensureToken()}
+            exit={{ opacity: 0 }}
+            noValidate
+            className="space-y-5"
+            aria-describedby="contact-status"
+          >
             <div className="grid gap-5 sm:grid-cols-2">
-              <Field name="name" label="Name" required autoComplete="name" error={errors?.name} defaultValue={values?.name} />
-              <Field name="email" label="Email" type="email" required autoComplete="email" error={errors?.email} defaultValue={values?.email} />
+              <Field
+                name="name"
+                label="Name"
+                required
+                autoComplete="name"
+                minLength={LIMITS.name.min}
+                maxLength={LIMITS.name.max}
+                error={errors?.name}
+                defaultValue={values?.name}
+              />
+              <Field
+                name="email"
+                label="Email"
+                type="email"
+                inputMode="email"
+                required
+                autoComplete="email"
+                maxLength={LIMITS.email.max}
+                error={errors?.email}
+                defaultValue={values?.email}
+              />
             </div>
-            <Field name="company" label="Company" autoComplete="organization" error={errors?.company} defaultValue={values?.company} />
+            <Field
+              name="company"
+              label="Company"
+              autoComplete="organization"
+              maxLength={LIMITS.company.max}
+              error={errors?.company}
+              defaultValue={values?.company}
+            />
             <Field
               name="message"
               label="Message"
               required
               textarea
+              minLength={LIMITS.message.min}
+              maxLength={LIMITS.message.max}
+              onInput={(e) => updateCounter(e.currentTarget.value.length)}
               error={errors?.message}
               defaultValue={values?.message}
               placeholder="Tell me about the role, team or project…"
+              hint={<span ref={counterRef} aria-hidden className="shrink-0 font-mono text-xs text-muted" />}
             />
 
             {/* Honeypot (hidden from people and assistive tech) */}
@@ -152,7 +241,6 @@ function ContactFormInner({ onReset }: { onReset: () => void }) {
                 <input name="website" type="text" tabIndex={-1} autoComplete="off" />
               </label>
             </div>
-            <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
 
             <div className="flex flex-wrap items-center gap-4">
               <button type="submit" disabled={pending} className="btn btn-primary relative min-w-44 overflow-hidden disabled:cursor-wait">

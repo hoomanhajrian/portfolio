@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['@react-three/drei', 'motion'],
+    serverActions: {
+      // The only Server Actions are the contact form and its token; nothing legitimate comes close to this.
+      bodySizeLimit: '64kb',
+    },
   },
   async headers() {
     return [
