@@ -1,0 +1,109 @@
+{
+  "card-creator": {
+    "src": "/img/projects/card-creator-7dd29b84.webp",
+    "texture": "/img/projects/3d/card-creator-cefa2410.webp",
+    "width": 1600,
+    "height": 987
+  },
+  "farmer-fresh": {
+    "src": "/img/projects/farmer-fresh-dc71e9d5.webp",
+    "texture": "/img/projects/3d/farmer-fresh-8a79d351.webp",
+    "width": 1600,
+    "height": 962
+  },
+  "go-hike": {
+    "src": "/img/projects/go-hike-0c51b7bf.webp",
+    "texture": "/img/projects/3d/go-hike-8a594621.webp",
+    "width": 1600,
+    "height": 970
+  },
+  "gojunk4moving": {
+    "src": "/img/projects/gojunk4moving-8368208a.webp",
+    "texture": "/img/projects/3d/gojunk4moving-00d828ff.webp",
+    "width": 1600,
+    "height": 963
+  },
+  "hesab-ketab": {
+    "src": "/img/projects/hesab-ketab-a7d2b20c.webp",
+    "texture": "/img/projects/3d/hesab-ketab-02f1f8dc.webp",
+    "width": 1600,
+    "height": 807
+  },
+  "icbc-practice-test": {
+    "src": "/img/projects/icbc-practice-test-b40673d8.webp",
+    "texture": "/img/projects/3d/icbc-practice-test-509b478b.webp",
+    "width": 1600,
+    "height": 1233
+  },
+  "lapsemoon": {
+    "src": "/img/projects/lapsemoon-c71b3dab.webp",
+    "texture": "/img/projects/3d/lapsemoon-438c5c02.webp",
+    "width": 1024,
+    "height": 1024
+  },
+  "littlesellca": {
+    "src": "/img/projects/littlesellca-f913175c.webp",
+    "texture": "/img/projects/3d/littlesellca-9ebd9bbe.webp",
+    "width": 1600,
+    "height": 907
+  },
+  "me": {
+    "src": "/img/me.webp",
+    "width": 420,
+    "height": 540
+  },
+  "movie-time": {
+    "src": "/img/projects/movie-time-21558dc5.webp",
+    "texture": "/img/projects/3d/movie-time-fc0c1a77.webp",
+    "width": 1600,
+    "height": 995
+  },
+  "pacivil": {
+    "src": "/img/projects/pacivil-ce525412.webp",
+    "texture": "/img/projects/3d/pacivil-21c4bb06.webp",
+    "width": 1600,
+    "height": 975
+  },
+  "patch-app": {
+    "src": "/img/projects/patch-app-de7e264e.webp",
+    "texture": "/img/projects/3d/patch-app-b5871a7f.webp",
+    "width": 1600,
+    "height": 976
+  },
+  "speedo360": {
+    "src": "/img/projects/speedo360-e6be8e29.webp",
+    "texture": "/img/projects/3d/speedo360-2d9500f2.webp",
+    "width": 1024,
+    "height": 1024
+  },
+  "sun-tag-and-title": {
+    "src": "/img/projects/sun-tag-and-title-79c5b55c.webp",
+    "texture": "/img/projects/3d/sun-tag-and-title-a40cf7bc.webp",
+    "width": 1200,
+    "height": 1200
+  },
+  "tajhiz-aras": {
+    "src": "/img/projects/tajhiz-aras-8728d65c.webp",
+    "texture": "/img/projects/3d/tajhiz-aras-9eb17bff.webp",
+    "width": 1600,
+    "height": 1082
+  },
+  "tariq-louis": {
+    "src": "/img/projects/tariq-louis-0172f445.webp",
+    "texture": "/img/projects/3d/tariq-louis-6183df44.webp",
+    "width": 1600,
+    "height": 983
+  },
+  "threeprinted": {
+    "src": "/img/projects/threeprinted-1fc4685f.webp",
+    "texture": "/img/projects/3d/threeprinted-19cc2bf5.webp",
+    "width": 1600,
+    "height": 1000
+  },
+  "wedding-planner": {
+    "src": "/img/projects/wedding-planner-aa20102f.webp",
+    "texture": "/img/projects/3d/wedding-planner-eac7f65b.webp",
+    "width": 1600,
+    "height": 992
+  }
+}
