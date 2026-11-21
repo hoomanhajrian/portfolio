@@ -46,7 +46,7 @@ export const profile = {
   availability: 'Open to full-time Full Stack, Front End and React/Next.js roles',
   email: 'hajarianhooman@gmail.com',
   links: {
-    site: 'https://hoomanhajarian.com',
+    site: 'https://www.hoomanhajarian.com',
     linkedin: 'https://www.linkedin.com/in/hooman-hajarian',
     github: 'https://github.com/hoomanhajrian',
     resume: '/resume.pdf',

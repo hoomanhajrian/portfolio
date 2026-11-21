@@ -1,6 +1,6 @@
 import { profile } from '@/data/profile'
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://hoomanhajarian.com').replace(/\/$/, '')
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.hoomanhajarian.com').replace(/\/$/, '')
 
 export const SITE_TITLE = `${profile.name} — ${profile.headline} (React, Next.js, TypeScript, Node.js)`
 
