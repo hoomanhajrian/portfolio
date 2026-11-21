@@ -2,7 +2,7 @@
 
 import { Component, Suspense, useEffect, useRef, type ReactNode } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { PerformanceMonitor, Preload } from '@react-three/drei'
+import { PerformanceMonitor, Preload, useTexture } from '@react-three/drei'
 import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import { setViewMode } from '@/lib/preferences'
@@ -15,6 +15,7 @@ import { ProjectFrame } from './ProjectFrame'
 import { EndRoom, EntranceSign } from './Landmarks'
 import { Hud, Loader } from './Hud'
 import { InfoPanel, ProjectPanel } from './Panels'
+import { ControlsGuide } from './ControlsGuide'
 
 /** If WebGL fails for any reason, fall back to the 2D site instead of showing a broken screen. */
 class HallwayErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
@@ -90,10 +91,39 @@ function Scene({ tier }: { tier: 'high' | 'low' }) {
   )
 }
 
+/**
+ * After the first load, quietly download every frame's artwork one by one (in walking order, when the
+ * browser is idle), so frames are ready before the visitor reaches them instead of loading on arrival.
+ */
+function useBackgroundTexturePrefetch() {
+  const introDone = useHallway((s) => s.introDone)
+  useEffect(() => {
+    if (!introDone) return
+    let cancelled = false
+    let timer = 0
+    let i = 0
+    const idle = (cb: () => void) => {
+      if (typeof window.requestIdleCallback === 'function') window.requestIdleCallback(cb, { timeout: 1500 })
+      else setTimeout(cb, 200) // Safari has no requestIdleCallback
+    }
+    const next = () => {
+      if (cancelled || i >= frames.length) return
+      useTexture.preload(frames[i++].project.image.texture)
+      timer = window.setTimeout(() => idle(next), 250)
+    }
+    idle(next)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
+  }, [introDone])
+}
+
 export default function Hallway() {
   const root = useRef<HTMLDivElement>(null)
   const tier = useHallway((s) => s.tier)
   useRailControls(root)
+  useBackgroundTexturePrefetch()
 
   useEffect(() => {
     // Touch devices (tablets) start on the lighter render path; PerformanceMonitor can lower desktops too.
@@ -132,6 +162,7 @@ export default function Hallway() {
       <Hud />
       <ProjectPanel />
       <InfoPanel />
+      <ControlsGuide />
       <Loader />
     </div>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useMemo, useRef, useState } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { useFrame, type ThreeEvent } from '@react-three/fiber'
 import { Text, useCursor, useTexture } from '@react-three/drei'
 import { easing } from 'maath'
@@ -30,6 +30,15 @@ function Artwork({ slot }: { slot: FrameSlot }) {
       <meshBasicMaterial map={texture} toneMapped={false} transparent={contain} />
     </mesh>
   )
+}
+
+/** Suspense fallback while a nearby frame's artwork downloads; reports itself to the HUD's small loading pill. */
+function LoadingPlaceholder({ slot }: { slot: FrameSlot }) {
+  useEffect(() => {
+    actions.frameLoading(slot.project.slug, true)
+    return () => actions.frameLoading(slot.project.slug, false)
+  }, [slot.project.slug])
+  return <Placeholder slot={slot} />
 }
 
 function Placeholder({ slot }: { slot: FrameSlot }) {
@@ -104,7 +113,7 @@ export function ProjectFrame({ slot }: { slot: FrameSlot }) {
         <meshBasicMaterial color="#0b1222" />
       </mesh>
       {near ? (
-        <Suspense fallback={<Placeholder slot={slot} />}>
+        <Suspense fallback={<LoadingPlaceholder slot={slot} />}>
           <Artwork slot={slot} />
         </Suspense>
       ) : (
